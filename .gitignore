@@ -1,0 +1,4 @@
+## some name ##
+.env
+dist
+node_modules
