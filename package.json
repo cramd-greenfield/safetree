@@ -1,0 +1,19 @@
+{
+  "name": "safetree",
+  "version": "1.0.0",
+  "description": "Greenfield: Safe-Tree",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cramd-greenfield/safetree.git"
+  },
+  "author": "Cody Daigle, Mike Sammartino, Allyn McKinney, Rodman Lavalais, Darius Cooper",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cramd-greenfield/safetree/issues"
+  },
+  "homepage": "https://github.com/cramd-greenfield/safetree#readme"
+}
