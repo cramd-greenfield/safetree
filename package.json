@@ -15,9 +15,5 @@
   "bugs": {
     "url": "https://github.com/cramd-greenfield/safetree/issues"
   },
-  "homepage": "https://github.com/cramd-greenfield/safetree#readme",
-  "devDependencies": {
-    "webpack": "^5.91.0",
-    "webpack-cli": "^5.1.4"
-  }
+  "homepage": "https://github.com/cramd-greenfield/safetree#readme"
 }
