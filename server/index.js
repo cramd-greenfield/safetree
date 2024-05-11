@@ -25,7 +25,7 @@ app.use(express.static(distPath)); // Statically serve up client directory
 // Setting environment variable
 // The port express will listen on
 // Read the port number
-const PORT = process.env.PORT || 3000; //=> 3000 is default value if PORT is not set
+const PORT = 3000; //=> 3000 is default value if PORT is not set
 
 // Creating GET request for some functionality
 app.get('/', (req, res) => {
