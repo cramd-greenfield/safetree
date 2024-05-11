@@ -10,9 +10,10 @@ const isProduction = process.env.NODE_ENV == 'production';
 const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader';
 
 
-
+/* Changed entry point from '.src/index.js'
+to '.server/index.js' */
 const config = {
-    entry: './src/index.js',
+    entry: './server/index.js', 
     output: {
         path: path.resolve(__dirname, 'dist'),
     },
