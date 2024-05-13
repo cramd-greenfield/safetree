@@ -4,8 +4,9 @@
   "description": "Stay safe outside",
   "main": "index.js",
   "scripts": {
+    "start": "node server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --mode=development --watch",
+    "build": "webpack --watch",
     "build:prod": "webpack --mode=production --node-env=production",
     "lint": "eslint . --ext=.js,.jsx"
   },
@@ -36,7 +37,7 @@
     "webpack-dev-server": "^5.0.4"
   },
   "dependencies": {
-    "express": "^4.19.2",
+    "dotenv": "^16.4.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.23.1"

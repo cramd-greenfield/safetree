@@ -1,64 +1,99 @@
-// Generated using webpack-cli https://github.com/webpack/webpack-cli
-
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const isProduction = process.env.NODE_ENV == 'production';
+const CLIENT_PATH = path.resolve(__dirname, 'client');
+const DIST_PATH = path.resolve(__dirname, 'dist');
 
+module.exports = {
+  mode: 'development',
+  entry: `${CLIENT_PATH}/index.jsx`,
+  devtool: 'source-map',
+  output: {
+    path: DIST_PATH,
+    filename: 'main.js',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+          },
+        },
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
+        type: 'asset',
+      },
+    ],
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: `${CLIENT_PATH}/index.html`,
+      filename: `index.html`,
+    }),
+  ],
+};
 
-const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader';
+/************************* OLD WEBPACK ********************************/
 
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const isProduction = process.env.NODE_ENV == 'production';
+
+// const stylesHandler = isProduction
+//   ? MiniCssExtractPlugin.loader
+//   : 'style-loader';
 
 /* Changed entry point from '.src/index.js'
 to '.server/index.js' */
-const config = {
-    entry: './server/index.js', 
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-    },
-    devServer: {
-        open: true,
-        host: 'localhost',
-    },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: 'index.html',
-        }),
+// const config = {
+//   entry: './server/index.js',
+//   output: {
+//     path: path.resolve(__dirname, 'dist'),
+//   },
+//   devServer: {
+//     open: true,
+//     host: 'localhost',
+//   },
+//   plugins: [
+//     new HtmlWebpackPlugin({
+//       template: 'index.html',
+//     }),
 
-        // Add your plugins here
-        // Learn more about plugins from https://webpack.js.org/configuration/plugins/
-    ],
-    module: {
-        rules: [
-            {
-                test: /\.(js|jsx)$/i,
-                loader: 'babel-loader',
-            },
-            {
-                test: /\.css$/i,
-                use: [stylesHandler,'css-loader'],
-            },
-            {
-                test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
-                type: 'asset',
-            },
+//     // Add your plugins here
+//     // Learn more about plugins from https://webpack.js.org/configuration/plugins/
+//   ],
+//   module: {
+//     rules: [
+//       {
+//         test: /\.(js|jsx)$/i,
+//         loader: 'babel-loader',
+//       },
+//       {
+//         test: /\.css$/i,
+//         use: [stylesHandler, 'css-loader'],
+//       },
+//       {
+//         test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
+//         type: 'asset',
+//       },
 
-            // Add your rules for custom modules here
-            // Learn more about loaders from https://webpack.js.org/loaders/
-        ],
-    },
-};
+//       // Add your rules for custom modules here
+//       // Learn more about loaders from https://webpack.js.org/loaders/
+//     ],
+//   },
+// };
 
-module.exports = () => {
-    if (isProduction) {
-        config.mode = 'production';
-        
-        config.plugins.push(new MiniCssExtractPlugin());
-        
-        
-    } else {
-        config.mode = 'development';
-    }
-    return config;
-};
+// module.exports = () => {
+//   if (isProduction) {
+//     config.mode = 'production';
+
+//     config.plugins.push(new MiniCssExtractPlugin());
+//   } else {
+//     config.mode = 'development';
+//   }
+//   return config;
+// };
