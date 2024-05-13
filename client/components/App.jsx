@@ -1,4 +1,5 @@
 import React from 'react';
+import WildLife from './WildLife.jsx';
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <div className="feature">
           <div className="wildlife">
             <h4>wildlife component here</h4>
+            <WildLife />
           </div>
         </div>
         <div className="feature">
