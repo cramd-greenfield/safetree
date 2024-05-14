@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Hikes from './Hikes.jsx';
+
 const App = () => {
   return (
     <div>
@@ -22,7 +24,7 @@ const App = () => {
         </div>
         <div className="feature">
           <div className="activities">
-            <h4>activities component here</h4>
+            <Hikes />
           </div>
         </div>
         <div className="feature">
