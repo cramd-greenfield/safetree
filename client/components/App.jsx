@@ -1,5 +1,11 @@
 import React from 'react';
 import Profile from './Profile.jsx';
+
+import Plants from './plants/Plants.jsx';
+=======
+import Hikes from './hikes/Hikes.jsx';
+
+
 const App = () => {
   return (
     <div>
@@ -18,12 +24,13 @@ const App = () => {
         </div>
         <div className='feature'>
           <div className='plants'>
-            <h4>plants component here</h4>
+            < Plants />
           </div>
         </div>
         <div className='feature'>
           <div className='activities'>
-            <h4>activities component here</h4>
+            <h4>Hikes</h4>
+            <Hikes />
           </div>
         </div>
         <div className='feature'>
