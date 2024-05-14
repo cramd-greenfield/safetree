@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Calendar from './Calendar.jsx';
 const App = () => {
   return (
     <div>
@@ -27,7 +27,9 @@ const App = () => {
         </div>
         <div className="feature">
           <div className="calendar">
-            <h4>calendar component here</h4>
+            <h4>calendar component here
+              <Calendar />
+            </h4>
           </div>
         </div>
         <div className="feature">
