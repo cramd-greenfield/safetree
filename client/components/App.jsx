@@ -1,10 +1,7 @@
 import React from 'react';
 import Profile from './Profile.jsx';
-
 import Plants from './plants/Plants.jsx';
-=======
 import Hikes from './hikes/Hikes.jsx';
-
 
 const App = () => {
   return (
@@ -24,7 +21,7 @@ const App = () => {
         </div>
         <div className='feature'>
           <div className='plants'>
-            < Plants />
+            <Plants />
           </div>
         </div>
         <div className='feature'>
