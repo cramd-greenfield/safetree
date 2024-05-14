@@ -5,22 +5,15 @@ const plants = require('./plants');
 const hikes = require('./hikes');
 const user = require('./user');
 
-const router = Router();
+const safeTree = Router();
 
-// Add all routes here
+safeTree.get('/hikes', hikes);
+safeTree.post('/hikes', hikes);
 
-//homepage routes for feed
-// router.route('/homepage').get(observations.feed);
-// router.route('/homepage').patch(observations.reaction);
+safeTree.get('/home', observations);
+safeTree.post('/home', observations);
 
-// Wildlife routes
+safeTree.get('/plants', plants);
+safeTree.post('/plants', plants);
 
-// Plants routes
-
-// Hikes routes
-
-// user/profile routes
-
-module.exports = {
-  router,
-};
+module.exports = safeTree;
