@@ -3,7 +3,10 @@ import React from 'react';
 const Login = () => {
   return (
     <>
-      <h1>Login Page</h1>
+      <h3>Login Screen</h3>
+      <form action='/auth/google' method='GET'>
+        <button type='submit'>Sign-In</button>
+      </form>
     </>
   );
 };

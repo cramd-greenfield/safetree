@@ -100,5 +100,3 @@ module.exports = {
   Observations,
   sequelize,
 };
-
-console.log(sequelize.models);
