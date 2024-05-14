@@ -24,6 +24,7 @@ const App = () => {
         </div>
         <div className="feature">
           <div className="activities">
+            <h4>Hikes</h4>
             <Hikes />
           </div>
         </div>
