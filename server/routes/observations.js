@@ -22,6 +22,8 @@ router.delete('/home', (req, res) => {
   console.log('Destroy');
 });
 
+module.exports = router;
+
 /*
 const Observations = sequelize.define('Observations', {
   id: {
