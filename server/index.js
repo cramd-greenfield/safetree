@@ -1,29 +1,11 @@
 const { app } = require('./app.js');
-const session = require('express-session');
+// const session = require('express-session');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const { User } = require('./database');
 
 require('dotenv').config();
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = process.env;
-
-const authorized = (accessToken, refreshToken, profile) => {
-  console.log('test', test);
-  User.findOrCreate(
-    { googleId: profile.id },
-    { googleId: profile.id, username: 'username' }
-  )
-    .then(([user]) => {
-      console.log('user', user);
-      return user;
-    })
-    .catch((err) => {
-      console.error('Failed to find or create user:', err);
-    });
-};
-
-// Allow requests
-app.use(passport.initialize());
 
 passport.use(
   new GoogleStrategy(
@@ -32,7 +14,10 @@ passport.use(
       clientSecret: GOOGLE_CLIENT_SECRET,
       callbackURL: '/auth/google/callback',
     },
-    authorized
+    // authorized
+    function (accessToken, refreshToken, profile, done) {
+      done(null, profile);
+    }
   )
 );
 
@@ -50,28 +35,13 @@ app.get(
     failureRedirect: '/login',
   })
 );
-// Save state for session
-app.use(passport.session());
 
-// Or connect.session()??
-app.use(
-  session({
-    secret: 'shush',
-    resave: false,
-    saveUninitialized: true, //automatically saves when using express-session & Passport
-  })
-);
-
-passport.serializeUser((user, cb) => {
-  process.nextTick(function () {
-    cb(null, { id: user.id, username: user.username, name: user.name });
-  });
+passport.serializeUser((user, done) => {
+  done(null, user);
 });
 
-passport.deserializeUser((user, cb) => {
-  process.nextTick(function () {
-    return cb(null, user);
-  });
+passport.deserializeUser((user, done) => {
+  done(null, user);
 });
 
 app.get('/login', (req, res) => {
