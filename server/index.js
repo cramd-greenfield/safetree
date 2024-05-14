@@ -7,24 +7,6 @@ const { User } = require('./database');
 require('dotenv').config();
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = process.env;
 
-// const authorized = (accessToken, refreshToken, profile, done) => {
-//   console.log('test', test);
-//   User.findOrCreate(
-//     { googleId: profile.id },
-//     { googleId: profile.id, username: 'username' }
-//   )
-//     .then(([user]) => {
-//       console.log('user', user);
-//       done(null, user);
-//     })
-//     .catch((err) => {
-//       console.error('Failed to find or create user:', err);
-//     });
-// };
-
-// Allow requests
-// app.use(passport.initialize());
-
 passport.use(
   new GoogleStrategy(
     {
@@ -53,17 +35,6 @@ app.get(
     failureRedirect: '/login',
   })
 );
-// Save state for session
-// app.use(passport.session());
-
-// // Or connect.session()??
-// app.use(
-//   session({
-//     secret: 'shush',
-//     resave: false,
-//     saveUninitialized: true, //automatically saves when using express-session & Passport
-//   })
-// );
 
 passport.serializeUser((user, done) => {
   done(null, user);
