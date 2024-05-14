@@ -70,6 +70,7 @@ const Hike = sequelize.define('Hike', {
   },
   description: DataTypes.STRING,
   location: DataTypes.STRING,
+  rating: DataTypes.INTEGER,
 });
 
 const Observations = sequelize.define('Observations', {
