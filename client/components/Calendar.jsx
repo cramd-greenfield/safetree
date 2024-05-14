@@ -2,7 +2,7 @@
 import React from 'react';
  
 // Import the renderCalendar function
-import Script from './CalendarScript.jsx';
+import Script from '../helpers/calendarScript.js';
 
 // Create component function
 const Calendar = () => {
