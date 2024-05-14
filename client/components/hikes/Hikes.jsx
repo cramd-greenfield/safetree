@@ -10,7 +10,7 @@ const Hikes = () => {
     <div className="hikes">
       <HikeSearch />
       <HikeResults />
-      <HikesFavList />
+      <HikeFavList />
     </div>
   )
 }
