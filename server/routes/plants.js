@@ -13,20 +13,12 @@ Plants.get('/plants', (req, res) => {
   // save results of search to database
 });
 
+Plants.post('/plants', (req, res) => {});
 
-Plants.post('/plants', (req, res) => {
-  
+Plants.get('/plants', (req, res) => {});
 
-});
-
-Plants.update('/plants', (req, res) => {
-
-});
-
-Plants.delete('/plants', (req, res) => {
-
-});
+Plants.delete('/plants', (req, res) => {});
 
 module.exports = {
-  Plants
+  Plants,
 };
