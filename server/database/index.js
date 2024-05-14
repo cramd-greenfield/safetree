@@ -20,12 +20,12 @@ const sequelize = new Sequelize('safetree', 'root', '', {
 
 const User = sequelize.define('User', {
   id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
+    type: DataTypes.INTEGER,
     primaryKey: true,
+    autoIncrement: true,
   },
-  email: DataTypes.STRING,
-  password: DataTypes.STRING,
+  googleId: DataTypes.STRING,
+  username: DataTypes.STRING,
 });
 
 const Plant = sequelize.define('Plant', {
