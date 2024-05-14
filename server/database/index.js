@@ -1,8 +1,8 @@
-const { Sequelize, DataTypes } = require("sequelize");
+const { Sequelize, DataTypes } = require('sequelize');
 
-const sequelize = new Sequelize("safetree", "root", "", {
+const sequelize = new Sequelize('safetree', 'root', '', {
   host: 'localhost',
-  dialect: "mysql",
+  dialect: 'mysql',
 });
 
 // async function connect() {
@@ -18,7 +18,7 @@ const sequelize = new Sequelize("safetree", "root", "", {
 
 // connect();
 
-const User = sequelize.define("User", {
+const User = sequelize.define('User', {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -28,7 +28,7 @@ const User = sequelize.define("User", {
   password: DataTypes.STRING,
 });
 
-const Plant = sequelize.define("Plant", {
+const Plant = sequelize.define('Plant', {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -40,7 +40,7 @@ const Plant = sequelize.define("Plant", {
   scientificNAme: DataTypes.STRING,
 });
 
-const Animal = sequelize.define("Animal", {
+const Animal = sequelize.define('Animal', {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -51,7 +51,7 @@ const Animal = sequelize.define("Animal", {
   location: DataTypes.STRING,
 });
 
-const Itinerary = sequelize.define("Itinerary", {
+const Itinerary = sequelize.define('Itinerary', {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -62,7 +62,7 @@ const Itinerary = sequelize.define("Itinerary", {
   userId: DataTypes.INTEGER,
 });
 
-const Hike = sequelize.define("Hike", {
+const Hike = sequelize.define('Hike', {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -72,8 +72,7 @@ const Hike = sequelize.define("Hike", {
   location: DataTypes.STRING,
 });
 
-
-const Observation = sequelize.define("Observation", {
+const Observations = sequelize.define('Observations', {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -86,16 +85,19 @@ const Observation = sequelize.define("Observation", {
   userId: DataTypes.INTEGER,
 });
 
+User.Observations = User.hasMany(Observations);
+Observations.User = Observations.belongsTo(User);
+
+// Will need to sync the items later. I need to reread the Sequelize docs.
 
 module.exports = {
   User,
   Plant,
   Animal,
   Itinerary,
-  Activity,
-  Observation,
+  Hike,
+  Observations,
   sequelize,
 };
 
 console.log(sequelize.models);
-
