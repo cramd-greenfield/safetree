@@ -57,15 +57,12 @@ const Itinerary = sequelize.define("Itinerary", {
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
   },
-  activityId: DataTypes.INTEGER,
+  hikeId: DataTypes.INTEGER,
   date: DataTypes.DATE,
   userId: DataTypes.INTEGER,
 });
 
-// Itinerary.sync()
-//   .catch(err => console.error('Sync of Itinerary failed: ', err));
-
-const Activity = sequelize.define("Activity", {
+const Hike = sequelize.define("Hike", {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -89,30 +86,6 @@ const Observation = sequelize.define("Observation", {
   userId: DataTypes.INTEGER,
 });
 
-// Itinerary.hasMany(Activity, {
-//   foreignKey: "activityId",
-// });
-// Activity.belongsTo(Itinerary);
-
-// Itinerary.hasMany(User, {
-//   foreignKey: "userId",
-// });
-// User.belongsTo(Itinerary);
-
-// Observation.hasMany(Plant, {
-//   foreignKey: "plantId",
-// });
-// Plant.belongsTo(Observation);
-
-// Observation.hasMany(Animal, {
-//   foreignKey: "animalId",
-// });
-// Animal.belongsTo(Observation);
-
-// Observation.hasMany(User, {
-//   foreignKey: "userId",
-// });
-// User.belongsTo(Observation);
 
 module.exports = {
   User,
