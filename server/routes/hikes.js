@@ -13,7 +13,7 @@ router.post('/favs', (req, res) => {
   // add a fav hike to the db
 
   // use Hike sequelize model.create() to add to table
-  Hike.create( /* insert object goes here */)
+  Hike.create(/* insert object goes here */)
     .then((data) => {
       console.log('Added favorite hike: ', data);
       res.sendStatus(201);
@@ -39,7 +39,7 @@ router.get('/favs', (req, res) => {
     });
 });
 
-router.update('/favs', (req, res) => {
+router.get('/favs', (req, res) => {
   // update certain fav hike rating in db
 
   // use Hike sequelize model.update() to update rating
@@ -68,6 +68,5 @@ router.delete('/favs', (req, res) => {
       res.sendStatus(500);
     });
 });
-
 
 module.exports = router;
