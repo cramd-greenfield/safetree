@@ -1,5 +1,6 @@
 import React from 'react';
 import Profile from './Profile.jsx';
+import Plants from './plants/Plants.jsx';
 const App = () => {
   return (
     <div>
@@ -18,7 +19,7 @@ const App = () => {
         </div>
         <div className='feature'>
           <div className='plants'>
-            <h4>plants component here</h4>
+            < Plants />
           </div>
         </div>
         <div className='feature'>
