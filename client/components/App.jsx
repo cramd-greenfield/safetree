@@ -1,5 +1,5 @@
 import React from 'react';
-import Profile from './Profile.jsx';
+import HomePage from './HomePage.jsx';
 import Plants from './plants/Plants.jsx';
 import Hikes from './hikes/Hikes.jsx';
 
@@ -38,7 +38,7 @@ const App = () => {
         <div className='feature'>
           <div className='observations'>
             <h4>observations component here</h4>
-            <Profile />
+            <HomePage />
           </div>
         </div>
       </div>
