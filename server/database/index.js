@@ -75,9 +75,9 @@ const Hike = sequelize.define('Hike', {
 
 const Observations = sequelize.define('Observations', {
   id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
+    type: DataTypes.INTEGER,
     primaryKey: true,
+    autoIncrement: true,
   },
   animalId: DataTypes.INTEGER,
   plantId: DataTypes.INTEGER,
