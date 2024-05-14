@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Hikes from './Hikes.jsx';
+import Hikes from './hikes/Hikes.jsx';
 
 const App = () => {
   return (
