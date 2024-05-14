@@ -2,7 +2,6 @@ import React from 'react';
 import Profile from './Profile.jsx';
 
 import Plants from './plants/Plants.jsx';
-=======
 import Hikes from './hikes/Hikes.jsx';
 
 
