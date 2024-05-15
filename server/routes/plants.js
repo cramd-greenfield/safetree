@@ -13,7 +13,7 @@ Plants.get('/plants', (req, res) => {
 
   // make req to api
   searchPlants(plantName)
-    .then(({data} => console.log(data))) // respond with list of plants + 200 status code
+    .then((({data}) => console.log(data))) // respond with list of plants + 200 status code
     .catch(err => console.error(err)); // respond w 500 status code
 });
 
