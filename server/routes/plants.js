@@ -9,7 +9,7 @@ Plants.get('/plants', (req, res) => {
   // would this be for the search ?
   loadPlants()
     .then(({ data })=> {
-      console.log(data.data);
+      console.log(data.data.length);
       res.status(201).send(data.data);
     })
     .catch(err => {
@@ -20,13 +20,18 @@ Plants.get('/plants', (req, res) => {
 
 Plants.post('/plants', (req, res) => {
   // access search value from body
-  const { plantName } = req.params;
-  console.log('hello');
+  const { plantName } = req.body;
   console.log(plantName);
   // make req to api
-  // searchPlants(plantName)
-  //   .then((({data}) => console.log(data))) // respond with list of plants + 200 status code
-  //   .catch(err => console.error(err)); // respond w 500 status code
+  searchPlants(plantName)
+    .then((({data}) => {
+      console.log(data);
+      res.status(201).send(data.data)
+    }))
+    .catch(err => {
+      console.error(err);
+      res.sendStatus(500);
+    });
 });
 
 
