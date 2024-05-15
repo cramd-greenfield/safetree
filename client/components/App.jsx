@@ -36,9 +36,8 @@ const App = () => {
         </div>
         <div className="feature">
           <div className="calendar">
-            <h4>calendar component here
-              <Calendar />
-            </h4>
+            <h4>calendar component here</h4> 
+            <Calendar />
           </div>
         </div>
         <div className='feature'>
