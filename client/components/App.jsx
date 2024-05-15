@@ -1,6 +1,6 @@
 import React from 'react';
-import Home from './Home.jsx';
-import Login from './Login.jsx';
+import Home from './observations/Home.jsx';
+import Login from './observations/Login.jsx';
 
 // import Calendar from './Calendar.jsx';
 import WildLife from './WildLife.jsx';
@@ -10,12 +10,6 @@ import Hikes from './hikes/Hikes.jsx';
 const App = () => {
   return (
     <div>
-      <div className='header'>
-        <h2 className='logo'>SafeTree</h2>
-        <div className='navbar'>
-          <p>Links to features here</p>
-        </div>
-      </div>
       <div className='features'>
         <div className='feature'>
           <div className='wildlife'>
