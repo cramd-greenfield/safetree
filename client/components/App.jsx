@@ -44,7 +44,7 @@ const App = () => {
         <div className='feature'>
           <div className='observations'>
             <h4>observations component here</h4>
-            <Profile />
+            <HomePage />
           </div>
         </div>
       </div>

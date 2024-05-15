@@ -34,7 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(distPath));
 // app.use(cookieParser()); Do we need?
 
-// app.use('/', routes); // Links the routes to app.js
+app.use('/', routes); // Links the routes to app.js
 
 app.listen(3000, () => {
   console.log(`
