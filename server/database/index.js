@@ -5,12 +5,24 @@ const sequelize = new Sequelize('safetree', 'root', '', {
   dialect: 'mysql',
 });
 
+(async () => {
+  try {
+    await sequelize.authenticate();
+    User.sync();
+    Plant.sync();
+    Animal.sync();
+    Itinerary.sync();
+    Hike.sync();
+    Observations.sync();
+    console.log('Connected');
+  } catch (err) {
+    console.error('Failed to connect:', err);
+  }
+})();
 // async function connect() {
 //   try {
 //     await sequelize.sync();
 //     console.log("All models were synchronized successfully.");
-//     // await sequelize.authenticate();
-//     // console.log('Connection has been established successfully.');
 //   } catch (error) {
 //     console.error("Unable to connect to the database:", error);
 //   }
@@ -24,15 +36,14 @@ const User = sequelize.define('User', {
     primaryKey: true,
     autoIncrement: true,
   },
-  googleId: DataTypes.STRING,
   username: DataTypes.STRING,
 });
 
 const Plant = sequelize.define('Plant', {
   id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
+    type: DataTypes.INTEGER,
     primaryKey: true,
+    autoIncrement: true,
   },
   species: DataTypes.STRING,
   isEdible: DataTypes.BOOLEAN,
@@ -42,9 +53,9 @@ const Plant = sequelize.define('Plant', {
 
 const Animal = sequelize.define('Animal', {
   id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
+    type: DataTypes.INTEGER,
     primaryKey: true,
+    autoIncrement: true,
   },
   species: DataTypes.STRING,
   isPredator: DataTypes.BOOLEAN,
@@ -53,9 +64,9 @@ const Animal = sequelize.define('Animal', {
 
 const Itinerary = sequelize.define('Itinerary', {
   id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
+    type: DataTypes.INTEGER,
     primaryKey: true,
+    autoIncrement: true,
   },
   hikeId: DataTypes.INTEGER,
   date: DataTypes.DATE,
@@ -64,9 +75,9 @@ const Itinerary = sequelize.define('Itinerary', {
 
 const Hike = sequelize.define('Hike', {
   id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
+    type: DataTypes.INTEGER,
     primaryKey: true,
+    autoIncrement: true,
   },
   description: DataTypes.STRING,
   location: DataTypes.STRING,
@@ -78,18 +89,19 @@ const Observations = sequelize.define('Observations', {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
+    allowNull: false,
   },
-  animalId: DataTypes.INTEGER,
-  plantId: DataTypes.INTEGER,
   message: DataTypes.STRING,
   date: DataTypes.DATE,
-  userId: DataTypes.INTEGER,
 });
 
-User.Observations = User.hasMany(Observations);
-Observations.User = Observations.belongsTo(User);
+User.hasMany(Observations);
 
-// Will need to sync the items later. I need to reread the Sequelize docs.
+Observations.hasMany(Plant);
+Observations.hasMany(Animal);
+Observations.hasMany(Hike);
+
+Observations.belongsTo(User);
 
 module.exports = {
   User,
