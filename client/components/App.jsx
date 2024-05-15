@@ -1,5 +1,6 @@
 import React from 'react';
-import HomePage from './HomePage.jsx';
+import WildLife from './WildLife.jsx';
+
 import Calendar from './Calendar.jsx';
 import Profile from './Profile.jsx';
 import Plants from './plants/Plants.jsx';
@@ -19,6 +20,7 @@ const App = () => {
         <div className='feature'>
           <div className='wildlife'>
             <h4>wildlife component here</h4>
+            <WildLife />
           </div>
         </div>
         <div className='feature'>
