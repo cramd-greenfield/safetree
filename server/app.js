@@ -16,6 +16,20 @@ app.get('/', (req, res) => {
   res.send('Hello, World!');
 });
 
+app.get('/v1/animals?name=', (req, res) => {
+
+  Animal.findAll({
+    attributes: ['species', 'isPredator', 'location']
+  })
+  .then((response) => {
+
+  })
+  .catch((response) => {
+    console.error('Error present! ', response);
+  })
+
+})
+
 module.exports = {
   app,
 };
