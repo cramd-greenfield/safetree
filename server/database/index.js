@@ -37,6 +37,7 @@ const User = sequelize.define('User', {
     autoIncrement: true,
   },
   username: DataTypes.STRING,
+  googleId: DataTypes.STRING,
 });
 
 const Plant = sequelize.define('Plant', {

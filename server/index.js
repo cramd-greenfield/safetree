@@ -1,6 +1,7 @@
 const { app } = require('./app.js');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const { User } = require('./database');
 
 require('dotenv').config();
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = process.env;
@@ -14,7 +15,15 @@ passport.use(
     },
     // authorized
     function (accessToken, refreshToken, profile, done) {
-      done(null, profile);
+      User.findOrCreate({
+        where: { googleId: profile.id },
+      })
+        .then(([user]) => {
+          done(null, user);
+        })
+        .catch((err) => {
+          console.error('Failed to find or create user:', err);
+        });
     }
   )
 );
@@ -29,7 +38,7 @@ app.get(
 app.get(
   '/auth/google/callback',
   passport.authenticate('google', {
-    successRedirect: '/home',
+    successRedirect: '/',
     failureRedirect: '/login',
   })
 );
@@ -49,14 +58,14 @@ app.get('/login', (req, res) => {
 app.get(
   '/oauth2/redirect/google',
   passport.authenticate('google', {
-    successRedirect: '/home',
+    successRedirect: '/',
     failureRedirect: '/login',
   })
 );
 
 /**************** LOGOUT *******************/
-app.post('/logout', (req, res, next) => {
-  req.logout((err) => {
+app.post('/logout', function (req, res, next) {
+  req.logout(function (err) {
     if (err) {
       return next(err);
     }
