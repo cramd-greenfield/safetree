@@ -1,5 +1,18 @@
 
-const fakeUsers = [];
+const fakeUsers = [
+  {
+    username: 'Spongebob'
+  },
+  {
+    username: 'Patrick'
+  },
+  {
+    username: 'Squidward'
+  },
+  {
+    username: 'Sandy'
+  },
+];
 
 const fakePlants = [
   {
@@ -36,34 +49,93 @@ const fakePlants = [
   }
 ];
 
-const fakeAnimals = [];
+const fakeAnimals = [
+  {
+    species: 'Bald Eagle',
+    isPredator: true,
+    location: 'North America'
+    },
+    {
+    species: 'African Forest Elephant',
+    isPredator: true,
+    location: 'Africa'
+    },
+    {
+    species: 'Indochinese Tiger',
+    isPredator: true,
+    location: 'Asia'
+    },
+    {
+    species: 'Bobcat',
+    isPredator: true,
+    location: 'Central-America'
+    }
+];
 
-const fakeItineraries = [];
+const fakeItineraries = [
+  {
+    hikeId: 1,
+    date: '2024-05-15',
+    userId: 1
+  },
+  {
+    hikeId: 2,
+    date: '2024-05-15',
+    userId: 1
+  },
+  {
+    hikeId: 3,
+    date: '2024-05-15',
+    userId: 4
+  },
+  {
+    hikeId: 4,
+    date: '2024-05-15',
+    userId: 2
+  },
+];
 
 const fakeHikes = [
   {
-    description: "Pivotwood Trail",
-    location: "2281 Pivot Rock Rd, Eureka Springs, AR 72632, USA",
+    description: 'Pivotwood Trail',
+    location: '2281 Pivot Rock Rd, Eureka Springs, AR 72632, USA',
     rating: 0,
   },
   {
-    description: "Bayou Sauvage Urban National Wildlife Refuge",
-    location: "17160 Chef Menteur Hwy, New Orleans, LA 70129, USA",
+    description: 'Bayou Sauvage Urban National Wildlife Refuge',
+    location: '17160 Chef Menteur Hwy, New Orleans, LA 70129, USA',
     rating: 0,
   },
   {
-    description: "Audubon Adventure Trail",
-    location: "11000 Lake Forest Blvd, New Orleans, LA 70127, USA",
+    description: 'Audubon Adventure Trail',
+    location: '11000 Lake Forest Blvd, New Orleans, LA 70127, USA',
     rating: 0,
   },
   {
-    description: "Bayou Sauvage NWR Ridge Trail & Boardwalk",
-    location: "20876 Chef Menteur Hwy, New Orleans, LA 70129, USA",
+    description: 'Bayou Sauvage NWR Ridge Trail & Boardwalk',
+    location: '20876 Chef Menteur Hwy, New Orleans, LA 70129, USA',
     rating: 0,
   },
 ];
 
-const fakeObservations = [];
+const fakeObservations = [
+  {
+    message: 'I loved this trail.',
+    data: '2024-05-15'
+  },
+  {
+    message: 'This trail was boring.',
+    data: '2024-05-15'
+  },
+  {
+    message: 'Parking lot was cool.',
+    data: '2024-05-15'
+  },
+  {
+    message: 'Saw a ton of plants on this trail.',
+    data: '2024-05-15'
+  },
+];
 
 module.exports = {
   fakeUsers,
