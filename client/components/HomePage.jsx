@@ -10,7 +10,7 @@ const HomePage = () => {
   useEffect(() => {
     axios(`/feed`)
       .then(({ data }) => {
-        setJournals(data);
+        console.log(data);
       })
       .catch((err) => console.error('Could not get Feed:', err));
   });
