@@ -2,11 +2,16 @@
 import React from 'react';
  
 // Import the renderCalendar function
-import Script from '../helpers/calendarScript.js';
+import { renderCalendar } from '../helpers/calendarScript.js';
 
 // Create component function
 const Calendar = () => {
-
+    // Calling the calendar function when the component mounts
+    // Use react hook; useEffect
+    useEffect(() => {
+        // Placing render Calendar inside the function
+        renderCalendar();
+    }, [])
     // Note to self: Clarify the difference of implicit and explicit again
     // Placing elements for calendar
 
@@ -41,13 +46,8 @@ const Calendar = () => {
                     <div className="day">Fri</div>
                     <div className="day">Sat</div>
                 </div>
-                <div className="days">
-        
-                </div>
+                <div className="days"></div>
             </div>
-            <script>
-                <Script />
-            </script>
         </div>
     );
 }
