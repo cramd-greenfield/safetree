@@ -100,7 +100,7 @@ User.hasMany(Observations);
 
 Observations.hasMany(Plant);
 Observations.hasMany(Animal);
-Observations.hasMany(Hike);
+// Observations.hasMany(Hike);
 
 Observations.belongsTo(User);
 
