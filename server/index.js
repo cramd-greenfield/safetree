@@ -1,8 +1,6 @@
 const { app } = require('./app.js');
-// const session = require('express-session');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const { User } = require('./database');
 
 require('dotenv').config();
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = process.env;
@@ -51,14 +49,14 @@ app.get('/login', (req, res) => {
 app.get(
   '/oauth2/redirect/google',
   passport.authenticate('google', {
-    successRedirect: '/',
+    successRedirect: '/home',
     failureRedirect: '/login',
   })
 );
 
 /**************** LOGOUT *******************/
-app.post('/logout', function (req, res, next) {
-  req.logout(function (err) {
+app.post('/logout', (req, res, next) => {
+  req.logout((err) => {
     if (err) {
       return next(err);
     }
