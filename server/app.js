@@ -34,13 +34,27 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(distPath));
 // app.use(cookieParser()); Do we need?
 
-// app.use('/', routes); // Links the routes to app.js
+app.use('/', routes); // Links the routes to app.js
 
 app.listen(3000, () => {
   console.log(`
     Check it out: http://127.0.0.1:3000
   `);
 });
+
+app.get('/v1/animals?name=', (req, res) => {
+
+  Animal.findAll({
+    attributes: ['species', 'isPredator', 'location']
+  })
+  .then((response) => {
+
+  })
+  .catch((response) => {
+    console.error('Error present! ', response);
+  })
+
+})
 
 module.exports = {
   app,

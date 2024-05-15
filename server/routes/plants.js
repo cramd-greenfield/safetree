@@ -17,24 +17,11 @@ Plants.get('/plants', (req, res) => {
     .catch(err => console.error(err)); // respond w 500 status code
 });
 
+Plants.post('/plants', (req, res) => {});
 
-Plants.post('/plants', (req, res) => {
-  // save plant to db
-  // access plant obj from req.body
-  const { plantObj } = req.body;
-  // pass plantObj to Plant.create
-  Plant.create()
-    .then()
-});
 
-Plants.patch('/plants/:id', (req, res) => {
-  // update isEdible property
-});
+Plants.get('/plants', (req, res) => {});
 
-Plants.delete('/plants', (req, res) => {
-  // delete plant obj
-});
+Plants.delete('/plants', (req, res) => {});
 
-module.exports = {
-  Plants
-};
+module.exports = Plants;
