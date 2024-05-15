@@ -47,6 +47,7 @@ const Plant = sequelize.define('Plant', {
   },
   species: DataTypes.STRING,
   isEdible: DataTypes.BOOLEAN,
+  isObserved: DataTypes.BOOLEAN,
   image: DataTypes.STRING,
   scientificNAme: DataTypes.STRING,
 });
