@@ -14,7 +14,7 @@ app.use(
   session({
     secret: 'shush',
     resave: false,
-    saveUninitialized: true, //automatically saves when using express-session & Passport
+    saveUninitialized: true,
   })
 );
 
@@ -41,20 +41,6 @@ app.listen(3000, () => {
     Check it out: http://127.0.0.1:3000
   `);
 });
-
-app.get('/v1/animals?name=', (req, res) => {
-
-  Animal.findAll({
-    attributes: ['species', 'isPredator', 'location']
-  })
-  .then((response) => {
-
-  })
-  .catch((response) => {
-    console.error('Error present! ', response);
-  })
-
-})
 
 module.exports = {
   app,
