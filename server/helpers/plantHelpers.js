@@ -9,7 +9,7 @@ const searchPlants = (plantName) => {
 
   return axios.get('https://trefle.io/api/v1/plants/search?', {
     params: {
-      token: 'aCV1nl40p1hyjRkpZYgIZwSGRJOf4SRYPHTx7rgZCSQ',
+      token: '',
       q: plantName
     }
   });
@@ -20,7 +20,7 @@ const searchPlants = (plantName) => {
 const loadPlants = () => {
   return axios.get('https://trefle.io/api/v1/plants', {
     params: {
-      token: 'aCV1nl40p1hyjRkpZYgIZwSGRJOf4SRYPHTx7rgZCSQ',
+      token: '',
     }
   })
 };
