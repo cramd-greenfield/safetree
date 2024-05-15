@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 // import logo from '../style/Logo.png';
 
@@ -18,7 +19,12 @@ const Home = () => {
 
   return (
     <div>
-      <h2 className='logo'>{/* <img src={logo} alt='Safe-Tree-Logo' /> */}</h2>
+      <div className='header'>
+        <h2 className='logo'>SafeTree</h2>
+        <div className='navbar'>
+          <p>Links to features here</p>
+        </div>
+      </div>
       <h1>Feed</h1>
       <textarea cols={50} rows={5}></textarea>
     </div>
