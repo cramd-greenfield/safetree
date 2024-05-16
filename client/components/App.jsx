@@ -1,59 +1,18 @@
 import React from 'react';
-import WildLife from './WildLife.jsx';
-import HomePage from './HomePage.jsx';
+import Home from './Home.jsx';
 import Login from './Login.jsx';
-
- import Calendar from './Calendar.jsx';
-import Plants from './plants/Plants.jsx';
-import Hikes from './hikes/Hikes.jsx';
+import Profile from './Profile.jsx';
+import { Routes, Route } from 'react-router-dom';
 
 const App = () => {
   return (
-    <div>
-      <div>
-        <Login />
-      </div>
-      <div className='header'>
-        <h2 className='logo'>SafeTree</h2>
-        <div className='navbar'>
-          <p>Links to features here</p>
-        </div>
-      </div>
-      <div className='features'>
-        <div className='feature'>
-          <div className='wildlife'>
-            <h4>wildlife component here</h4>
-            <WildLife />
-          </div>
-        </div>
-        <div className='feature'>
-          <div className='plants'>
-            <Plants />
-          </div>
-        </div>
-        <div className='feature'>
-          <div className='activities'>
-            <h4>Hikes</h4>
-            <Hikes />
-          </div>
-        </div>
-        <div className='feature'>
-          <div className='calendar'>
-            <h4>calendar component here</h4>
-            <Calendar />
-          </div>
-        </div>
-        <div className='feature'>
-          <div className='observations'>
-            <h4>observations component here</h4>
-            <HomePage />
-          </div>
-        </div>
-      </div>
-      <div className='footer'>
-        <p>bottom of page things go here</p>
-      </div>
-    </div>
+    <>
+      <Routes>
+        <Route path='/' element={<Login />} />
+        <Route path='/home' element={<Home />} />
+        <Route path='/profile' element={<Profile />} />
+      </Routes>
+    </>
   );
 };
 

@@ -1,25 +1,37 @@
 const { Router } = require('express');
-const { Observations } = require('../database');
+const { Observations, User } = require('../database');
 
 const router = Router();
 
 // POST: Create
-router.post('/home', (req, res) => {
-  console.log('Create');
-});
-// GET: Read
-router.get('/home', (req, res) => {
-  Observations.findAll({}).then((data) => {
-    console.log(data);
+router.post('/observations', (req, res) => {
+  const { message } = req.params;
+  const { observation } = req.body;
+  console.log('observation', observation, 'msg', message);
+  User.create(message).then((data) => {
+    console.log('data', data);
   });
 });
+
+// GET: Read
+router.get('/observations', (req, res) => {
+  Observations.findAll({})
+    .then((dataValues) => {
+      res.status(200).send(dataValues);
+    })
+    .catch((err) => console.error('Failed to FindAll Observations:', err));
+});
+
 // PUT/PATCH: Update
-router.get('/home', (req, res) => {
+router.get('/observations', (req, res) => {
   console.log('Update');
 });
+
 // Delete: Destroy
-router.delete('/home', (req, res) => {
-  console.log('Destroy');
+router.delete('/observations', (req, res) => {
+  const { user } = req.body;
+  const { id } = req.params;
+  console.log('user', user, 'id', id);
 });
 
 module.exports = router;
