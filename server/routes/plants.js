@@ -8,15 +8,14 @@ const Plants = Router();
 Plants.get('/plants', (req, res) => {
   // make req to api
   loadPlants()
-    .then(({ data })=> {
+    .then(({ data }) => {
       console.log(data.data.length);
       res.status(201).send(data.data);
     })
-    .catch(err => {
+    .catch((err) => {
       console.error('failed to load plants', err);
       res.sendStatus(500);
     });
- 
 });
 
 Plants.post('/plants', (req, res) => {
@@ -25,16 +24,15 @@ Plants.post('/plants', (req, res) => {
   console.log(plantName);
   // make req to api
   searchPlants(plantName)
-    .then((({data}) => {
+    .then(({ data }) => {
       console.log(data);
-      res.status(201).send(data.data)
-    }))
-    .catch(err => {
+      res.status(201).send(data.data);
+    })
+    .catch((err) => {
       console.error(err);
       res.sendStatus(500);
     });
 });
-
 
 Plants.get('/plants', (req, res) => {});
 

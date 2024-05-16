@@ -1,5 +1,7 @@
 # Greenfield: Safe-Tree Application
 
+![Safe-Tree-Logo](client/style/logo.png)
+
 ### What some features are
 
 <li>View activities
