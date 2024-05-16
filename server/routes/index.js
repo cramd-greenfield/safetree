@@ -15,7 +15,7 @@ safeTree.post('/home', observations);
 safeTree.get('/plants', plants);
 safeTree.post('/plants', plants);
 
-safeTree.get('/wildlife', wildlife);
-safeTree.post('/wildlife', wildlife);
+safeTree.all('/wildlife', wildlife);
+
 
 module.exports = safeTree;
