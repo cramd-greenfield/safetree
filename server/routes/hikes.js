@@ -10,10 +10,15 @@ const { Hike } = require('../database');
 // routes for hike related requests
 
 hikes.post('/hikes', (req, res) => {
-  // add a fav hike to the db
+  /**
+   * description
+   * location
+   * rating
+   */
+  const { description, location, rating } = req.body.hike;
 
-  // use Hike sequelize model.create() to add to table
-  Hike.create(/* insert object goes here */)
+  // add hike to the database
+  Hike.create({ description, location, rating })
     .then((data) => {
       console.log('Added favorite hike: ', data);
       res.sendStatus(201);
@@ -22,11 +27,12 @@ hikes.post('/hikes', (req, res) => {
       console.error('Failed to add favorite hike: ', err);
       res.sendStatus(500);
     });
+
 });
 
 hikes.get('/hikes', (req, res) => {
 
-  // find all hikes in hikes table
+  // find all hikes in database
   Hike.findAll()
     .then((hikes) => {
       res.status(200).send(hikes);
