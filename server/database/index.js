@@ -37,6 +37,7 @@ const User = sequelize.define('User', {
     autoIncrement: true,
   },
   username: DataTypes.STRING,
+  googleId: DataTypes.STRING,
 });
 
 const Plant = sequelize.define('Plant', {
@@ -76,7 +77,7 @@ const Itinerary = sequelize.define('Itinerary', {
 
 const Hike = sequelize.define('Hike', {
   id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     primaryKey: true,
     autoIncrement: true,
   },
@@ -100,7 +101,7 @@ User.hasMany(Observations);
 
 Observations.hasMany(Plant);
 Observations.hasMany(Animal);
-Observations.hasMany(Hike);
+// Observations.hasMany(Hike);
 
 Observations.belongsTo(User);
 
