@@ -46,6 +46,8 @@ const Profile = () => {
       <div>
         <img src={profile.picture} alt='' />
         <p>Name: {profile.name}</p>
+        <p>Info: {}</p>
+        <p>moreInfo: {}</p>
         <br />
         <br />
       </div>
@@ -53,8 +55,6 @@ const Profile = () => {
         <div className='user-chat-box'></div>
         <div className='chat-popup' id='myForm'>
           <form action='/action_page.php' className='form-container'>
-            <h1>Chat</h1>
-
             <label htmlFor='message'></label>
             <textarea
               placeholder='Tell us about your adventures!'
