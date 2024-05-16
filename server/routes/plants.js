@@ -7,8 +7,7 @@ const Plants = Router();
 // makes search to api
 Plants.get('/plants', (req, res) => {
   // would this be for the search ?
-<<<<<<< HEAD
-<<<<<<< HEAD
+ 
 
   // access search value from params (?)
   const { plantName } = req.params;
@@ -17,9 +16,7 @@ Plants.get('/plants', (req, res) => {
   searchPlants(plantName)
     .then((({data}) => console.log(data))) // respond with list of plants + 200 status code
     .catch(err => console.error(err)); // respond w 500 status code
-=======
-=======
->>>>>>> 22cd59d84405db16904604647023704f4f115ddb
+ 
   loadPlants()
     .then(({ data })=> {
       console.log(data.data.length);
@@ -29,10 +26,7 @@ Plants.get('/plants', (req, res) => {
       console.error('failed to load plants', err);
       res.sendStatus(500);
     });
-<<<<<<< HEAD
->>>>>>> c1e1da02c9a2289c18af8c388e371c51e991dc6c
-=======
->>>>>>> 22cd59d84405db16904604647023704f4f115ddb
+ 
 });
 
 Plants.post('/plants', (req, res) => {
