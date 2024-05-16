@@ -1,12 +1,13 @@
 import React from "react";
+import Plant from "./Plant.jsx";
 
 const PlantList = () => {
   return (
-    <ul>
-      <li>Plant</li>
-      <li>Plant</li>
-      <li>Plant</li>
-    </ul>
+    <div>
+      < Plant />
+      < Plant />
+      < Plant />
+    </div>
   );
 };
 
