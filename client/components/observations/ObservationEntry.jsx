@@ -1,9 +1,9 @@
 import React from 'react';
 
-const ObservationEntry = ({ item }) => (
+const ObservationEntry = ({ observation }) => (
   <>
-    {console.log(item)}
-    <h5>{item.message}</h5>
+    {console.log(observation)}
+    <h5>{observation.message}</h5>
   </>
 );
 

@@ -4,16 +4,15 @@ import fakeData, {
   fakeObservations,
 } from '../../../server/database/fakeData.js';
 
-const ObservationsList = (props, { observations }) => {
-  props = fakeObservations;
-  console.log(observations);
+const ObservationsList = ({ observations }) => {
+  console.log(observations); // empty...
   // console.log('obs', props);
   return (
-    <div>
-      {props.map((item, idx) => (
-        <ObservationEntry item={item} key={`${item}-${idx}`} />
+    <>
+      {observations.map((observation) => (
+        <ObservationEntry observation={observation} key={observation.id} />
       ))}
-    </div>
+    </>
   );
 };
 
