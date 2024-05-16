@@ -3,11 +3,13 @@ const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = new Sequelize('safetree', 'root', '', {
   host: 'localhost',
   dialect: 'mysql',
+  logging: false,
 });
 
 (async () => {
   try {
     await sequelize.authenticate();
+    // await sequelize.sync(),
     User.sync();
     Plant.sync();
     Animal.sync();
@@ -19,16 +21,6 @@ const sequelize = new Sequelize('safetree', 'root', '', {
     console.error('Failed to connect:', err);
   }
 })();
-// async function connect() {
-//   try {
-//     await sequelize.sync();
-//     console.log("All models were synchronized successfully.");
-//   } catch (error) {
-//     console.error("Unable to connect to the database:", error);
-//   }
-// }
-
-// connect();
 
 const User = sequelize.define('User', {
   id: {
@@ -70,9 +62,9 @@ const Itinerary = sequelize.define('Itinerary', {
     primaryKey: true,
     autoIncrement: true,
   },
-  hikeId: DataTypes.INTEGER,
+  hikeId: DataTypes.INTEGER, // Probably wont work without creating the relationships
   date: DataTypes.DATE,
-  userId: DataTypes.INTEGER,
+  userId: DataTypes.INTEGER, // Probably wont work without creating the relationships
 });
 
 const Hike = sequelize.define('Hike', {
@@ -94,15 +86,29 @@ const Observations = sequelize.define('Observations', {
     allowNull: false,
   },
   message: DataTypes.STRING,
-  date: DataTypes.DATE,
+  AnimalId: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: Animal,
+      key: 'id',
+    },
+  },
+  HikeId: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: Hike,
+      key: 'id',
+    },
+  },
+  PlantId: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: Plant,
+      key: 'id',
+    },
+  },
 });
-
 User.hasMany(Observations);
-
-Observations.hasMany(Plant);
-Observations.hasMany(Animal);
-// Observations.hasMany(Hike);
-
 Observations.belongsTo(User);
 
 module.exports = {
