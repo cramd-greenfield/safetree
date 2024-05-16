@@ -178,32 +178,32 @@ const fakeHikes = [
 
 const fakeObservations = [
   {
-    user: fakeUsers[0].username,
+    UserId: fakeUsers[0].id,
     message: 'I loved this trail.',
     plantSpec: fakePlants[0].species,
     animalSpec: fakeAnimals[0].species,
-    hikeLoc: fakeHikes[0].location,
+    hikeLoc: fakeHikes[0].description,
   },
   {
-    user: fakeUsers[1].username,
+    UserId: fakeUsers[1].id,
     message: 'This trail was boring.',
     plantSpec: fakePlants[1].species,
     animalSpec: fakeAnimals[1].species,
-    hikeLoc: fakeHikes[1].location,
+    hikeLoc: fakeHikes[1].description,
   },
   {
-    user: fakeUsers[2].username,
+    UserId: fakeUsers[2].id,
     message: 'Parking lot was cool.',
     plantSpec: fakePlants[2].species,
     animalSpec: fakeAnimals[2].species,
-    hikeLoc: fakeHikes[2].location,
+    hikeLoc: fakeHikes[2].description,
   },
   {
-    user: fakeUsers[3].username,
+    UserId: fakeUsers[3].id,
     message: 'Saw a ton of plants on this trail.',
     plantSpec: fakePlants[3].species,
     animalSpec: fakeAnimals[3].species,
-    hikeLoc: fakeHikes[3].location,
+    hikeLoc: fakeHikes[3].description,
   },
 ];
 
