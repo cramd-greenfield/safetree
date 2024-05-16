@@ -62,7 +62,7 @@ const Itinerary = sequelize.define('Itinerary', {
 
 const Hike = sequelize.define('Hike', {
   id: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
