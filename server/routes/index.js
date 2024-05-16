@@ -9,6 +9,7 @@ const safeTree = Router();
 
 safeTree.get('/hikes', hikes);
 safeTree.post('/hikes', hikes);
+safeTree.patch('/hikes', hikes);
 
 safeTree.get('/home', observations);
 safeTree.post('/home', observations);

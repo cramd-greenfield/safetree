@@ -35,12 +35,23 @@ hikes.get('/hikes', (req, res) => {
 });
 
 hikes.patch('/hikes', (req, res) => {
-  // update certain fav hike rating in db
+  /**
+   * description,
+   * rating
+   */
+  const { description, rating } = req.body.hike;
 
   // use Hike sequelize model.update() to update rating
-  Hike.update()
+  Hike.update(
+    { rating },
+    {
+      where: {
+        description
+      },
+    },
+  )
     .then((data) => {
-      console.log('updated hike rating, response data: ', data);
+      console.log('updated hike rating, response data: ');
       res.sendStatus(202);
     })
     .catch((err) => {
