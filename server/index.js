@@ -1,7 +1,11 @@
 const { app } = require('./app.js');
+const path = require('path');
+const serveStatic = require('serve-static');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const { User } = require('./database');
+const { Router } = require('express');
+const tester = Router();
 
 require('dotenv').config();
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = process.env;
@@ -16,6 +20,7 @@ passport.use(
     function (accessToken, refreshToken, profile, done) {
       User.findOrCreate({
         where: { googleId: profile.id },
+        // defaults: { googleId: profile.id, username: 'Mr.Krabbs' },
       })
         .then((user) => {
           done(null, user);
@@ -42,6 +47,12 @@ app.get(
   })
 );
 
+// app.use(serveStatic('dist', { index: ['index.html'] }));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
+});
+
 passport.serializeUser((user, done) => {
   done(null, user);
 });
@@ -63,13 +74,8 @@ app.get(
 );
 
 /**************** LOGOUT *******************/
-app.post('/logout', function (req, res, next) {
-  req.logout(function (err) {
-    if (err) {
-      return next(err);
-    }
-    res.redirect('/');
-  });
+app.post('/logout', (req, res, next) => {
+  req.logout(err).then(() => res.redirect('/').catch((err) => next(err)));
 });
 
 module.exports = {
