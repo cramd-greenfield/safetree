@@ -1,4 +1,6 @@
 const axios = require('axios');
+require('dotenv').config();
+const { TREFLE_API_TOKEN } = process.env;
 
 const searchPlants = (plantName) => {
   //receive plant name to be spliced into url to make req to api
@@ -9,7 +11,7 @@ const searchPlants = (plantName) => {
 
   return axios.get('https://trefle.io/api/v1/plants/search?', {
     params: {
-      token: '',
+      token: TREFLE_API_TOKEN,
       q: plantName
     }
   });
@@ -20,7 +22,7 @@ const searchPlants = (plantName) => {
 const loadPlants = () => {
   return axios.get('https://trefle.io/api/v1/plants', {
     params: {
-      token: '',
+      token: TREFLE_API_TOKEN,
     }
   })
 };

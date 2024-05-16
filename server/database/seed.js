@@ -1,86 +1,96 @@
-const { fakeUsers, fakePlants, fakeAnimals, fakeItineraries, fakeHikes, fakeObservations } = require('./fakeData');
-const { User, Plant, Animal, Itinerary, Hike, Observations } =require('./index');
+const {
+  fakeUsers,
+  fakePlants,
+  fakeAnimals,
+  fakeItineraries,
+  fakeHikes,
+  fakeObservations,
+} = require('./fakeData');
+const {
+  User,
+  Plant,
+  Animal,
+  Itinerary,
+  Hike,
+  Observations,
+} = require('./index');
 
-const seedDB = () => {
-
+// const seedDB = () => {
+(async = () => {
   User.destroy({
-    where: {}
+    where: {},
   })
+    // .then(() => Plant.destroy({ where: {} }))
+    // .then(() => Animal.destroy({ where: {} }))
+    // .then(() => Itinerary.destroy({ where: {} }))
+    // .then(() => Hike.destroy({ where: {} }))
+    // .then(() => Observations.destroy({ where: {} }))
     .then(() => {
-      User.bulkCreate(fakeUsers)
-        .catch((err) => {
-          console.error('Failed to add fake user records', err);
-        })
+      User.bulkCreate(fakeUsers).catch((err) => {
+        console.error('Failed to add fake user records', err);
+      });
     })
     .catch((err) => {
       console.error('Failed to destroy user records', err);
-    })
+    });
 
   Plant.destroy({
-    where: {}
+    where: {},
   })
     .then(() => {
-      Plant.bulkCreate(fakePlants)
-        .catch((err) => {
-          console.error('Failed to add fake plant records', err);
-        })
+      Plant.bulkCreate(fakePlants).catch((err) => {
+        console.error('Failed to add fake plant records', err);
+      });
     })
     .catch((err) => {
       console.error('Failed to destroy plant records', err);
-    })
+    });
 
   Animal.destroy({
-    where: {}
+    where: {},
   })
     .then(() => {
-      Animal.bulkCreate(fakeAnimals)
-        .catch((err) => {
-          console.error('Failed to add fake animal records', err);
-        })
+      Animal.bulkCreate(fakeAnimals).catch((err) => {
+        console.error('Failed to add fake animal records', err);
+      });
     })
     .catch((err) => {
       console.error('Failed to destroy animal records', err);
-    })
+    });
 
   Itinerary.destroy({
-    where: {}
+    where: {},
   })
     .then(() => {
-      Itinerary.bulkCreate(fakeItineraries)
-        .catch((err) => {
-          console.error('Failed to add fake itinerary records', err);
-        })
+      Itinerary.bulkCreate(fakeItineraries).catch((err) => {
+        console.error('Failed to add fake itinerary records', err);
+      });
     })
     .catch((err) => {
       console.error('Failed to destroy itinerary records', err);
-    })
+    });
 
   Hike.destroy({
-    where: {}
+    where: {},
   })
     .then(() => {
-      Hike.bulkCreate(fakeHikes)
-        .catch((err) => {
-          console.error('Failed to add fake hike records', err);
-        })
+      Hike.bulkCreate(fakeHikes).catch((err) => {
+        console.error('Failed to add fake hike records', err);
+      });
     })
     .catch((err) => {
       console.error('Failed to destroy hike records', err);
-    })
+    });
 
   Observations.destroy({
     where: {},
   })
     .then(() => {
-      Observations.bulkCreate(fakeObservations)
-        .catch((err) => {
-          console.error('Failed to add fake observations records', err);
-        })
+      Observations.bulkCreate(fakeObservations).catch((err) => {
+        console.error('Failed to add fake observations records', err);
+      });
     })
     .catch((err) => {
       console.error('Failed to destroy observations records', err);
-    })
-
-};
-
-seedDB();
+    });
+})();

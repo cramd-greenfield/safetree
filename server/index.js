@@ -1,7 +1,10 @@
 const { app } = require('./app.js');
+const path = require('path');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const { User } = require('./database');
+const { Router } = require('express');
+const tester = Router();
 
 require('dotenv').config();
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = process.env;
@@ -13,12 +16,12 @@ passport.use(
       clientSecret: GOOGLE_CLIENT_SECRET,
       callbackURL: '/auth/google/callback',
     },
-    // authorized
     function (accessToken, refreshToken, profile, done) {
       User.findOrCreate({
         where: { googleId: profile.id },
+        // defaults: { googleId: profile.id, username: 'Mr.Krabbs' },
       })
-        .then(([user]) => {
+        .then((user) => {
           done(null, user);
         })
         .catch((err) => {
@@ -38,10 +41,14 @@ app.get(
 app.get(
   '/auth/google/callback',
   passport.authenticate('google', {
-    successRedirect: '/',
-    failureRedirect: '/login',
+    successRedirect: '/home',
+    failureRedirect: '/',
   })
 );
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
+});
 
 passport.serializeUser((user, done) => {
   done(null, user);
@@ -55,22 +62,9 @@ app.get('/login', (req, res) => {
   res.render('login');
 });
 
-app.get(
-  '/oauth2/redirect/google',
-  passport.authenticate('google', {
-    successRedirect: '/',
-    failureRedirect: '/login',
-  })
-);
-
 /**************** LOGOUT *******************/
-app.post('/logout', function (req, res, next) {
-  req.logout(function (err) {
-    if (err) {
-      return next(err);
-    }
-    res.redirect('/');
-  });
+app.post('/logout', (req, res, next) => {
+  req.logout(err).then(() => res.redirect('/').catch((err) => next(err)));
 });
 
 module.exports = {
