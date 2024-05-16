@@ -79,29 +79,15 @@ const Observations = sequelize.define('Observations', {
     allowNull: false,
   },
   message: DataTypes.STRING,
-  AnimalId: {
-    type: DataTypes.STRING,
-    references: {
-      model: Animal,
-      key: 'species',
-    },
-  },
-  HikeId: {
-    type: DataTypes.STRING,
-    references: {
-      model: Hike,
-      key: 'description',
-    },
-  },
-  PlantId: {
-    type: DataTypes.STRING,
-    references: {
-      model: Plant,
-      key: 'species',
-    },
-  },
+  animalSpec: DataTypes.STRING,
+  plantSpec: DataTypes.STRING,
+  hikeLoc: DataTypes.STRING,
 });
 User.hasMany(Observations);
+Observations.hasMany(Animal);
+Observations.hasMany(Plant);
+Observations.hasMany(Hike);
+
 Observations.belongsTo(User);
 
 module.exports = {
