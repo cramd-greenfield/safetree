@@ -3,7 +3,7 @@ const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = new Sequelize('safetree', 'root', '', {
   host: 'localhost',
   dialect: 'mysql',
-  logging: false,
+  logging: false, // stops the spamming on CLI
 });
 
 (async () => {
@@ -56,7 +56,7 @@ const Itinerary = sequelize.define('Itinerary', {
     autoIncrement: true,
   },
   hikeId: DataTypes.INTEGER, // Probably wont work without creating the relationships
-  date: DataTypes.DATE,
+  date: DataTypes.DATE, // Sequelize automatically adds this feature
   userId: DataTypes.INTEGER, // Probably wont work without creating the relationships
 });
 
@@ -76,9 +76,8 @@ const Observations = sequelize.define('Observations', {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
-    allowNull: false,
   },
-  message: DataTypes.STRING,
+  message: DataTypes.STRING, // Should this be it's own model?
   animalSpec: DataTypes.STRING,
   plantSpec: DataTypes.STRING,
   hikeLoc: DataTypes.STRING,
