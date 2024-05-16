@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.Router();
+const hikes = express.Router();
 const { Hike } = require('../database');
 
 // in app.js, there will be something like app.use('/', routerIndex),
@@ -9,7 +9,7 @@ const { Hike } = require('../database');
 
 // routes for hike related requests
 
-router.post('/favs', (req, res) => {
+hikes.post('/hikes', (req, res) => {
   // add a fav hike to the db
 
   // use Hike sequelize model.create() to add to table
@@ -24,22 +24,21 @@ router.post('/favs', (req, res) => {
     });
 });
 
-router.get('/favs', (req, res) => {
-  // respond with all the fav hikes in db
+hikes.get('/hikes', (req, res) => {
 
-  // use Hike sequelize model.findAll() in hikes table
+  // find all hikes in hikes table
   Hike.findAll()
-    .then((data) => {
-      console.log('fetched all hikes: ', data);
-      res.sendStatus(200);
+    .then((hikes) => {
+      res.status(200).send(hikes);
     })
     .catch((err) => {
       console.error('Failed to get favorite hikes from database: ', err);
       res.sendStatus(500);
     });
+
 });
 
-router.get('/favs', (req, res) => {
+hikes.put('/hikes', (req, res) => {
   // update certain fav hike rating in db
 
   // use Hike sequelize model.update() to update rating
@@ -54,7 +53,7 @@ router.get('/favs', (req, res) => {
     });
 });
 
-router.delete('/favs', (req, res) => {
+hikes.delete('/hikes', (req, res) => {
   // delete a fav hike from the db
 
   // use Hike sequelize model.destory() to delete fav hike from table
@@ -69,4 +68,4 @@ router.delete('/favs', (req, res) => {
     });
 });
 
-module.exports = router;
+module.exports = hikes;
