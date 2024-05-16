@@ -1,15 +1,18 @@
 import React from 'react';
 import WildLife from './WildLife.jsx';
+import HomePage from './HomePage.jsx';
+import Login from './Login.jsx';
 
-import Calendar from './Calendar.jsx';
-import Profile from './Profile.jsx';
+// import Calendar from './Calendar.jsx';
 import Plants from './plants/Plants.jsx';
 import Hikes from './hikes/Hikes.jsx';
 
 const App = () => {
   return (
     <div>
-      <div></div>
+      <div>
+        <Login />
+      </div>
       <div className='header'>
         <h2 className='logo'>SafeTree</h2>
         <div className='navbar'>
@@ -34,10 +37,11 @@ const App = () => {
             <Hikes />
           </div>
         </div>
-        <div className="feature">
-          <div className="calendar">
-            <h4>calendar component here
-              <Calendar />
+        <div className='feature'>
+          <div className='calendar'>
+            <h4>
+              calendar component here
+              {/* <Calendar /> */}
             </h4>
           </div>
         </div>

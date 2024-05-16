@@ -1,5 +1,4 @@
 const { app } = require('./app.js');
-// const session = require('express-session');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const { User } = require('./database');
@@ -16,7 +15,15 @@ passport.use(
     },
     // authorized
     function (accessToken, refreshToken, profile, done) {
-      done(null, profile);
+      User.findOrCreate({
+        where: { googleId: profile.id },
+      })
+        .then(([user]) => {
+          done(null, user);
+        })
+        .catch((err) => {
+          console.error('Failed to find or create user:', err);
+        });
     }
   )
 );
@@ -31,7 +38,7 @@ app.get(
 app.get(
   '/auth/google/callback',
   passport.authenticate('google', {
-    successRedirect: '/home',
+    successRedirect: '/',
     failureRedirect: '/login',
   })
 );

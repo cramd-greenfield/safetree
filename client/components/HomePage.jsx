@@ -7,13 +7,13 @@ const HomePage = () => {
   const [observation, setObservation] = useState('');
 
   //get all observations for the feed
-  useEffect(() => {
-    axios(`/feed`)
-      .then(({ data }) => {
-        console.log(data);
-      })
-      .catch((err) => console.error('Could not get Feed:', err));
-  });
+  // useEffect(() => {
+  //   axios(`/feed`)
+  //     .then(({ data }) => {
+  //       console.log(data);
+  //     })
+  //     .catch((err) => console.error('Could not get Feed:', err));
+  // });
 
   return (
     <div>
