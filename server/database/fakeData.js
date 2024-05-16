@@ -66,7 +66,7 @@ const fakePlants = [
 
 const fakeAnimals = [
   {
-    id: 1,
+    // id: 1,
     species: 'Bald Eagle',
     isPredator: true,
     location: 'North America',
@@ -145,67 +145,67 @@ const fakeHikes = [
   },
 ];
 
-const fakeObservations = [
-  {
-    id: 1,
-    message: 'I loved this trail.',
-    PlantId: 1,
-    AnimalId: 1,
-    HikeId: 1,
-  },
-  {
-    id: 2,
-    message: 'This trail was boring.',
-    PlantId: 2,
-    AnimalId: 2,
-    HikeId: 2,
-  },
-  {
-    id: 3,
-    message: 'Parking lot was cool.',
-    PlantId: 3,
-    AnimalId: 3,
-    HikeId: 3,
-  },
-  {
-    id: 4,
-    message: 'Saw a ton of plants on this trail.',
-    PlantId: 4,
-    AnimalId: 4,
-    HikeId: 4,
-  },
-];
-
 // const fakeObservations = [
 //   {
-//     userId: fakeUsers[0].id,
+//     id: 1,
 //     message: 'I loved this trail.',
-//     PlantId: fakePlants[0].species,
-//     AnimalId: fakeAnimals[0].species,
-//     HikeId: fakeHikes[0].description,
+//     PlantId: 1,
+//     AnimalId: 1,
+//     HikeId: 1,
 //   },
 //   {
-//     userId: fakeUsers[1].id,
+//     id: 2,
 //     message: 'This trail was boring.',
-//     PlantId: fakePlants[1].species,
-//     AnimalId: fakeAnimals[1].species,
-//     HikeId: fakeHikes[1].description,
+//     PlantId: 2,
+//     AnimalId: 2,
+//     HikeId: 2,
 //   },
 //   {
-//     userId: fakeUsers[2].id,
+//     id: 3,
 //     message: 'Parking lot was cool.',
-//     PlantId: fakePlants[2].species,
-//     AnimalId: fakeAnimals[2].species,
-//     HikeId: fakeHikes[2].description,
+//     PlantId: 3,
+//     AnimalId: 3,
+//     HikeId: 3,
 //   },
 //   {
-//     userId: fakeUsers[3].id,
+//     id: 4,
 //     message: 'Saw a ton of plants on this trail.',
-//     PlantId: fakePlants[3].species,
-//     AnimalId: fakeAnimals[3].species,
-//     HikeId: fakeHikes[3].description,
+//     PlantId: 4,
+//     AnimalId: 4,
+//     HikeId: 4,
 //   },
 // ];
+
+const fakeObservations = [
+  {
+    userId: fakeUsers[0].id,
+    message: 'I loved this trail.',
+    PlantId: fakePlants[0].species,
+    AnimalId: fakeAnimals[0].species,
+    HikeId: fakeHikes[0].description,
+  },
+  {
+    userId: fakeUsers[1].id,
+    message: 'This trail was boring.',
+    PlantId: fakePlants[1].species,
+    AnimalId: fakeAnimals[1].species,
+    HikeId: fakeHikes[1].description,
+  },
+  {
+    userId: fakeUsers[2].id,
+    message: 'Parking lot was cool.',
+    PlantId: fakePlants[2].species,
+    AnimalId: fakeAnimals[2].species,
+    HikeId: fakeHikes[2].description,
+  },
+  {
+    userId: fakeUsers[3].id,
+    message: 'Saw a ton of plants on this trail.',
+    PlantId: fakePlants[3].species,
+    AnimalId: fakeAnimals[3].species,
+    HikeId: fakeHikes[3].description,
+  },
+];
 
 module.exports = {
   fakeUsers,
