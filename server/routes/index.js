@@ -7,8 +7,7 @@ const user = require('./user');
 
 const safeTree = Router();
 
-safeTree.get('/hikes', hikes);
-safeTree.post('/hikes', hikes);
+safeTree.all('/hikes', hikes);
 
 safeTree.get('/home', observations);
 safeTree.post('/home', observations);

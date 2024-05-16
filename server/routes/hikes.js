@@ -1,51 +1,53 @@
 const express = require('express');
-const router = express.Router();
+const hikes = express.Router();
 const { Hike } = require('../database');
-
-// in app.js, there will be something like app.use('/', routerIndex),
-// and then in server/routes/index.js, router.use('/hikes', hikes);
-// so all requests starting with /hikes will come here, and these
-// endpoints will handle requests to endpoints '/hikes/*'
 
 // routes for hike related requests
 
-router.post('/favs', (req, res) => {
-  // add a fav hike to the db
+hikes.post('/hikes', (req, res) => {
 
-  // use Hike sequelize model.create() to add to table
-  Hike.create(/* insert object goes here */)
-    .then((data) => {
-      console.log('Added favorite hike: ', data);
+  const { description, location, rating } = req.body.hike;
+
+  // add hike to the database
+  Hike.create({ description, location, rating })
+    .then(() => {
       res.sendStatus(201);
     })
     .catch((err) => {
       console.error('Failed to add favorite hike: ', err);
       res.sendStatus(500);
     });
+
 });
 
-router.get('/favs', (req, res) => {
-  // respond with all the fav hikes in db
+hikes.get('/hikes', (req, res) => {
 
-  // use Hike sequelize model.findAll() in hikes table
+  // find all hikes in database
   Hike.findAll()
-    .then((data) => {
-      console.log('fetched all hikes: ', data);
-      res.sendStatus(200);
+    .then((hikes) => {
+      res.status(200).send(hikes);
     })
     .catch((err) => {
-      console.error('Failed to get favorite hikes from database: ', err);
+      console.error('Failed to get hikes from database: ', err);
       res.sendStatus(500);
     });
+
 });
 
-router.get('/favs', (req, res) => {
-  // update certain fav hike rating in db
+hikes.patch('/hikes', (req, res) => {
 
-  // use Hike sequelize model.update() to update rating
-  Hike.update()
-    .then((data) => {
-      console.log('updated hike rating, response data: ', data);
+  const { description, rating } = req.body.hike;
+
+  // update selected hike rating in database
+  Hike.update(
+      { rating },
+      {
+        where: {
+          description
+        },
+      },
+    )
+    .then(() => {
       res.sendStatus(202);
     })
     .catch((err) => {
@@ -54,19 +56,23 @@ router.get('/favs', (req, res) => {
     });
 });
 
-router.delete('/favs', (req, res) => {
-  // delete a fav hike from the db
+hikes.delete('/hikes', (req, res) => {
 
-  // use Hike sequelize model.destory() to delete fav hike from table
-  Hike.destroy()
-    .then((data) => {
-      console.log('deleted user, response data: ', data);
+  const { description } = req.body.hike;
+
+  // delete a hike from the database
+  Hike.destroy({
+    where: {
+      description,
+    },
+  })
+    .then(() => {
       res.sendStatus(200);
     })
     .catch((err) => {
-      console.log('Failed to delete a favorite hike: ', err);
+      console.log('Failed to delete a hike: ', err);
       res.sendStatus(500);
     });
 });
 
-module.exports = router;
+module.exports = hikes;
