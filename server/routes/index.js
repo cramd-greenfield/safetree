@@ -10,8 +10,8 @@ const safeTree = Router();
 safeTree.get('/hikes', hikes);
 safeTree.post('/hikes', hikes);
 
-safeTree.get('/home', observations);
-safeTree.post('/home', observations);
+safeTree.get('/observations', observations);
+safeTree.post('/observations', observations);
 
 safeTree.get('/plants', plants);
 safeTree.post('/plants', plants);
