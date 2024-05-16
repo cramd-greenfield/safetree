@@ -1,36 +1,41 @@
-// Import react
-import React from 'react';
- 
-// Import the renderCalendar function
-import Script from '../helpers/calendarScript.js';
+ // Import the useEffect hook from react
+import React, { useEffect, useState } from 'react';
+
+
+import CalendarScript from '../helpers/calendarScript.jsx';
+
+const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+];
 
 // Create component function
 const Calendar = () => {
+    // Define state variables for current month and year
+    const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
+    const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
 
-    // Note to self: Clarify the difference of implicit and explicit again
-    // Placing elements for calendar
-
+ 
     /* Important Tags 
     header
     weekdays
     */
-    
     return (
-        <div class="container">
-            <div class="calendar">
-                <div class="header">
-                    <div class="month">May, 2024</div>
-                    <div class="btn">
-                        <div class="btn today-btn">
-                            <i class="fas fa-calendar-day"></i>
-                        </div>
-                        <div class="btn prev-btn">
-                            <i class="fas fa-chevron-left"></i>
-                        </div>
-                        <div class="btn next-btn">
-                            <i class="fas fa-chevron-right"></i>
-                        </div>
-                    </div>
+        <div className="container">
+            <div className="calendar">
+                <div className="header">
+                    <div className="month">{months[currentMonth]} {currentYear}</div>
+    
                 </div>
                 <div className="weekdays">
                     <div className="day">Sun</div>
@@ -42,15 +47,14 @@ const Calendar = () => {
                     <div className="day">Sat</div>
                 </div>
                 <div className="days">
-        
+                    <CalendarScript />
                 </div>
             </div>
-            <script>
-                <Script />
-            </script>
-        </div>
+         </div>
     );
 }
 
 // Export component function
 export default Calendar;
+
+
