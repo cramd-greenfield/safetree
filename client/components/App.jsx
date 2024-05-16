@@ -1,6 +1,6 @@
 import React from 'react';
-import Home from './observations/Home.jsx';
-import Login from './observations/Login.jsx';
+import Home from './Home.jsx';
+import Login from './Login.jsx';
 import Profile from './Profile.jsx';
 import { Routes, Route } from 'react-router-dom';
 
