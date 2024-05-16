@@ -9,14 +9,7 @@ const sequelize = new Sequelize('safetree', 'root', '', {
 (async () => {
   try {
     await sequelize.authenticate();
-    // await sequelize.sync(),
-    User.sync();
-    Plant.sync();
-    Animal.sync();
-    Itinerary.sync();
-    Hike.sync();
-    Observations.sync();
-    console.log('Connected');
+    await sequelize.sync(), console.log('Connected');
   } catch (err) {
     console.error('Failed to connect:', err);
   }
@@ -87,24 +80,24 @@ const Observations = sequelize.define('Observations', {
   },
   message: DataTypes.STRING,
   AnimalId: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     references: {
       model: Animal,
-      key: 'id',
+      key: 'species',
     },
   },
   HikeId: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     references: {
       model: Hike,
-      key: 'id',
+      key: 'description',
     },
   },
   PlantId: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     references: {
       model: Plant,
-      key: 'id',
+      key: 'species',
     },
   },
 });
