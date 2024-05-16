@@ -15,16 +15,10 @@ const {
   Observations,
 } = require('./index');
 
-// const seedDB = () => {
 (async = () => {
   User.destroy({
     where: {},
   })
-    // .then(() => Plant.destroy({ where: {} }))
-    // .then(() => Animal.destroy({ where: {} }))
-    // .then(() => Itinerary.destroy({ where: {} }))
-    // .then(() => Hike.destroy({ where: {} }))
-    // .then(() => Observations.destroy({ where: {} }))
     .then(() => {
       User.bulkCreate(fakeUsers).catch((err) => {
         console.error('Failed to add fake user records', err);
