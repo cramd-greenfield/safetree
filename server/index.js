@@ -1,6 +1,5 @@
 const { app } = require('./app.js');
 const path = require('path');
-const serveStatic = require('serve-static');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const { User } = require('./database');
@@ -42,12 +41,10 @@ app.get(
 app.get(
   '/auth/google/callback',
   passport.authenticate('google', {
-    successRedirect: '/home', // on success goes to home page
-    failureRedirect: '/', // on fail it will prompt to login in again
+    successRedirect: '/home',
+    failureRedirect: '/',
   })
 );
-
-// app.use(serveStatic('dist', { index: ['index.html'] }));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/index.html'));
@@ -64,14 +61,6 @@ passport.deserializeUser((user, done) => {
 app.get('/login', (req, res) => {
   res.render('login');
 });
-
-app.get(
-  '/oauth2/redirect/google',
-  passport.authenticate('google', {
-    successRedirect: '/home',
-    failureRedirect: '/login',
-  })
-);
 
 /**************** LOGOUT *******************/
 app.post('/logout', (req, res, next) => {
