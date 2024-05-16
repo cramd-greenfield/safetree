@@ -1,14 +1,8 @@
-// Import react
-//import React from 'react';
-//import React from 'react';
-
  // Import the useEffect hook from react
 import React, { useEffect, useState } from 'react';
 
 
 import CalendarScript from '../helpers/calendarScript.jsx';
-// Import the renderCalendar function
-//import { renderCalendar } from '../helpers/calendarScript.js';
 
 const months = [
     "January",
@@ -36,7 +30,6 @@ const Calendar = () => {
     header
     weekdays
     */
-    
     return (
         <div className="container">
             <div className="calendar">
@@ -63,3 +56,5 @@ const Calendar = () => {
 
 // Export component function
 export default Calendar;
+
+
