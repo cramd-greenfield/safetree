@@ -2,7 +2,7 @@ import React from 'react';
 import WildLife from './WildLife.jsx';
 import HomePage from './HomePage.jsx';
 
-// import Calendar from './Calendar.jsx';
+ import Calendar from './Calendar.jsx';
 import Plants from './plants/Plants.jsx';
 import Hikes from './hikes/Hikes.jsx';
 
@@ -36,10 +36,8 @@ const App = () => {
         </div>
         <div className='feature'>
           <div className='calendar'>
-            <h4>
-              calendar component here
-              {/* <Calendar /> */}
-            </h4>
+            <h4>calendar component here</h4>
+            <Calendar />
           </div>
         </div>
         <div className='feature'>
