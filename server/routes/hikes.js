@@ -28,30 +28,26 @@ hikes.get('/hikes', (req, res) => {
       res.status(200).send(hikes);
     })
     .catch((err) => {
-      console.error('Failed to get favorite hikes from database: ', err);
+      console.error('Failed to get hikes from database: ', err);
       res.sendStatus(500);
     });
 
 });
 
 hikes.patch('/hikes', (req, res) => {
-  /**
-   * description,
-   * rating
-   */
+
   const { description, rating } = req.body.hike;
 
-  // use Hike sequelize model.update() to update rating
+  // update selected hike rating in database
   Hike.update(
-    { rating },
-    {
-      where: {
-        description
+      { rating },
+      {
+        where: {
+          description
+        },
       },
-    },
-  )
-    .then((data) => {
-      console.log('updated hike rating, response data: ');
+    )
+    .then(() => {
       res.sendStatus(202);
     })
     .catch((err) => {
@@ -61,16 +57,20 @@ hikes.patch('/hikes', (req, res) => {
 });
 
 hikes.delete('/hikes', (req, res) => {
-  // delete a fav hike from the db
 
-  // use Hike sequelize model.destory() to delete fav hike from table
-  Hike.destroy()
-    .then((data) => {
-      console.log('deleted user, response data: ', data);
+  const { description } = req.body.hike;
+
+  // delete a hike from the database
+  Hike.destroy({
+    where: {
+      description,
+    },
+  })
+    .then(() => {
       res.sendStatus(200);
     })
     .catch((err) => {
-      console.log('Failed to delete a favorite hike: ', err);
+      console.log('Failed to delete a hike: ', err);
       res.sendStatus(500);
     });
 });
