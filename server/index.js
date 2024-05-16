@@ -13,12 +13,11 @@ passport.use(
       clientSecret: GOOGLE_CLIENT_SECRET,
       callbackURL: '/auth/google/callback',
     },
-    // authorized
     function (accessToken, refreshToken, profile, done) {
       User.findOrCreate({
         where: { googleId: profile.id },
       })
-        .then(([user]) => {
+        .then((user) => {
           done(null, user);
         })
         .catch((err) => {
@@ -38,8 +37,8 @@ app.get(
 app.get(
   '/auth/google/callback',
   passport.authenticate('google', {
-    successRedirect: '/',
-    failureRedirect: '/login',
+    successRedirect: '/home', // on success goes to home page
+    failureRedirect: '/', // on fail it will prompt to login in again
   })
 );
 
@@ -58,7 +57,7 @@ app.get('/login', (req, res) => {
 app.get(
   '/oauth2/redirect/google',
   passport.authenticate('google', {
-    successRedirect: '/',
+    successRedirect: '/home',
     failureRedirect: '/login',
   })
 );
