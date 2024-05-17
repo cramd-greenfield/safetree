@@ -77,16 +77,42 @@ const Observations = sequelize.define('Observations', {
     primaryKey: true,
     autoIncrement: true,
   },
-  message: DataTypes.STRING, // Should this be it's own model?
-  animalSpec: DataTypes.STRING,
-  plantSpec: DataTypes.STRING,
-  hikeLoc: DataTypes.STRING,
+  animalId: {
+    type: DataTypes.INTEGER,
+    primaryKey: false,
+    references: {
+      model: Animal,
+      key: 'animalId',
+    },
+  },
+  plantId: {
+    type: DataTypes.INTEGER,
+    primaryKey: false,
+    references: {
+      model: Plant,
+      key: 'plantId',
+    },
+  },
+  hikeId: {
+    type: DataTypes.INTEGER,
+    primaryKey: false,
+    references: {
+      model: Hike,
+      key: 'hikeId',
+    },
+  },
+});
+
+Animal.belongsTo(Observations, {
+  foreignKey: 'animalId',
+});
+Hike.belongsTo(Observations, {
+  foreignKey: 'hikeId',
+});
+Plant.belongsTo(Observations, {
+  foreignKey: 'plantId',
 });
 User.hasMany(Observations);
-Observations.hasMany(Animal);
-Observations.hasMany(Plant);
-Observations.hasMany(Hike);
-
 Observations.belongsTo(User);
 
 module.exports = {
