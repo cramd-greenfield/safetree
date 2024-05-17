@@ -9,8 +9,6 @@ const distPath = path.resolve(__dirname, '../dist');
 
 const app = express();
 
-app.use('/', routes);
-
 app.use(
   session({
     secret: 'shush',
@@ -33,6 +31,8 @@ app.use(passport.session());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(distPath));
+
+app.use('/', routes);
 
 app.listen(3000, () => {
   console.log(`\
