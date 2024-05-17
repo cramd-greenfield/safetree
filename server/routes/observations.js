@@ -18,7 +18,7 @@ router.post('/observations', (req, res) => {
 
 // GET: Read
 router.get('/observations', (req, res) => {
-  Observations.findAll({})
+  Observations.findAll()
     .then((dataValues) => {
       res.status(200).send(dataValues);
     })

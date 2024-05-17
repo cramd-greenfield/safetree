@@ -1,79 +1,74 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import ObservationsList from './observations/ObservationsList.jsx';
-// import fakeData from '../../server/database/fakeData.js';
+import fakeData from '../../server/database/fakeData.js';
 
+const test = 57;
 const Profile = () => {
-  const testObj = () => [
-    {
-      username: 'Cody',
-      message: 'Hooks are cool, but confusing at times...',
-      animalSpec: 'Bear',
-      plantSpec: 'flour',
-      hikeLoc: 'over there',
-    },
-  ];
+  const init = () => {
+    return ObservationsList;
+  };
 
-  const [profile, setProfile] = useState([]);
-  const [state, setState] = useState(() => testObj());
-  const [observations, setObservations] = useState([]);
-  const [feed, setFeed] = useState('');
-
-  const username = state.username;
-  const message = state.message;
-  const animalSpec = state.animalSpec;
-  const plantSpec = state.plantSpec;
-
+  const [observations, setObservations] = useState(() => []);
+  const [title, setTitle] = useState('');
+  const [message, setMessage] = useState('');
+  const [safe, setSafe] = useState(true);
+  const obRef = useRef(observations);
+  const [show, hide] = useState(false);
   // Post to database
-  const createObservations = () => {};
+  const createObservations = () => {
+    axios
+      .post(`/observations`, { observation: title, message, safe })
+      .then((observation) => {
+        console.log(observation.data);
+      })
+      .catch((err) => {
+        console.error('Failed to Create Observation:', err);
+      });
+  };
 
-  // get all observations for the feed
   useEffect(() => {
     axios
       .get(`/observations`)
       .then(({ data }) => {
-        console.log(data);
-        // setObservations(data);
+        setObservations((prevData) => (prevData = data));
       })
       .catch((err) => console.error('Could not get Feed:', err));
-  });
+    // };
+  }, [obRef]);
+
+  // useEffect(() => {
+  //   getObservations();
+  // }, [observations]);
 
   return (
     <div>
-      <h4>User Profile Page</h4>
-      <br />
-      <br />
-      <div>
-        <img src={profile.picture} alt='' />
-        <p>Name: {profile.name}</p>
-        <p>Info: {}</p>
-        <p>moreInfo: {}</p>
-        <br />
-        <br />
-      </div>
       <div>
         <div className='user-chat-box'></div>
-        <div className='chat-popup' id='myForm'>
-          <form action='/action_page.php' className='form-container'>
-            <label htmlFor='message'></label>
-            <textarea
-              placeholder='Tell us about your adventures!'
-              name={feed}
-              required
-            ></textarea>
 
-            <button type='submit' className='Send-it'>
-              Send
-            </button>
-            <button type='button' className='Close'>
-              Close
-            </button>
-            {/* <button type='button' className='Close' onClick={}>
-            Close
-          </button> */}
-          </form>
-        </div>
-        <ObservationsList observations={observations} />
+        {/* <span>{observations}</span> */}
+        <textarea
+          placeholder='Tell us about your adventures!'
+          // value={observations}
+          name='observations'
+          required
+          // onChange={}
+        ></textarea>
+
+        <button
+          type='submit'
+          onClick={() => createObservations()}
+          className='Send-it'
+        >
+          Send
+        </button>
+        <button type='button' className='Close' onClick={() => hide(!show)}>
+          Close
+        </button>
+
+        <>
+          <ObservationsList observations={observations} />
+        </>
       </div>
     </div>
   );
