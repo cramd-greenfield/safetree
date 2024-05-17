@@ -171,7 +171,7 @@ const fakeObservations = [
     message: "There a was an angry eagle that wouldn't let us pass...",
     title: fakeHikes[3].description,
     date: '05/16/2024',
-    safe: true,
+    safe: false,
     UserId: fakeUsers[3].id,
   },
 ];

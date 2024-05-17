@@ -83,7 +83,7 @@ const Observations = sequelize.define('observation', {
   safe: DataTypes.BOOLEAN,
 });
 User.Observations = User.hasMany(Observations);
-Observations.belongsTo(User);
+Observations.User = Observations.belongsTo(User);
 
 // const Observations = sequelize.define('Observations', {
 //   id: {
