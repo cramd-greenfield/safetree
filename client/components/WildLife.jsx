@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-require("dotenv").config();
+// require("dotenv").config();
 // const { ANIMALS_API_KEY } = process.env;
-console.log(process.env)
+// console.log(process.env)
 
 
 const WildLife = () => {
