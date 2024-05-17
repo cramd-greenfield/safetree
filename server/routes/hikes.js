@@ -6,7 +6,7 @@ const { GOOGLE_MAPS_API_KEY } = process.env;
 
 // routes for hike related requests
 
-hikes.post('/hikes', (req, res) => {
+hikes.post('/hikeSearch', (req, res) => {
 
   const { location } = req.body.search;
 
@@ -39,16 +39,21 @@ hikes.post('/hikes', (req, res) => {
       res.sendStatus(500);
     })
 
-  // // add hike to the database
-  // Hike.create({ description, location, rating })
-  //   .then(() => {
-  //     res.sendStatus(201);
-  //   })
-  //   .catch((err) => {
-  //     console.error('Failed to add favorite hike: ', err);
-  //     res.sendStatus(500);
-  //   });
+});
 
+hikes.post('/hikes', (req, res) => {
+
+  const { description, location, rating } = req.body.hike;
+
+  // add hike to the database
+  Hike.create({ description, location, rating })
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch((err) => {
+      console.error('Failed to add favorite hike: ', err);
+      res.sendStatus(500);
+    });
 });
 
 hikes.get('/hikes', (req, res) => {
