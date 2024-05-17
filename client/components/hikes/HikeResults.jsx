@@ -2,7 +2,7 @@ import React from 'react';
 
 import HikeResult from './HikeResult.jsx';
 
-const HikeResults = ({ results }) => {
+const HikeResults = ({ results, getFavHikes }) => {
 
   return (
     <div className="hike-search-result-list">
@@ -12,6 +12,7 @@ const HikeResults = ({ results }) => {
             <HikeResult
               hike={ result }
               key={`${result}-${i}`}
+              getFavHikes={ getFavHikes }
             />
           )
         })

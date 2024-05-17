@@ -2,13 +2,21 @@ import React from 'react';
 
 import HikeFav from './HikeFav.jsx';
 
-const HikeFavList = () => {
+const HikeFavList = ({ favHikes, getFavHikes }) => {
 
   return (
     <div className="fav-hike-list">
-        <HikeFav />
-        <HikeFav />
-        <HikeFav />
+      {
+        favHikes.map((favHike, i) => {
+          return (
+            <HikeFav
+              favHike={ favHike }
+              key={`${favHike}-${i}`}
+              getFavHikes={ getFavHikes }
+            />
+          )
+        })
+      }
     </div>
   )
 }
