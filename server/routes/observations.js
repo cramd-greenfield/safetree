@@ -51,11 +51,24 @@ router.patch('/observations/:id', (req, res) => {
 });
 
 // Delete: Destroy
-router.delete('/observations', (req, res) => {
-  const { user } = req.body;
+router.delete('/observations/:id', (req, res) => {
   const { id } = req.params;
-  // findByPk obtains single entry from the table, using the provided PRIMARY KEY
-  console.log('user', user, 'id', id);
+  Observations.destroy({
+    where: {
+      id: id,
+    },
+  })
+    .then((data) => {
+      if (data) {
+        res.sendStatus(200);
+      } else {
+        res.sendStatus(404);
+      }
+    })
+    .catch((err) => {
+      console.error('Failed to destroy observation:', err);
+      res.sendStatus(500);
+    });
 });
 
 module.exports = router;
