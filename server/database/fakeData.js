@@ -147,32 +147,32 @@ const fakeHikes = [
 
 const fakeObservations = [
   {
+    message: 'A lot of rust. Would not recommend...',
+    title: fakeHikes[0].description,
+    date: '05/17/2024',
+    safe: false,
     UserId: fakeUsers[0].id,
-    message: 'I loved this trail.',
-    plantSpec: fakePlants[0].species,
-    animalSpec: fakeAnimals[0].species,
-    hikeLoc: fakeHikes[0].description,
   },
   {
+    message: 'A lot of great stuff to say about this place.',
+    title: fakeHikes[1].description,
+    date: '05/16/2024',
+    safe: true,
     UserId: fakeUsers[1].id,
-    message: 'This trail was boring.',
-    plantSpec: fakePlants[1].species,
-    animalSpec: fakeAnimals[1].species,
-    hikeLoc: fakeHikes[1].description,
   },
   {
+    message: 'Great day for a family adventure!',
+    title: fakeHikes[2].description,
+    date: '05/16/2024',
+    safe: true,
     UserId: fakeUsers[2].id,
-    message: 'Parking lot was cool.',
-    plantSpec: fakePlants[2].species,
-    animalSpec: fakeAnimals[2].species,
-    hikeLoc: fakeHikes[2].description,
   },
   {
+    message: "There a was an angry eagle that wouldn't let us pass...",
+    title: fakeHikes[3].description,
+    date: '05/16/2024',
+    safe: true,
     UserId: fakeUsers[3].id,
-    message: 'Saw a ton of plants on this trail.',
-    plantSpec: fakePlants[3].species,
-    animalSpec: fakeAnimals[3].species,
-    hikeLoc: fakeHikes[3].description,
   },
 ];
 
