@@ -4,9 +4,9 @@ const HikeFav = () => {
 
   return (
     <div>
+      <button>Remove Favorite</button>
       <span>Hike Description</span>
       <span>Hike Location</span>
-      <button>Remove Favorite</button>
     </div>
   )
 }

@@ -6,11 +6,9 @@ const HikesFavList = () => {
 
   return (
     <div className="fav-hike-list">
-      <ul className="fav-hikes">
         <HikeResult />
         <HikeResult />
         <HikeResult />
-      </ul>
     </div>
   )
 }
