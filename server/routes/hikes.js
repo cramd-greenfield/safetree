@@ -7,10 +7,8 @@ const { GOOGLE_MAPS_API_KEY } = process.env;
 // routes for hike related requests
 
 hikes.post('/hikes', (req, res) => {
-  console.log('req.body', req.body);
 
   const { location } = req.body.search;
-  console.log('searched location: ', location);
 
   axios({
     method: 'post',
@@ -33,7 +31,7 @@ hikes.post('/hikes', (req, res) => {
           rating: result.rating,
         }
       })
-      console.log('relevantHIkeProps', relevantHikeProps);
+      // console.log('relevantHIkeProps', relevantHikeProps);
       res.status(201).send(relevantHikeProps);
     })
     .catch((err) => {
