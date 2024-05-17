@@ -38,7 +38,8 @@ app.use('/', routes); // Links the routes to app.js
 
 app.listen(3000, () => {
   console.log(`
-    Check it out: http://127.0.0.1:3000
+    Check it out here: http://localhost:3000
+    Or here: http://127.0.0.1:3000
   `);
 });
 
