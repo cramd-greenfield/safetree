@@ -5,7 +5,7 @@ import HikeResult from './HikeResult.jsx';
 const HikeResults = ({ results }) => {
 
   return (
-    <div className="fav-hike-list">
+    <div className="hike-search-result-list">
       {
         results.map((result, i) => {
           return (
