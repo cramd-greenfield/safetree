@@ -4,7 +4,6 @@ const session = require('express-session');
 const passport = require('passport');
 const cors = require('cors');
 const routes = require('./routes');
-// do we need morgan???
 
 const distPath = path.resolve(__dirname, '../dist');
 
@@ -32,14 +31,14 @@ app.use(passport.session());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(distPath));
-// app.use(cookieParser()); Do we need?
 
-app.use('/', routes); // Links the routes to app.js
+app.use('/', routes);
 
 app.listen(3000, () => {
-  console.log(`
-    Check it out here: http://localhost:3000
-    Or here: http://127.0.0.1:3000
+  console.log(`\
+  \nCheck it out:\
+  \nhttp://127.0.0.1:3000 |\
+  http://localhost:3000
   `);
 });
 
