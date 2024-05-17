@@ -1,20 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import ObservationsList from './observations/ObservationsList.jsx';
-import fakeData from '../../server/database/fakeData.js';
 
 const test = 57;
 const Profile = () => {
-  const init = () => {
-    return ObservationsList;
-  };
-
-  const [observations, setObservations] = useState(() => []);
+  const [observations, setObservations] = useState([]);
   const [title, setTitle] = useState('');
   const [message, setMessage] = useState('');
   const [safe, setSafe] = useState(true);
   const obRef = useRef(observations);
   const [show, hide] = useState(false);
+
   // Post to database
   const createObservations = () => {
     axios
@@ -34,12 +30,7 @@ const Profile = () => {
         setObservations((prevData) => (prevData = data));
       })
       .catch((err) => console.error('Could not get Feed:', err));
-    // };
   }, [obRef]);
-
-  // useEffect(() => {
-  //   getObservations();
-  // }, [observations]);
 
   return (
     <div>
