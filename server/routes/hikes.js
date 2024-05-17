@@ -1,22 +1,45 @@
 const express = require('express');
+const axios = require('axios');
 const hikes = express.Router();
 const { Hike } = require('../database');
-
+const { GOOGLE_MAPS_API_KEY } = process.env;
+console.log('GOOGLE_MAPS_API_KEY', GOOGLE_MAPS_API_KEY);
 // routes for hike related requests
 
 hikes.post('/hikes', (req, res) => {
 
-  const { description, location, rating } = req.body.hike;
+  const { location } = req.body.search;
+  console.log('searched location: ', location);
 
-  // add hike to the database
-  Hike.create({ description, location, rating })
-    .then(() => {
+  axios({
+    method: 'post',
+    url: 'https://places.googleapis.com/v1/places:searchText',
+    params: {
+      key: GOOGLE_MAPS_API_KEY,
+      fields: 'places.id,places.displayName,places.location,places.primaryTypeDisplayName,places.rating,places.formattedAddress',
+      textQuery: `hikes near ${location}`,
+      maxResultCount: 5,
+      rankPreference: 'DISTANCE',
+    }
+  })
+    .then(({ data }) => {
+      console.log('results from google: ', data);
       res.sendStatus(201);
     })
     .catch((err) => {
-      console.error('Failed to add favorite hike: ', err);
+      console.error('Failed to fetch results from Google Maps', err);
       res.sendStatus(500);
-    });
+    })
+
+  // // add hike to the database
+  // Hike.create({ description, location, rating })
+  //   .then(() => {
+  //     res.sendStatus(201);
+  //   })
+  //   .catch((err) => {
+  //     console.error('Failed to add favorite hike: ', err);
+  //     res.sendStatus(500);
+  //   });
 
 });
 
