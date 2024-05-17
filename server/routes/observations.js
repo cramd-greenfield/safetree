@@ -24,6 +24,15 @@ router.get('/observations', (req, res) => {
 
 // PUT/PATCH: Update
 router.get('/observations', (req, res) => {
+  //example
+  User.update(
+    { lastName: 'Doe' },
+    {
+      where: {
+        lastName: null,
+      },
+    }
+  );
   console.log('Update');
 });
 
@@ -31,22 +40,8 @@ router.get('/observations', (req, res) => {
 router.delete('/observations', (req, res) => {
   const { user } = req.body;
   const { id } = req.params;
+  // findByPk obtains single entry from the table, using the provided PRIMARY KEY
   console.log('user', user, 'id', id);
 });
 
 module.exports = router;
-
-/*
-const Observations = sequelize.define('Observations', {
-  id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
-    primaryKey: true,
-  },
-  animalId: DataTypes.INTEGER,
-  plantId: DataTypes.INTEGER,
-  message: DataTypes.STRING,
-  date: DataTypes.DATE,
-  userId: DataTypes.INTEGER,
-});
-*/
