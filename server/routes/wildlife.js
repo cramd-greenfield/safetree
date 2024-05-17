@@ -18,7 +18,7 @@ const { Router } = require('express');
 const { Animal } = require('../database');
 
 const router = Router();
-
+// const { ANIMALS_API_KEY } = process.env;
 //how will it get animals if not external api here
 
 router.get('/wildlife', (req, res) => {
