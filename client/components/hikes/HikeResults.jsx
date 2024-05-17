@@ -2,15 +2,20 @@ import React from 'react';
 
 import HikeResult from './HikeResult.jsx';
 
-const HikesFavList = () => {
-
+const HikeResults = ({ results }) => {
+  console.log('results passed into HikeResults', results, Array.isArray(results));
   return (
     <div className="fav-hike-list">
-        <HikeResult />
-        <HikeResult />
-        <HikeResult />
+      {
+        results.map((result) => {
+          console.log('result', result);
+          <HikeResult
+            hike={ result }
+          />
+        })
+      }
     </div>
   )
 }
 
-export default HikesFavList;
+export default HikeResults;

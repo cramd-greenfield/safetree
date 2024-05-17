@@ -1,28 +1,28 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-// require('dotenv').config();
-// const { GOOGLE_MAPS_API_KEY } = process.env;
+
+import HikeResults from './HikeResults.jsx';
 
 const HikeSearch = () => {
 
   const [input, setInput] = useState('');
+  const [results, loadResults] = useState([]);
 
   const handleInput = (e) => {
     setInput(e.target.value);
-    console.log(e.target.value);
   }
 
   const searchHikes = () => {
-    console.log('hike searched');
-    console.log(input);
+    console.log('hike searched', input);
 
     axios.post('/hikes', {
       search: {
         location: input,
       }
     })
-      .then((data) => {
-        console.log('results from axios post ', data);
+      .then((hikeResults) => {
+        console.log('results from axios post ', hikeResults.data);
+        loadResults(hikeResults.data);
       })
       .catch((err) => {
         console.error('Failed to send post req to server', err);
@@ -33,6 +33,7 @@ const HikeSearch = () => {
     <div className="hike-search">
       <input value={ input } onChange={ handleInput } type="text" placeholder="city, state, or zip code"/>
       <button onClick={ searchHikes }>Search</button>
+      <HikeResults results={ results }/>
     </div>
   )
 }

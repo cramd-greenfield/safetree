@@ -1,13 +1,13 @@
 import React from 'react';
 
-const HikeResult = () => {
-
+const HikeResult = ({ result }) => {
+  console.log('passed into HikeResult', result)
   return (
     <div>
       <button>Add Favorite</button>
       <button>Remove</button>
-      <span>Hike Description</span>
-      <span>Hike Location</span>
+      <span>{ description }</span>
+      <span>{ location }</span>
     </div>
   )
 }

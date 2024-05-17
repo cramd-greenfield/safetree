@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import HikeSearch from './HikeSearch.jsx';
-import HikeResults from './HikeResults.jsx';
-import HikeFavList from './HikeFavList.jsx';
+// import HikeResults from './HikeResults.jsx';
+// import HikeFavList from './HikeFavList.jsx';
 
 const Hikes = () => {
 
@@ -13,14 +13,14 @@ const Hikes = () => {
         <h4>Search for trails near you:</h4>
         <HikeSearch />
       </div>
-      <div className="hike-results">
+      {/* <div className="hike-results">
         <h4>Local Results</h4>
-        <HikeResults />
-      </div>
-      <div className="hike-favs">
+        <HikeResults results={ results } />
+      </div> */}
+      {/* <div className="hike-favs">
         <h4>Favorite Trails</h4>
         <HikeFavList />
-      </div>
+      </div> */}
     </div>
   )
 }
