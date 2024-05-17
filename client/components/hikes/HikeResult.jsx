@@ -1,18 +1,34 @@
 import React from 'react';
+import axios from 'axios';
 
 const HikeResult = ({ hike, getFavHikes }) => {
 
-  const addFavHike = (e) => {
-    console.log(e);
-    // getFavHikes()
+  const { description, location, rating } = hike;
+
+  const addFavHike = () => {
+
+    // post to the db
+    axios.post('/hikes', {
+      hike: {
+        description,
+        location,
+        rating,
+      }
+    })
+      .then(() => {
+        getFavHikes();
+      })
+      .catch(() => {
+        console.error('Failed to add favorite hike', err);
+      });
   }
 
   return (
     <div>
       <button onClick={ addFavHike } type="button">Favorite</button> {/** somehow associate hike object with this button */}
-      <span>{ hike.description }</span>
-      <span>{ hike.location }</span>
-      <span>{ hike.rating }</span>
+      <span>{ description }</span>
+      <span>{ location }</span>
+      <span>{ rating }</span>
     </div>
   )
 }
