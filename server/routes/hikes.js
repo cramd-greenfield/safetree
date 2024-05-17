@@ -3,10 +3,11 @@ const axios = require('axios');
 const hikes = express.Router();
 const { Hike } = require('../database');
 const { GOOGLE_MAPS_API_KEY } = process.env;
-console.log('GOOGLE_MAPS_API_KEY', GOOGLE_MAPS_API_KEY);
+
 // routes for hike related requests
 
 hikes.post('/hikes', (req, res) => {
+  console.log('req.body', req.body);
 
   const { location } = req.body.search;
   console.log('searched location: ', location);
@@ -23,8 +24,17 @@ hikes.post('/hikes', (req, res) => {
     }
   })
     .then(({ data }) => {
-      console.log('results from google: ', data);
-      res.sendStatus(201);
+      // console.log('data from google: ', data);
+      // map data.places to object I want
+      let relevantHikeProps = data.places.map((result) => {
+        return {
+          description: result.displayName.text,
+          location: result.formattedAddress,
+          rating: result.rating,
+        }
+      })
+      console.log('relevantHIkeProps', relevantHikeProps);
+      res.status(201).send(relevantHikeProps);
     })
     .catch((err) => {
       console.error('Failed to fetch results from Google Maps', err);
