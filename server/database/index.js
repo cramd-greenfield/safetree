@@ -71,7 +71,7 @@ const Hike = sequelize.define('Hike', {
   rating: DataTypes.INTEGER,
 });
 
-const Observations = sequelize.define('observations', {
+const Observations = sequelize.define('observation', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
