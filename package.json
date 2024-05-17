@@ -4,6 +4,7 @@
   "description": "Stay safe outside",
   "main": "index.js",
   "scripts": {
+    "obs": "node server/database/ObsSeed.js",
     "start": "nodemon server/index.js",
     "seed": "node server/database/seed.js",
     "build": "webpack --watch",
