@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { Observations, User } = require('../database');
+const { Observations } = require('../database');
 
 const router = Router();
 
@@ -26,17 +26,28 @@ router.get('/observations', (req, res) => {
 });
 
 // PUT/PATCH: Update
-router.get('/observations/:id', (req, res) => {
-  //example
-  User.update(
-    { lastName: 'Doe' },
+router.patch('/observations/:id', (req, res) => {
+  const { id } = req.params;
+  const { message, title, safe } = req.body.observation;
+  Observations.update(
+    { message, title, safe },
     {
       where: {
-        lastName: null,
+        id: id,
       },
     }
-  );
-  console.log('Update');
+  )
+    .then((data) => {
+      if (data) {
+        res.sendStatus(202);
+      } else {
+        res.sendStatus(404);
+      }
+    })
+    .catch((err) => {
+      console.error('Failed to update Observation:', err);
+      res.sendStatus(500);
+    });
 });
 
 // Delete: Destroy
