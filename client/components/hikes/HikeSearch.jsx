@@ -16,20 +16,16 @@ const HikeSearch = () => {
     console.log('hike searched');
     console.log(input);
 
-    axios.post('https://places.googleapis.com/v1/places:searchText', {
-      params: {
-        fields: 'places.id,places.displayName,places.location,places.primaryTypeDisplayName,places.rating,places.formattedAddress',
-        textQuery: `hikes near ${input}`,
-        key: GOOGLE_MAPS_API_KEY,
-        maxResultCount: 5,
-        rankPreference: 'DISTANCE',
+    axios.post('/hikes', {
+      search: {
+        location: input,
       }
     })
       .then((data) => {
-        console.log('results from google: ', data);
+        console.log('results from axios post ', data);
       })
       .catch((err) => {
-        console.error('Failed to fetch results from Google Maps', err);
+        console.error('Failed to send post req to server', err);
       })
   }
 
