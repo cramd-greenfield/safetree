@@ -10,6 +10,7 @@ hikes.post('/hikeSearch', (req, res) => {
 
   const { location } = req.body.search;
 
+  // fetch search results from google places api
   axios({
     method: 'post',
     url: 'https://places.googleapis.com/v1/places:searchText',
@@ -22,8 +23,8 @@ hikes.post('/hikeSearch', (req, res) => {
     }
   })
     .then(({ data }) => {
-      // console.log('data from google: ', data);
-      // map data.places to object I want
+
+      // map data.places to custom object
       let relevantHikeProps = data.places.map((result) => {
         return {
           description: result.displayName.text,
@@ -31,7 +32,6 @@ hikes.post('/hikeSearch', (req, res) => {
           rating: result.rating,
         }
       })
-      // console.log('relevantHIkeProps', relevantHikeProps);
       res.status(201).send(relevantHikeProps);
     })
     .catch((err) => {

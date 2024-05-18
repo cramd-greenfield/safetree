@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 const HikeFav = ({ favHike, getFavHikes }) => {
+
+  const [newRating, setNewRating] = useState('');
 
   const { description } = favHike;
 
@@ -22,16 +24,33 @@ const HikeFav = ({ favHike, getFavHikes }) => {
 
   }
 
-  const rateFavHike = (e) => {
-    console.log(e);
-    // patch req to the db
+  const handleNewRating = (e) => {
+    setNewRating(e.target.value);
+    console.log(e.target.value);
+  }
 
-    // getFavHikes()
+  const rateFavHike = () => {
+
+    // patch req to the db
+    axios.patch('/hikes', {
+      hike: {
+        description,
+        rating: newRating,
+      }
+    })
+      .then(() => {
+        getFavHikes();
+      })
+      .then(() => { setNewRating('') })
+      .catch(() => {
+        console.error('Failed to change rating', err);
+      })
   }
 
   return (
     <div>
       <button onClick={ removeFavHike } type="button">Remove</button>
+      <input value={ newRating } onChange={ handleNewRating } type="text" placeholder="up to 5" />
       <button onClick={ rateFavHike } type="button">Rate</button>
       <span>{ favHike.description }</span>
       <span>{ favHike.location }</span>
