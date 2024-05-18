@@ -2,17 +2,23 @@ import React from 'react';
 
 import HikeResult from './HikeResult.jsx';
 
-const HikesFavList = () => {
+const HikeResults = ({ results, getFavHikes }) => {
 
   return (
-    <div className="fav-hike-list">
-      <ul className="fav-hikes">
-        <HikeResult />
-        <HikeResult />
-        <HikeResult />
-      </ul>
+    <div className="hike-search-result-list">
+      {
+        results.map((result, i) => {
+          return (
+            <HikeResult
+              hike={ result }
+              key={`${result}-${i}`}
+              getFavHikes={ getFavHikes }
+            />
+          )
+        })
+      }
     </div>
   )
 }
 
-export default HikesFavList;
+export default HikeResults;
