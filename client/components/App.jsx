@@ -1,8 +1,8 @@
+import { Routes, Route } from 'react-router-dom';
 import React from 'react';
 import Home from './Home.jsx';
 import Login from './Login.jsx';
-import Profile from './Profile.jsx';
-import { Routes, Route } from 'react-router-dom';
+import Profile from './Nav.jsx';
 
 const App = () => {
   return (
@@ -10,7 +10,6 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Login />} />
         <Route path='/home' element={<Home />} />
-        <Route path='/profile' element={<Profile />} />
       </Routes>
     </>
   );
