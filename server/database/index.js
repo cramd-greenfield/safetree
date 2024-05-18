@@ -78,9 +78,7 @@ const Observations = sequelize.define('observation', {
     autoIncrement: true,
   },
   message: DataTypes.TEXT,
-  title: DataTypes.STRING,
-  date: DataTypes.STRING,
-  safe: DataTypes.BOOLEAN,
+  isSafe: DataTypes.BOOLEAN,
 });
 User.Observations = User.hasMany(Observations);
 Observations.User = Observations.belongsTo(User);
