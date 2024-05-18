@@ -26,7 +26,6 @@ const HikeFav = ({ favHike, getFavHikes }) => {
 
   const handleNewRating = (e) => {
     setNewRating(e.target.value);
-    console.log(e.target.value);
   }
 
   const rateFavHike = () => {
@@ -42,7 +41,7 @@ const HikeFav = ({ favHike, getFavHikes }) => {
         getFavHikes();
       })
       .then(() => { setNewRating('') })
-      .catch(() => {
+      .catch((err) => {
         console.error('Failed to change rating', err);
       })
   }
