@@ -41,7 +41,15 @@ router.post('/wildLifeSearch', (req, res) => {
     headers: { 'X-Api-Key': ANIMALS_API_KEY }
   })
   .then((response) => {
-    console.log('NEW RESPONSE:', response);
+    console.log('API RESPONSE:', response);
+
+    // const animals = response.data.map(animal => {
+    //   return {
+    //     species: animal.name,
+    //     location: animal.locations 
+    //   };
+    // });
+    // console.log('Formatted response', animals);
     res.status(200).send(response.data);
   })
   .catch((error) => {

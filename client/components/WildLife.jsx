@@ -11,9 +11,9 @@ const WildLife = () => {
   const [list, updateList] = useState([])
   const [emptyInput, updatedInput] = useState('')
   
-  useEffect(() => {
-    console.log('Updated list:', list);
-  }, [list]);
+  // useEffect(() => {
+  //   console.log('Updated list:', list);
+  // }, [list]);
 
   const loadList = () => {
     
@@ -34,7 +34,16 @@ const WildLife = () => {
       searchInput: emptyInput
     })
     .then((response) => {
-      console.log('NEW RESPONSE:', response);
+      // console.log('NEW RESPONSE:', response);
+
+      const animals = response.data.map(animal => {
+        return {
+          species: animal.name,
+          isPredator: animal.characteristics.prey !== undefined,
+          location: animal.locations
+        };
+      });
+      console.log('Formatted response', animals);
       updateList(response.data);
     })
     .catch((error) => {
@@ -42,7 +51,7 @@ const WildLife = () => {
     });
   }
 
-  
+
   const updatedInputTrigger = (event) => {
     // console.log(event.target.value);
     //updatedInput is the update function to the input string
