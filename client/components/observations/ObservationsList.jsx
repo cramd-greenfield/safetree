@@ -1,16 +1,28 @@
 import React from 'react';
 import ObservationEntry from './ObservationEntry.jsx';
 
-const ObservationsList = ({ observations }) => {
-  console.log(observations); // empty...
-  // console.log('obs', props);
+const ObservationsList = ({ observations, getObservations }) => {
+  const createObservation = () => {
+    const { message, isSafe } = observation;
+    axios
+      .post(`/observations`, { observation: { message, isSafe } })
+      .then(() => {
+        getObservations();
+      })
+
+      .catch((err) => {
+        console.error('Failed to Create Observation:', err);
+      });
+    // [msgRef];
+  };
+
   return (
     <>
       {observations.map((observation, idx) => (
         <ObservationEntry
           observation={observation}
-          key={observation.id}
-          // key={`${observation}-${idx}`}
+          getObservations={getObservations}
+          key={`${observation}-${idx}`}
         />
       ))}
     </>
