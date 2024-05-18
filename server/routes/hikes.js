@@ -94,7 +94,7 @@ hikes.patch('/hikes', (req, res) => {
 
 hikes.delete('/hikes', (req, res) => {
 
-  const { description } = req.body.hike;
+  const { description } = req.body;
 
   // delete a hike from the database
   Hike.destroy({
