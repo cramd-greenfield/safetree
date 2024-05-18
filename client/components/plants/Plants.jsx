@@ -1,22 +1,36 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PlantSearch from "./PlantSearch.jsx";
 import PlantList from "./PlantList.jsx";
 import axios from "axios";
 
 
 const Plants = () => {
-  const loadPage = () => {
+  const [plantArr, setPlantArr] = useState([]);
+
+  const loadPlants = () => {
     axios.get('/plants')
-      .then(data => console.log(data))
+      .then(({data}) => {
+        // console.log(data);
+        setPlantArr(data);
+      })
       .catch(err => console.error(err))
-  };
+  }
+
+  useEffect(() => {
+    axios.get('/plants')
+      .then(({ data }) => {
+        // console.log(data);
+        setPlantArr(data)
+      })
+      .catch(err => console.error(err));
+  }, []);
 
   return (
     <div>
-      {/* {loadPage()} */}
+      {/* {loadPlants()} */}
       <h1>Plants</h1>
-      <PlantList />
       <PlantSearch />
+      <PlantList plants={plantArr} />
     </div>
   );
 };

@@ -6,16 +6,15 @@ const Plants = Router();
 
 // makes search to api
 Plants.get('/plants', (req, res) => {
-  // make req to api
-  // loadPlants()
-  //   .then(({ data }) => {
-  //     // console.log(data.data.length);
-  //     res.status(201).send(data.data);
-  //   })
-  //   .catch((err) => {
-  //     console.error('failed to load plants', err);
-  //     res.sendStatus(500);
-  //   });
+  Plant.findAll({ limit: 5 })
+    .then(data => {
+      // console.log(data);
+      res.status(200).send(data);
+    })
+    .catch(err => {
+      console.error(err);
+      res.sendStatus(500);
+    });
 });
 
 Plants.post('/plants', (req, res) => {
