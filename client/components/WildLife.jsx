@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 // require("dotenv").config();
 // const { ANIMALS_API_KEY } = process.env;
@@ -11,22 +11,27 @@ const WildLife = () => {
   const [list, updateList] = useState([])
   const [emptyInput, updatedInput] = useState('')
   
-  
+  useEffect(() => {
+    console.log('Updated list:', list);
+  }, [list]);
+
   const loadList = () => {
     
     axios.get('/wildlife')
     .then((response) => {
-      // console.log('Response:', response.data);
+      console.log('Frontend Axios Response:', response.data);
       updateList(response.data);
     })
     .catch((error) => {
       console.error('Error locating animal list:', error);
     });
   }
+  //send POST request to backend with empty input in the body
+
 
   const searchAnimal = () => {
-    axios.get(`https://api.api-ninjas.com/v1/animals?name=${emptyInput}`, {
-
+    axios.post(`/wildLifeSearch`, {
+      searchInput: emptyInput
     })
     .then((response) => {
       console.log('NEW RESPONSE:', response);
@@ -37,9 +42,9 @@ const WildLife = () => {
     });
   }
 
-
+  
   const updatedInputTrigger = (event) => {
-    console.log(event.target.value);
+    // console.log(event.target.value);
     //updatedInput is the update function to the input string
     updatedInput(event.target.value)
 

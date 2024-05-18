@@ -16,9 +16,10 @@
 const { Router } = require('express');
 
 const { Animal } = require('../database');
-
+const axios = require('axios');
 const router = Router();
-// const { ANIMALS_API_KEY } = process.env;
+require('dotenv').config();
+const { ANIMALS_API_KEY } = process.env;
 //how will it get animals if not external api here
 
 router.get('/wildlife', (req, res) => {
@@ -33,6 +34,49 @@ router.get('/wildlife', (req, res) => {
     res.sendStatus(500);
   });
 });
+
+router.post('/wildLifeSearch', (req, res) => {
+  console.log('REQ BODY', req);
+  axios.get(`https://api.api-ninjas.com/v1/animals?name=${req.body.searchInput}`, {
+    headers: { 'X-Api-Key': ANIMALS_API_KEY }
+  })
+  .then((response) => {
+    console.log('NEW RESPONSE:', response);
+    res.status(200).send(response.data);
+  })
+  .catch((error) => {
+    console.error('Error locating animal list:', error);
+    res.sendStatus(500);
+  });
+})
+
+
+
+// const searchAnimal = () => {
+//   axios.get(`https://api.api-ninjas.com/v1/animals?name=${emptyInput}`, {
+//     headers: { 'X-Api-Key': process.env.ANIMALS_API_KEY }
+//   })
+//   .then((response) => {
+//     console.log('NEW RESPONSE:', response);
+//     updateList(response.data);
+//   })
+//   .catch((error) => {
+//     console.error('Error locating animal list:', error);
+//   });
+// }
+
+// router.get('/wildlife', (req, res) => {
+
+//   Animal.findAll()
+//   .then((response) => {
+//     console.log('Check out these animals that matches your search!', response);
+//     res.status(200).send(response);
+//   })
+//   .catch((error) => {
+//     console.error('Problem finding desired animal!', error);
+//     res.sendStatus(500);
+//   });
+// });
 
 module.exports = router;
 // const loadList = () => {

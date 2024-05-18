@@ -17,5 +17,6 @@ safeTree.post('/plants', plants);
 
 safeTree.all('/wildlife', wildlife);
 
+safeTree.all('/wildLifeSearch', wildlife)
 
 module.exports = safeTree;
