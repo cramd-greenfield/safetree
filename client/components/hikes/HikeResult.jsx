@@ -25,10 +25,12 @@ const HikeResult = ({ hike, getFavHikes }) => {
 
   return (
     <div>
+      <ul>
+        <li>Name:  { description }</li>
+        <li>Location:  { location }</li>
+        <li>Rating:  { rating }</li>
+      </ul>
       <button onClick={ addFavHike } type="button">Favorite</button> {/** somehow associate hike object with this button */}
-      <span>{ description }</span>
-      <span>{ location }</span>
-      <span>{ rating }</span>
     </div>
   )
 }

@@ -46,10 +46,12 @@ const HikeSearch = () => {
         <input value={ input } onChange={ handleInput } type="text" placeholder="city, state, or zip code"/>
         <button onClick={ searchHikes } type="button">Search</button>
       </div>
+
       <div className="hike-search-results">
         <h4>Nearby Results</h4>
         <HikeResults results={ results } getFavHikes={ getFavHikes }/>
       </div>
+
       <div className="hike-favs">
         <h4>Favorite Trails</h4>
         <HikeFavList favHikes={ favHikes } getFavHikes={ getFavHikes }/>

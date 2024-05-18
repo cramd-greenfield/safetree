@@ -49,12 +49,14 @@ const HikeFav = ({ favHike, getFavHikes }) => {
 
   return (
     <div>
-      <button onClick={ removeFavHike } type="button">Remove</button>
+      <ul>
+        <li>Name:  { favHike.description }</li>
+        <li>Location:  { favHike.location }</li>
+        <li>Rating:  { favHike.rating }</li>
+      </ul>
       <input value={ newRating } onChange={ handleNewRating } type="text" placeholder="up to 5" />
       <button onClick={ rateFavHike } type="button">Rate</button>
-      <span>{ favHike.description }</span>
-      <span>{ favHike.location }</span>
-      <span>{ favHike.rating }</span>
+      <button onClick={ removeFavHike } type="button">Remove</button>
     </div>
   )
 }
