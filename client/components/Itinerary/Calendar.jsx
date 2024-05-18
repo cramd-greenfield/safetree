@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 
 
-import CalendarScript from '../helpers/calendarScript.jsx';
+import CalendarScript from '../Itinerary/CalendarScript.jsx';
 
 const months = [
     "January",
