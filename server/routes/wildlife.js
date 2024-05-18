@@ -36,20 +36,22 @@ router.get('/wildlife', (req, res) => {
 });
 
 router.post('/wildLifeSearch', (req, res) => {
-  console.log('REQ BODY', req);
+  // console.log('REQ BODY', req);
   axios.get(`https://api.api-ninjas.com/v1/animals?name=${req.body.searchInput}`, {
     headers: { 'X-Api-Key': ANIMALS_API_KEY }
   })
   .then((response) => {
-    console.log('API RESPONSE:', response);
+    console.log('API RESPONSE:', response.data);
+    const animals = response.data.map(animal => {
+      return {
+        species: animal.name,
+        isPredator: animal.characteristics.prey !== undefined,
+        location: animal.locations
+      };
+    });
 
-    // const animals = response.data.map(animal => {
-    //   return {
-    //     species: animal.name,
-    //     location: animal.locations 
-    //   };
-    // });
-    // console.log('Formatted response', animals);
+    
+  
     res.status(200).send(response.data);
   })
   .catch((error) => {
@@ -58,7 +60,7 @@ router.post('/wildLifeSearch', (req, res) => {
   });
 })
 
-
+module.exports = router;
 
 // const searchAnimal = () => {
 //   axios.get(`https://api.api-ninjas.com/v1/animals?name=${emptyInput}`, {
@@ -86,7 +88,7 @@ router.post('/wildLifeSearch', (req, res) => {
 //   });
 // });
 
-module.exports = router;
+
 // const loadList = () => {
 //   // console.log('hello')
 //   axios.get(`https://api.api-ninjas.com/v1/animals?name=`, {

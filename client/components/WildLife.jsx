@@ -11,9 +11,9 @@ const WildLife = () => {
   const [list, updateList] = useState([])
   const [emptyInput, updatedInput] = useState('')
   
-  // useEffect(() => {
-  //   console.log('Updated list:', list);
-  // }, [list]);
+  useEffect(() => {
+    console.log('Updated list:', list);
+  }, [list]);
 
   const loadList = () => {
     
@@ -43,8 +43,10 @@ const WildLife = () => {
           location: animal.locations
         };
       });
-      console.log('Formatted response', animals);
-      updateList(response.data);
+      //console.log('Formatted response', animals);
+      updateList(animals);
+
+      // console.log(list);
     })
     .catch((error) => {
       console.error('Error locating animal list:', error);
@@ -69,7 +71,16 @@ const WildLife = () => {
         <button onClick={searchAnimal}>Search</button>
       </div>
       <div>
-        <h1>Animal List</h1>
+        <h1><i>Animal List</i></h1>
+        {
+          list.map((animal, index) => (
+            <div key={index}>
+              <h3>{animal.species}</h3>
+              <p>{animal.isPredator ? 'Predator' : 'Not a predator'}</p>
+              <p>{animal.location}</p>
+            </div>
+          ))
+        }
       </div>
     </div>
   )
