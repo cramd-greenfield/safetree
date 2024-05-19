@@ -1,21 +1,24 @@
 const { Router } = require('express');
-const { Observations, User } = require('../database');
+const { Observations } = require('../database');
 
 const router = Router();
 
 // POST: Create
 router.post('/observations', (req, res) => {
-  const { message } = req.params;
-  const { observation } = req.body;
-  console.log('observation', observation, 'msg', message);
-  User.create(message).then((data) => {
-    console.log('data', data);
-  });
+  const { message, safe } = req.body.observation;
+  Observations.create({ message, safe })
+    .then((obsObject) => {
+      res.sendStatus(201);
+    })
+    .catch((err) => {
+      console.error('Failed to create observation:', err);
+      res.sendStatus(500);
+    });
 });
 
 // GET: Read
 router.get('/observations', (req, res) => {
-  Observations.findAll({})
+  Observations.findAll()
     .then((dataValues) => {
       res.status(200).send(dataValues);
     })
@@ -23,30 +26,49 @@ router.get('/observations', (req, res) => {
 });
 
 // PUT/PATCH: Update
-router.get('/observations', (req, res) => {
-  console.log('Update');
+router.patch('/observations/:id', (req, res) => {
+  const { id } = req.params;
+  const { message, safe } = req.body.observation;
+  Observations.update(
+    { message, safe },
+    {
+      where: {
+        id: id,
+      },
+    }
+  )
+    .then((data) => {
+      if (data) {
+        res.sendStatus(202);
+      } else {
+        res.sendStatus(404);
+      }
+    })
+    .catch((err) => {
+      console.error('Failed to update Observation:', err);
+      res.sendStatus(500);
+    });
 });
 
 // Delete: Destroy
-router.delete('/observations', (req, res) => {
-  const { user } = req.body;
+router.delete('/observations/:id', (req, res) => {
   const { id } = req.params;
-  console.log('user', user, 'id', id);
+  Observations.destroy({
+    where: {
+      id: id,
+    },
+  })
+    .then((data) => {
+      if (data) {
+        res.sendStatus(200);
+      } else {
+        res.sendStatus(404);
+      }
+    })
+    .catch((err) => {
+      console.error('Failed to destroy observation:', err);
+      res.sendStatus(500);
+    });
 });
 
 module.exports = router;
-
-/*
-const Observations = sequelize.define('Observations', {
-  id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
-    primaryKey: true,
-  },
-  animalId: DataTypes.INTEGER,
-  plantId: DataTypes.INTEGER,
-  message: DataTypes.STRING,
-  date: DataTypes.DATE,
-  userId: DataTypes.INTEGER,
-});
-*/

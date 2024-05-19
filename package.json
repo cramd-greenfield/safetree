@@ -4,6 +4,7 @@
   "description": "Stay safe outside",
   "main": "index.js",
   "scripts": {
+    "obs": "node server/database/ObsSeed.js",
     "start": "nodemon server/index.js",
     "seed": "node server/database/seed.js",
     "build": "webpack --watch",
@@ -38,6 +39,9 @@
     "webpack-dev-server": "^5.0.4"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/material": "^5.15.18",
     "axios": "^1.6.8",
     "cookie-session": "^2.1.0",
     "cors": "^2.8.5",
