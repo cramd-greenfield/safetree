@@ -148,29 +148,21 @@ const fakeHikes = [
 const fakeObservations = [
   {
     message: 'A lot of rust. Would not recommend...',
-    title: fakeHikes[0].description,
-    date: '05/17/2024',
     safe: false,
     UserId: fakeUsers[0].id,
   },
   {
     message: 'A lot of great stuff to say about this place.',
-    title: fakeHikes[1].description,
-    date: '05/16/2024',
     safe: true,
     UserId: fakeUsers[1].id,
   },
   {
     message: 'Great day for a family adventure!',
-    title: fakeHikes[2].description,
-    date: '05/16/2024',
     safe: true,
     UserId: fakeUsers[2].id,
   },
   {
     message: "There a was an angry eagle that wouldn't let us pass...",
-    title: fakeHikes[3].description,
-    date: '05/16/2024',
     safe: false,
     UserId: fakeUsers[3].id,
   },

@@ -10,11 +10,16 @@ const safeTree = Router();
 safeTree.post('/hikeSearch', hikes);
 safeTree.all('/hikes', hikes);
 
-// safeTree.all('/observations', observations);
-safeTree.route('/observations').all(observations);
-safeTree.route('/observations/:id').all(observations);
+safeTree.all('/observations/', observations);
+safeTree.all('/observations/:id', observations);
+
+safeTree.all('/user', user);
 
 safeTree.get('/plants', plants);
 safeTree.post('/plants', plants);
+
+safeTree.all('/wildlife', wildlife);
+
+safeTree.all('/wildLifeSearch', wildlife)
 
 module.exports = safeTree;
