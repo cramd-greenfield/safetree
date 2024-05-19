@@ -1,89 +1,84 @@
-import React, { useState } from 'react';
-
-
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+// require("dotenv").config();
+// const { ANIMALS_API_KEY } = process.env;
+// console.log(process.env)
 
 const WildLife = () => {
+  const [list, updateList] = useState([]);
+  const [emptyInput, updatedInput] = useState("");
 
-  /**
-   * So I know we will have a array that holds our data, and our input box is what the user will type into
-   * we need those two to be updated within the state
-   * 
-   * for our Axios get, we will just set the search to the entire external api Allyn talked about,
-   * 
-   * 
-   * in our get request
-   */
+  useEffect(() => {
+    console.log("Updated list:", list);
+  }, [list]);
 
-  //[IMPORTANT]
-  //WHEN USING useState, the second variable is always a function to update the first variable
-  //we will have a array that will get updated in the state
-  const [list, updateList] = useState([])
-  //also our input value will get updated in the state too
-  //set it to a empty string, because the input box will be empty at first
-  const [emptyInput, updatedInput] = useState('')
-
-  /**
-   * const Animal = sequelize.define(
-  'Animal',
-  {
-    id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4
-    },
-    species: DataTypes.STRING,
-    isPredator: DataTypes.BOOLEAN,
-    location: DataTypes.STRING
-  }
-)
-   */
-  /**
-   * [QUESTIONS FOR TEAM]
-   * I'm thinking about how to get the three specific property Allyn said we want for our schema table,
-   * which is the species, isPredator, and location. These will result after searching it's name
-   */
-
-  /**
-   * [What's NEXT!!!!]
-   * Set up a function, that makes the data from the input, our updatedInput() argument in the useState
-   */
-
-  
-  /**
-   * after speaking to Mike we want to create a button that triggers loadList
-   * 
-   * use console logs to observe the response data to make sure it's what we desire
-   */
-//set up a method for our axios
   const loadList = () => {
-    console.log('hello')
-    axios.get(`https://api.api-ninjas.com/v1/animals?name=${updatedInput}`, {
-      headers: {
-        'x-api-key': 'tc3I3hxkNGZ68GEUawweJA==ywLVNlUXNO8JeerJ'
-      },
-      params: {
-        name: emptyInput
-      }
-    })
-    .then((response) => {
-      //we will update the list, with this data we just retrieved, but we need to figure how to get just the results we desire
-      updateList(response);
-    })
-    .catch((response) => {
-      console.error('Animal was not retrieved!', response)
-    })
-  }
+    axios
+      .get("/wildlife")
+      .then((response) => {
+        console.log("Frontend Axios Response:", response.data);
+        updateList(response.data);
+      })
+      .catch((error) => {
+        console.error("Error locating animal list:", error);
+      });
+  };
+  //send POST request to backend with empty input in the body
+
+  const searchAnimal = () => {
+    axios
+      .post(`/wildLifeSearch`, {
+        searchInput: emptyInput,
+      })
+      .then((response) => {
+        console.log('NEW RESPONSE:', response);
+
+        
+        //console.log('Formatted response', animals);
+        updateList(response.data);
+
+        // console.log(list);
+      })
+      .catch((error) => {
+        console.error("Error locating animal list:", error);
+      });
+  };
+
+  const updatedInputTrigger = (event) => {
+    // console.log(event.target.value);
+    //updatedInput is the update function to the input string
+    updatedInput(event.target.value);
+
+    
+  };
 
   return (
     <div>
       <div>
-        <input type='text' placeholder='Search animal here'></input>
-        <button onClick={loadList}>Search</button>
+        {/* input form that holds the users text */}
+        <input
+          type="text"
+          placeholder="Search animal here"
+          value={emptyInput}
+          onChange={updatedInputTrigger}
+        ></input>
+        {/* onClick event, once the search button is clicked, it invokes the axios function */}
+        <button onClick={searchAnimal}>Search</button>
       </div>
       <div>
-        <h1>Animal List</h1>
+        <h1>
+          <u>Animal List</u>
+        </h1>
+        {list.map((animal, index) => (
+          <div key={index}>
+            <h3>{animal.species}</h3>
+            <p>{animal.isPredator ? "Predator" : "Not a predator"}</p>
+            <p>{animal.location}</p>
+          </div>
+        ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default WildLife;

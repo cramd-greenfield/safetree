@@ -4,6 +4,10 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const { User } = require('./database');
 
+// const { Router } = require('express'); commented these 2 lines and the logout part at the bottom
+// const tester = Router();
+
+
 require('dotenv').config();
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = process.env;
 
@@ -61,9 +65,9 @@ app.get('/login', (req, res) => {
 });
 
 /**************** LOGOUT *******************/
-app.post('/logout', (req, res, next) => {
-  req.logout(err).then(() => res.redirect('/').catch((err) => next(err)));
-});
+// app.post('/logout', (req, res, next) => {
+//   req.logout(err).then(() => res.redirect('/').catch((err) => next(err)));
+// });
 
 module.exports = {
   app,
