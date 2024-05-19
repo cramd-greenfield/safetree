@@ -1,7 +1,8 @@
 // Import the useEffect hook from react
 import React, { useEffect, useState } from 'react';
 
-import CalendarScript from './calendarScript.jsx';
+
+import CalendarScript from '../Itinerary/CalendarScript.jsx';
 
 const months = [
   'January',
