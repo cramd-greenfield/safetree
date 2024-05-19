@@ -14,4 +14,11 @@ const reviewBox = {
   backgroundColor: 'background.paper',
 };
 
-export { st, reviewBox };
+const boxHeader = {
+  gap: 20,
+  display: 'inline-flex',
+  backgroundColor: 'green',
+  width: '100%',
+};
+
+export { st, reviewBox, boxHeader };

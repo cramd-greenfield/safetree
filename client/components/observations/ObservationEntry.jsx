@@ -13,12 +13,7 @@ import {
   DialogTitle,
 } from '@mui/material';
 
-const ObservationEntry = ({
-  observation,
-  getObservations,
-  createObservation,
-}) => {
-  const [message, setMessage] = useState('');
+const ObservationEntry = ({ observation, getObservations }) => {
   const [open, setOpen] = useState(false);
   const [isSafe, setIsSafe] = useState(true);
 
@@ -30,10 +25,11 @@ const ObservationEntry = ({
     setOpen(false);
   };
 
-  const updateSafe = () => {
+  const updateReview = () => {
     axios
       .patch(`/observations/${observation.id}`, {
         observation: {
+          message: message,
           isSafe: !observation.isSafe,
         },
       })
@@ -58,20 +54,24 @@ const ObservationEntry = ({
     <div>
       <Box>
         <Box sx={{ width: '100%', maxWidth: 500, bgcolor: 'background.paper' }}>
-          <Button variant='outlined' onClick={deleteObservation}>
+          {/* <Button variant='outlined' onClick={deleteObservation}>
             🔥
-          </Button>
-          <Typography variant='contained'> {observation.message}</Typography>
-          <Typography align='right' variant='contained'>
-            {checkSafe}
-          </Typography>
-          <Button variant='outlined' onClick={handleClickOpen}>
+          </Button> */}
+          <Box sx={{ gap: 20, justifyContent: 'space-evenly' }}>
+            <Typography align='left' variant='contained' gutterBottom>
+              {observation.message}
+            </Typography>
+            <Typography align='right' variant='contained'>
+              {checkSafe}
+            </Typography>
+          </Box>
+          {/* <Button variant='outlined' onClick={handleClickOpen}>
             Edit
-          </Button>
+          </Button> */}
 
-          {observation.isSafe}
+          {/* {observation.isSafe} */}
         </Box>
-        <Dialog
+        {/* <Dialog
           open={open}
           onClose={handleClose}
           PaperProps={{
@@ -84,8 +84,18 @@ const ObservationEntry = ({
           <DialogTitle>Add a Review</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              What would you like to add to your list of reviews?
-            </DialogContentText>{' '}
+              <Button variant='outlined' onClick={deleteObservation}>
+                🔥
+              </Button>
+              <Typography variant='contained'>
+                {' '}
+                {observation.message}
+              </Typography>
+              <Typography align='right' variant='contained'>
+                {checkSafe}
+              </Typography>
+            </DialogContentText>
+
             <Typography>
               Safe?
               <Checkbox
@@ -121,7 +131,7 @@ const ObservationEntry = ({
               Submit
             </Button>
           </DialogActions>
-        </Dialog>
+        </Dialog> */}
       </Box>
     </div>
   );

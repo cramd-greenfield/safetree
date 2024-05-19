@@ -13,19 +13,18 @@ import {
   DialogContentText,
   DialogTitle,
 } from '@mui/material';
+import ObservationsList from './ObservationsList.jsx';
 
-const ObsForm = ({ observation, getObservations, deleteObservation }) => {
-  const [open, setOpen] = useState(false);
-  const [isSafe, setIsSafe] = useState(true);
+const ObsForm = ({ getObservations, handleClose, deleteObservation }) => {
+  const safe = () => {
+    if (isSafe) {
+      return '🌳';
+    } else {
+      return '🍄';
+    }
+  };
+  const [isSafe, setIsSafe] = useState(() => safe());
   const [message, setMessage] = useState('');
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   const createObservation = () => {
     axios
@@ -43,59 +42,58 @@ const ObsForm = ({ observation, getObservations, deleteObservation }) => {
 
   return (
     <>
-      <Button variant='outlined' onClick={handleClickOpen}>
-        Edit Reviews
-      </Button>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        PaperProps={{
-          component: 'form',
-          onSubmit: (e) => {
-            handleClose(e.target.value);
-          },
-        }}
-      >
-        <DialogTitle>Reviews</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            What would you like to add to your list of reviews?
-          </DialogContentText>
-          <Typography>
-            Safe?
-            <Checkbox
-              label='safety'
-              checked={isSafe}
-              onChange={(e) => {
-                setIsSafe(e.target.checked);
-              }}
-            />
-          </Typography>
-          <TextField
-            autoFocus
-            required
-            value={message}
-            margin='dense'
-            id='message'
-            name='message'
-            label='Tell us about your last adventure'
-            fullWidth
-            variant='standard'
+      <DialogTitle>Reviews</DialogTitle>
+      <DialogContent>
+        <DialogContentText></DialogContentText>
+        <Typography>
+          Safe?
+          <Checkbox
+            label='safety'
+            checked={isSafe}
             onChange={(e) => {
-              setMessage(e.target.value);
+              setIsSafe(e.target.checked);
             }}
           />
-          <Button variant='outlined' onClick={deleteObservation}>
-            🔥
-          </Button>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Close</Button>
-          <Button variant='contained' type='submit' onClick={createObservation}>
-            Submit
-          </Button>
-        </DialogActions>
-      </Dialog>
+        </Typography>
+        <TextField
+          autoFocus
+          required
+          value={message}
+          margin='dense'
+          id='message'
+          name='message'
+          label='Tell us about your last adventure'
+          fullWidth
+          variant='standard'
+          onChange={(e) => {
+            setMessage(e.target.value);
+          }}
+        />
+        <TextField
+          autoFocus
+          required
+          value={isSafe}
+          margin='dense'
+          id='safe'
+          name='safety'
+          label='Was it safe?'
+          fullWidth
+          variant='standard'
+          onChange={(e) => {
+            setIsSafe(e.target.value);
+          }}
+        />
+        <Button variant='outlined' onClick={deleteObservation}>
+          🔥
+        </Button>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose}>Close</Button>
+        <Button variant='contained' type='submit' onClick={createObservation}>
+          Submit
+        </Button>
+      </DialogActions>
+      {/* </Dialog> */}
     </>
   );
 };
