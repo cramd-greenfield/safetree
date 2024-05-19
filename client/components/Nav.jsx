@@ -4,18 +4,29 @@ import { Button, Box } from '@mui/material';
 
 const Nav = () => {
   return (
-    <Box sx={{ gap: '20px', display: 'flex', alignContent: 'center' }}>
+    <Box
+      padding={1}
+      sx={{ gap: '20px', display: 'flex', alignContent: 'center' }}
+    >
       <Link to='/wildlife'>
-        <Button type='submit'>WildLife Info</Button>
+        <Button variant='contained' type='submit'>
+          WildLife Info
+        </Button>
       </Link>
       <Link to='/plants'>
-        <Button type='submit'>Plant Info</Button>
+        <Button variant='contained' type='submit'>
+          Plant Info
+        </Button>
       </Link>
       <Link to='/hikes'>
-        <Button type='submit'>Hike Info</Button>
+        <Button variant='contained' type='submit'>
+          Hike Info
+        </Button>
       </Link>
       <Link to='/calender'>
-        <Button type='submit'>Planning</Button>
+        <Button variant='contained' type='submit'>
+          Planning
+        </Button>
       </Link>
     </Box>
   );

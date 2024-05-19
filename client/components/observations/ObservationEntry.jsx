@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Box, Checkbox, Typography } from '@mui/material';
+import { Box, Checkbox, Typography, Button } from '@mui/material';
 
 const ObservationEntry = ({ observation, getObservations }) => {
   const [isSafe, setIsSafe] = useState(true);
   const [message, setMessage] = useState('');
+
   const updateSafe = () => {
     axios
       .patch(`/observations/${observation.id}`, {
@@ -12,7 +13,7 @@ const ObservationEntry = ({ observation, getObservations }) => {
           isSafe: !observation.isSafe,
         },
       })
-      .then(getObservations)
+      .then(() => getObservations())
       .catch((err) => console.error('Failed to Patch safe:', err));
   };
 
@@ -27,28 +28,31 @@ const ObservationEntry = ({ observation, getObservations }) => {
       });
   };
 
-  const handleSafe = (e) => {
-    setIsSafe(e.target.checked);
-  };
+  const checkSafe = observation.isSafe ? '🍄' : '🌳';
 
   return (
     <div>
-      <Box component='span'>
-        <button onClick={deleteObservation}>🔥</button>
-        <Typography variant='outlined'> Safe:</Typography>
+      <Box>
+        <Box sx={{ width: '100%', maxWidth: 500, bgcolor: 'background.paper' }}>
+          <Button variant='outlined' onClick={deleteObservation}>
+            🔥
+          </Button>
+          <Typography variant='contained'> {observation.message}</Typography>
+          <Typography variant='contained'>{checkSafe}</Typography>
 
-        <Checkbox
-          label='safety'
-          checked={isSafe}
-          onChange={handleSafe}
-          inputProps={{ 'aria-label': 'controlled' }}
-        />
-        <Typography variant='contained'> {observation.message}</Typography>
+          <Checkbox
+            label='safety'
+            checked={isSafe}
+            onChange={(e) => {
+              setIsSafe(e.target.checked);
+            }}
+            // onChange={updateSafe}
+            inputProps={{ 'aria-label': 'controlled' }}
+          />
+          {observation.isSafe}
+        </Box>
       </Box>
     </div>
-    // <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-    //   <Typography variant='contained'>{observation.message}</Typography>
-    // </List>
   );
 };
 

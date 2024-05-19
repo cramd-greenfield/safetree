@@ -69,7 +69,7 @@ const CalendarScript = () => {
     // Return the JSX for the calendar grid
     return (
         <div className="calendar-grid">
-            {days}
+            {days} 
         </div>
     );
     };
@@ -96,6 +96,10 @@ const renderDaysOfMonth = () => {
         const dayJSX = (
             <div className={`day ${isToday ? 'today' : ''}`} key={i}>
                 {i}
+                <form>
+                   <label for="fname">Things to do:</label>
+                   <input type="text" id="fname" name="fname"></input>
+                 </form>
             </div>
         );
 
@@ -114,13 +118,13 @@ const renderDaysOfMonth = () => {
         <div className="days">{renderDaysOfMonth()}</div>
         <div className="buttons">
             <button className="prev-btn" onClick={handlePrevMonthClick}>
-                <i className="fas fa-chevron-left"></i>
+                <i className="fas fa-chevron-left">Prev</i>
             </button>
             <button className="next-btn" onClick={handleNextMonthClick}>
-                <i className="fas fa-chevron-right"></i>
+                <i className="fas fa-chevron-right">Next</i>
             </button>
             <button className="today-btn" onClick={handleTodayBtnClick}>
-                <i className="fas fa-calendar-day"></i>
+                <i className="fas fa-calendar-day">Current</i>
             </button>
         </div>
     </div>
