@@ -13,26 +13,27 @@
 //   })
 
 // })
-const { Router } = require('express');
 
+
+const { Router } = require('express');
 const { Animal } = require('../database');
 const axios = require('axios');
 const router = Router();
 require('dotenv').config();
 const { ANIMALS_API_KEY } = process.env;
-//how will it get animals if not external api here
+
 
 router.get('/wildlife', (req, res) => {
 
   Animal.findAll()
-  .then((response) => {
-    console.log('Check out these animals that matches your search!', response);
-    res.status(200).send(response);
-  })
-  .catch((error) => {
-    console.error('Problem finding desired animal!', error);
-    res.sendStatus(500);
-  });
+    .then((response) => {
+      console.log('Check out these animals that matches your search!', response);
+      res.status(200).send(response);
+    })
+    .catch((error) => {
+      console.error('Problem finding desired animal!', error);
+      res.sendStatus(500);
+    });
 });
 
 router.post('/wildLifeSearch', (req, res) => {
@@ -40,24 +41,32 @@ router.post('/wildLifeSearch', (req, res) => {
   axios.get(`https://api.api-ninjas.com/v1/animals?name=${req.body.searchInput}`, {
     headers: { 'X-Api-Key': ANIMALS_API_KEY }
   })
-  .then((response) => {
-    console.log('API RESPONSE:', response.data);
-    const animals = response.data.map(animal => {
-      return {
-        species: animal.name,
-        isPredator: animal.characteristics.prey !== undefined,
-        location: animal.locations
-      };
-    });
+    .then((response) => {
+      console.log('API RESPONSE:', response.data);
+      const animals = response.data.map(animal => { //animals created here array of objects
+        return {
+          species: animal.name,
+          isPredator: animal.characteristics.prey !== undefined,
+          location: animal.locations.join(", ")
+        };
+      });
+      
 
-    
-  
-    res.status(200).send(response.data);
-  })
-  .catch((error) => {
-    console.error('Error locating animal list:', error);
-    res.sendStatus(500);
-  });
+      //insert the animals objects into the Animals database
+      Animal.bulkCreate(animals)
+        .then(() => {
+          console.log('Animals successfully added to database!', animals)
+          res.status(200).send(animals)
+        })
+        .catch((error) => {
+          console.error('Animals not added!')
+          res.sendStatus(500);
+        })
+    })
+    .catch((error) => {
+      console.error('Error locating animal list:', error);
+      res.sendStatus(500);
+    });
 })
 
 module.exports = router;
