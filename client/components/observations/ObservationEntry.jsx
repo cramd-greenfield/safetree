@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Box, Checkbox, Typography, Button, Divider } from '@mui/material';
+import { Box, Checkbox, Typography, Button } from '@mui/material';
 
 const ObservationEntry = ({ observation, getObservations }) => {
   const [isSafe, setIsSafe] = useState(true);
   const [message, setMessage] = useState('');
+
   const updateSafe = () => {
-    const { isSafe } = observation;
     axios
       .patch(`/observations/${observation.id}`, {
         observation: {
           isSafe: !observation.isSafe,
         },
       })
-      .then(getObservations)
+      .then(() => getObservations())
       .catch((err) => console.error('Failed to Patch safe:', err));
   };
 
@@ -28,6 +28,8 @@ const ObservationEntry = ({ observation, getObservations }) => {
       });
   };
 
+  const checkSafe = observation.isSafe ? '🍄' : '🌳';
+
   return (
     <div>
       <Box>
@@ -36,19 +38,21 @@ const ObservationEntry = ({ observation, getObservations }) => {
             🔥
           </Button>
           <Typography variant='contained'> {observation.message}</Typography>
-          <Typography variant='contained'>{observation.safe}</Typography>
+          <Typography variant='contained'>{checkSafe}</Typography>
 
-          <input
-            type='checkbox'
-            onChange={updateSafe}
-            checked={observation.isSafe}
+          <Checkbox
+            label='safety'
+            checked={isSafe}
+            onChange={(e) => {
+              setIsSafe(e.target.checked);
+            }}
+            // onChange={updateSafe}
+            inputProps={{ 'aria-label': 'controlled' }}
           />
+          {observation.isSafe}
         </Box>
       </Box>
     </div>
-    // <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-    //   <Typography variant='contained'>{observation.message}</Typography>
-    // </List>
   );
 };
 
