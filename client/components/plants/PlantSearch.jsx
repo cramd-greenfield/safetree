@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 
-const PlantSearch = () => {
+const PlantSearch = ({updatePlantList}) => {
   const [plantInput, setPlant] = React.useState('');
 
   const handleInputChange = (e) => {
@@ -13,7 +13,12 @@ const PlantSearch = () => {
     axios.post('/plants', {
       plantName: plantInput
     })
-      .then(data => console.log(data))
+      .then(({ data }) => {
+        // pass data to plantList ?
+        const searchRes = data.data;
+        console.log('search data: ', searchRes);
+        updatePlantList(searchRes)
+      })
       .catch(err => console.error(err));
   }
 
