@@ -6,7 +6,6 @@ import {
   Typography,
   Container,
   Checkbox,
-  Avatar,
   TextField,
   Dialog,
   DialogActions,
@@ -15,8 +14,8 @@ import {
   DialogTitle,
 } from '@mui/material';
 
-const ObsForm = ({ observations, getObservations, deleteObservation }) => {
-  const [open, setOpen] = React.useState(false);
+const ObsForm = ({ observation, getObservations, deleteObservation }) => {
+  const [open, setOpen] = useState(false);
   const [isSafe, setIsSafe] = useState(true);
   const [message, setMessage] = useState('');
 
@@ -42,18 +41,6 @@ const ObsForm = ({ observations, getObservations, deleteObservation }) => {
       });
   };
 
-  const updateReview = () => {
-    axios
-      .patch(`/observations/${observations.id}`, {
-        observation: {
-          message: message,
-          isSafe: !observations.isSafe,
-        },
-      })
-      .then(() => getObservations())
-      .catch((err) => console.error('Failed to Patch safe:', err));
-  };
-
   return (
     <>
       <Button variant='outlined' onClick={handleClickOpen}>
@@ -68,7 +55,6 @@ const ObsForm = ({ observations, getObservations, deleteObservation }) => {
             handleClose(e.target.value);
           },
         }}
-        onChange={updateReview}
       >
         <DialogTitle>Reviews</DialogTitle>
         <DialogContent>
@@ -83,20 +69,21 @@ const ObsForm = ({ observations, getObservations, deleteObservation }) => {
               onChange={(e) => {
                 setIsSafe(e.target.checked);
               }}
-              inputProps={{ 'aria-label': 'controlled' }}
             />
           </Typography>
           <TextField
             autoFocus
             required
-            value={observations.message}
+            value={message}
             margin='dense'
             id='message'
             name='message'
             label='Tell us about your last adventure'
-            type='email'
             fullWidth
             variant='standard'
+            onChange={(e) => {
+              setMessage(e.target.value);
+            }}
           />
           <Button variant='outlined' onClick={deleteObservation}>
             🔥
