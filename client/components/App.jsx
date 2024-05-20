@@ -3,8 +3,6 @@ import React from 'react';
 import Home from './Home.jsx';
 import Hikes from './hikes/Hikes.jsx';
 import Login from './Login.jsx';
-import Profile from './Profile.jsx';
-import { Routes, Route } from 'react-router-dom';
 import Plants from './plants/Plants.jsx';
 
 const App = () => {

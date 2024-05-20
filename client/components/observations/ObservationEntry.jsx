@@ -1,26 +1,39 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Box, Checkbox, Typography, Button } from '@mui/material';
+import {
+  Button,
+  Typography,
+  Grid,
+  ToggleButton,
+  Box,
+  ToggleButtonGroup,
+} from '@mui/material';
 
-const ObservationEntry = ({ observation, getObservations }) => {
-  const [isSafe, setIsSafe] = useState(true);
-  const [message, setMessage] = useState('');
+const ObservationEntry = ({ observation, getObservations, handleClose }) => {
+  const [isSafe, setIsSafe] = useState('safe');
 
-  const updateSafe = () => {
+  const handleIsSafe = (event, newIsSafe) => {
+    setIsSafe(newIsSafe);
+  };
+
+  const updateReview = () => {
+    const { message, isSafe } = observation;
     axios
       .patch(`/observations/${observation.id}`, {
         observation: {
+          message,
           isSafe: !observation.isSafe,
         },
       })
-      .then(() => getObservations())
+      .then(getObservations)
       .catch((err) => console.error('Failed to Patch safe:', err));
   };
 
   const deleteObservation = () => {
+    const { message, isSafe } = observation;
     axios
       .delete(`/observations/${observation.id}`, {
-        observation: { message },
+        observation: { message, isSafe },
       })
       .then(getObservations)
       .catch((err) => {
@@ -28,31 +41,48 @@ const ObservationEntry = ({ observation, getObservations }) => {
       });
   };
 
-  const checkSafe = observation.isSafe ? '🍄' : '🌳';
-
   return (
-    <div>
-      <Box>
-        <Box sx={{ width: '100%', maxWidth: 500, bgcolor: 'background.paper' }}>
-          <Button variant='outlined' onClick={deleteObservation}>
+    <Box sx={{ width: '100%', maxWidth: 500, bgcolor: 'background.paper' }}>
+      <Box sx={{ gap: 20, justifyContent: 'space-evenly' }}>
+        <Typography align='left' variant='contained'>
+          <Button size='small' variant='contained' onClick={deleteObservation}>
             🔥
           </Button>
-          <Typography variant='contained'> {observation.message}</Typography>
-          <Typography variant='contained'>{checkSafe}</Typography>
 
-          <Checkbox
-            label='safety'
-            checked={isSafe}
-            onChange={(e) => {
-              setIsSafe(e.target.checked);
+          <ToggleButtonGroup
+            value={isSafe}
+            exclusive
+            onChange={handleIsSafe}
+            aria-label='safe-selection'
+            onSubmit={(e) => {
+              setIsSafe(e.target.value);
             }}
-            // onChange={updateSafe}
-            inputProps={{ 'aria-label': 'controlled' }}
-          />
-          {observation.isSafe}
-        </Box>
+          >
+            <ToggleButton
+              value='safe'
+              onClick={updateReview}
+              aria-label='safe-tree'
+            >
+              🌳
+            </ToggleButton>
+            <ToggleButton
+              value='not-safe'
+              onClick={updateReview}
+              aria-label='do-not-sign'
+            >
+              🚫
+            </ToggleButton>
+          </ToggleButtonGroup>
+        </Typography>
+        <Typography align='right' variant='contained' gutterBottom>
+          {observation.message}
+        </Typography>
+
+        <Typography align='left' variant='contained' gutterBottom>
+          {/* {observation.isSafe} places a 1 or 0 for true or false */}
+        </Typography>
       </Box>
-    </div>
+    </Box>
   );
 };
 
