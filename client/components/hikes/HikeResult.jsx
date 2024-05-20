@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Button, List, ListItem, ListItemText } from '@mui/material';
 
 const HikeResult = ({ hike, getFavHikes }) => {
 
@@ -25,12 +26,24 @@ const HikeResult = ({ hike, getFavHikes }) => {
 
   return (
     <div>
-      <ul>
-        <li>Name:  { description }</li>
-        <li>Location:  { location }</li>
-        <li>Rating:  { rating }</li>
-      </ul>
-      <button onClick={ addFavHike } type="button">Favorite</button> {/** somehow associate hike object with this button */}
+      <List>
+        <ListItem>
+          <ListItemText
+            primary={`Name:  ${description}`}
+          />
+        </ListItem>
+        <ListItem>
+          <ListItemText
+            primary={`Location:  ${location}`}
+          />
+        </ListItem>
+        <ListItem>
+          <ListItemText
+            primary={`Rating:  ${rating}`}
+          />
+        </ListItem>
+      </List>
+      <Button variant="outlined" onClick={ addFavHike } type="button">Add Favorite</Button>
     </div>
   )
 }

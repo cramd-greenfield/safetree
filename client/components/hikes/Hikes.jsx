@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Typography } from '@mui/material';
 
 import HikeSearch from './HikeSearch.jsx';
 
@@ -6,9 +7,13 @@ const Hikes = () => {
 
   return (
     <div className="hikes">
-      <h2>Hikes</h2>
+      <Typography variant="h2" gutterBottom>
+        Hikes
+      </Typography>
       <div className="hike-search">
-        <h4>Search for trails near you:</h4>
+        <Typography variant="h5" gutterBottom>
+          Search for trails near you:
+        </Typography>
         <HikeSearch />
       </div>
     </div>

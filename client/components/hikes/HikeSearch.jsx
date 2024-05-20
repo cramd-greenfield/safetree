@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Button, TextField, Typography } from '@mui/material';
 
 import HikeResults from './HikeResults.jsx';
 import HikeFavList from './HikeFavList.jsx';
@@ -43,17 +44,28 @@ const HikeSearch = () => {
   return (
     <div className="hike-search">
       <div className="hike-search-form">
-        <input value={ input } onChange={ handleInput } type="text" placeholder="city, state, or zip code"/>
-        <button onClick={ searchHikes } type="button">Search</button>
+        <TextField
+          id="filled-basic"
+          variant="filled"
+          value={ input }
+          onChange={ handleInput }
+          type="text"
+          placeholder="city, state, or zip"
+        />
+        <Button variant="outlined" onClick={ searchHikes } type="button">Search</Button>
       </div>
 
       <div className="hike-search-results">
-        <h4>Nearby Results</h4>
+        <Typography variant="h5" gutterBottom>
+          Nearby Results
+        </Typography>
         <HikeResults results={ results } getFavHikes={ getFavHikes }/>
       </div>
 
       <div className="hike-favs">
-        <h4>Favorite Trails</h4>
+        <Typography variant="h5" gutterBottom>
+          Favorite Trails
+        </Typography>
         <HikeFavList favHikes={ favHikes } getFavHikes={ getFavHikes }/>
       </div>
     </div>
