@@ -3,10 +3,11 @@ import Nav from './Nav.jsx';
 import axios from 'axios';
 import { Box, Button, Typography, Avatar, Dialog } from '@mui/material';
 import logo from '../style/logo.png';
-import ObservationsList from './observations/ObservationsList.jsx';
+import ObservationsList, {
+  handleEdit,
+} from './observations/ObservationsList.jsx';
 import ObsForm from './observations/ObsForm.jsx';
 import { st, reviewBox, boxHeader } from './observations/styles.js';
-// import ObsSafe from './observations/ObsSafe.jsx';
 
 const Home = () => {
   const [observations, setObservations] = useState([]);
@@ -50,15 +51,16 @@ const Home = () => {
           <Box height={300} width={500} sx={reviewBox}>
             <Box sx={boxHeader}>
               <Typography align='right' variant='h8'>
-                Safe: / Unsafe:
+                {/* Safe: / Unsafe: */}
               </Typography>
-              <Typography align='left' variant='h8'>
+              <Typography align='center' variant='h8' gutterBottom>
                 Review
               </Typography>
             </Box>
             <ObservationsList
               observations={observations}
               getObservations={getObservations}
+              handleEdit={handleEdit}
             />
             <Dialog
               open={open}
@@ -81,6 +83,10 @@ const Home = () => {
         <Button variant='contained' type='submit' onClick={handleOpen}>
           Add
         </Button>
+        {/* <EditObs getObservations={getObservations} handleEdit={handleEdit}/> */}
+        {/* <Button variant='contained' type='submit' onClick={handleEdit}> 
+        Edit
+        </Button> */}
       </Box>
     </div>
   );
