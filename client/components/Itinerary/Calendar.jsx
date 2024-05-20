@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 
 import CalendarScript from '../Itinerary/CalendarScript.jsx';
+// import useStyles from '../Itinerary/StyleCalendar.jsx'; // Import the styles
 
 const months = [
   'January',
@@ -21,6 +22,9 @@ const months = [
 
 // Create component function
 const Calendar = () => {
+    // Initialize the styles hook
+    //const classes = useStyles(); 
+
   // Define state variables for current month and year
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
@@ -31,13 +35,13 @@ const Calendar = () => {
     */
   return (
     <div className='container'>
-      <div className='calendar'>
-        <div className='header'>
-          <div className='month'>
-            {months[currentMonth]} {currentYear}
-          </div>
-        </div>
-        <div className='weekdays'>
+      <div className="calendar"> {/* Apply calendar styles */}  
+           <div className='header'>
+             <div className="month">
+             {months[currentMonth]} {currentYear}
+              </div> {/* Apply month styles */}
+               </div>
+            <div className='weekdays'>
           <div className='day'>Sun</div>
           <div className='day'>Mon</div>
           <div className='day'>Tue</div>
