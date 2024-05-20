@@ -1,26 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Nav from './Nav.jsx';
 import axios from 'axios';
-import {
-  Box,
-  Button,
-  Typography,
-  Container,
-  Checkbox,
-  Avatar,
-  TextField,
-  Divider,
-  Dialog,
-} from '@mui/material';
+import { Box, Button, Typography, Avatar, Dialog } from '@mui/material';
 import logo from '../style/logo.png';
 import ObservationsList from './observations/ObservationsList.jsx';
 import ObsForm from './observations/ObsForm.jsx';
 import { st, reviewBox, boxHeader } from './observations/styles.js';
+// import ObsSafe from './observations/ObsSafe.jsx';
 
 const Home = () => {
   const [observations, setObservations] = useState([]);
   const [open, setOpen] = useState(false);
-  // const [isSafe, setIsSafe] = useState(false);
   const obRef = useRef(observations);
 
   const handleOpen = () => {
@@ -54,41 +44,42 @@ const Home = () => {
         </Box>
         <Nav />
         <Box>
-          <Avatar src={`${logo}`} />
+          <Avatar sizes='medium' src={`${logo}`} />
         </Box>
-        <Box height={300} width={400} sx={reviewBox}>
-          <Box sx={boxHeader}>
-            <Typography align='left' variant='h8'>
-              Review
-            </Typography>
-            <Typography align='right' variant='h8'>
-              Safe: / Unsafe:
-            </Typography>
-          </Box>
-          <Box sx={{ overflow: 'hidden' }}>
+        <Box sx={{ overflow: 'hidden' }}>
+          <Box height={300} width={500} sx={reviewBox}>
+            <Box sx={boxHeader}>
+              <Typography align='right' variant='h8'>
+                Safe: / Unsafe:
+              </Typography>
+              <Typography align='left' variant='h8'>
+                Review
+              </Typography>
+            </Box>
             <ObservationsList
               observations={observations}
               getObservations={getObservations}
             />
+            <Dialog
+              open={open}
+              onClose={handleClose}
+              PaperProps={{
+                component: 'form',
+                onSubmit: (e) => {
+                  handleClose(e.target.value);
+                },
+              }}
+              onSubmit={getObservations}
+            >
+              <ObsForm
+                getObservations={getObservations}
+                handleClose={handleClose}
+              />
+            </Dialog>
           </Box>
-          <Dialog
-            open={open}
-            onClose={handleClose}
-            PaperProps={{
-              component: 'form',
-              onSubmit: (e) => {
-                handleClose(e.target.value);
-              },
-            }}
-          >
-            <ObsForm
-              getObservations={getObservations}
-              handleClose={handleClose}
-            />
-          </Dialog>
         </Box>
         <Button variant='contained' type='submit' onClick={handleOpen}>
-          Edit Reviews
+          Add
         </Button>
       </Box>
     </div>

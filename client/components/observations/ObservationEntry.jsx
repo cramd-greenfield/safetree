@@ -1,46 +1,39 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import {
-  Box,
   Button,
   Typography,
-  Checkbox,
-  TextField,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
+  Grid,
+  ToggleButton,
+  Box,
+  ToggleButtonGroup,
 } from '@mui/material';
 
-const ObservationEntry = ({ observation, getObservations }) => {
-  const [open, setOpen] = useState(false);
-  const [isSafe, setIsSafe] = useState(true);
+const ObservationEntry = ({ observation, getObservations, handleClose }) => {
+  const [isSafe, setIsSafe] = useState('safe');
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
+  const handleIsSafe = (event, newIsSafe) => {
+    setIsSafe(newIsSafe);
   };
 
   const updateReview = () => {
+    const { message, isSafe } = observation;
     axios
       .patch(`/observations/${observation.id}`, {
         observation: {
-          message: message,
+          message,
           isSafe: !observation.isSafe,
         },
       })
-      .then(() => getObservations())
+      .then(getObservations)
       .catch((err) => console.error('Failed to Patch safe:', err));
   };
 
   const deleteObservation = () => {
+    const { message, isSafe } = observation;
     axios
       .delete(`/observations/${observation.id}`, {
-        observation: { message },
+        observation: { message, isSafe },
       })
       .then(getObservations)
       .catch((err) => {
@@ -48,92 +41,48 @@ const ObservationEntry = ({ observation, getObservations }) => {
       });
   };
 
-  const checkSafe = observation.isSafe ? '🍄' : '🌳';
-
   return (
-    <div>
-      <Box>
-        <Box sx={{ width: '100%', maxWidth: 500, bgcolor: 'background.paper' }}>
-          {/* <Button variant='outlined' onClick={deleteObservation}>
+    <Box sx={{ width: '100%', maxWidth: 500, bgcolor: 'background.paper' }}>
+      <Box sx={{ gap: 20, justifyContent: 'space-evenly' }}>
+        <Typography align='left' variant='contained'>
+          <Button size='small' variant='contained' onClick={deleteObservation}>
             🔥
-          </Button> */}
-          <Box sx={{ gap: 20, justifyContent: 'space-evenly' }}>
-            <Typography align='left' variant='contained' gutterBottom>
-              {observation.message}
-            </Typography>
-            <Typography align='right' variant='contained'>
-              {checkSafe}
-            </Typography>
-          </Box>
-          {/* <Button variant='outlined' onClick={handleClickOpen}>
-            Edit
-          </Button> */}
+          </Button>
 
-          {/* {observation.isSafe} */}
-        </Box>
-        {/* <Dialog
-          open={open}
-          onClose={handleClose}
-          PaperProps={{
-            component: 'form',
-            onSubmit: (event) => {
-              handleClose(event.target.value);
-            },
-          }}
-        >
-          <DialogTitle>Add a Review</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              <Button variant='outlined' onClick={deleteObservation}>
-                🔥
-              </Button>
-              <Typography variant='contained'>
-                {' '}
-                {observation.message}
-              </Typography>
-              <Typography align='right' variant='contained'>
-                {checkSafe}
-              </Typography>
-            </DialogContentText>
-
-            <Typography>
-              Safe?
-              <Checkbox
-                label='safety'
-                checked={isSafe}
-                onChange={(e) => {
-                  setIsSafe(e.target.checked);
-                }}
-                inputProps={{ 'aria-label': 'controlled' }}
-              />
-            </Typography>
-            <TextField
-              autoFocus
-              value={observation.message}
-              margin='dense'
-              id='message'
-              name='message'
-              label='Tell us about your last adventure'
-              fullWidth
-              variant='standard'
-            />
-            <Button variant='outlined' onClick={deleteObservation}>
-              🔥
-            </Button>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose}>Close</Button>
-            <Button
-              variant='contained'
-              type='submit'
-              onClick={createObservation}
+          <ToggleButtonGroup
+            value={isSafe}
+            exclusive
+            onChange={handleIsSafe}
+            aria-label='safe-selection'
+            onSubmit={(e) => {
+              setIsSafe(e.target.value);
+            }}
+          >
+            <ToggleButton
+              value='safe'
+              onClick={updateReview}
+              aria-label='safe-tree'
             >
-              Submit
-            </Button>
-          </DialogActions>
-        </Dialog> */}
+              🌳
+            </ToggleButton>
+            <ToggleButton
+              value='not-safe'
+              onClick={updateReview}
+              aria-label='do-not-sign'
+            >
+              🚫
+            </ToggleButton>
+          </ToggleButtonGroup>
+        </Typography>
+        <Typography align='right' variant='contained' gutterBottom>
+          {observation.message}
+        </Typography>
+
+        <Typography align='left' variant='contained' gutterBottom>
+          {/* {observation.isSafe} places a 1 or 0 for true or false */}
+        </Typography>
       </Box>
-    </div>
+    </Box>
   );
 };
 
