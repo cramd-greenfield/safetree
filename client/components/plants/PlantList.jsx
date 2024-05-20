@@ -2,7 +2,7 @@ import React from "react";
 import Plant from "./Plant.jsx";
 
 const PlantList = ({plants}) => {
-  console.log('plant list props: ', plants);
+  // console.log('plant list props: ', plants);
 
   return (
     <div>
@@ -14,9 +14,6 @@ const PlantList = ({plants}) => {
         />
       );
       })}
-      {/* < Plant />
-      < Plant />
-      < Plant /> */}
     </div>
   );
 };

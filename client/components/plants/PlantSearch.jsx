@@ -15,9 +15,10 @@ const PlantSearch = ({updatePlantList}) => {
     })
       .then(({ data }) => {
         // pass data to plantList ?
-        const searchRes = data.data;
-        console.log('search data: ', searchRes);
-        updatePlantList(searchRes)
+        console.log(data)
+        // const searchRes = data.data;
+        // console.log('search data: ', searchRes);
+        updatePlantList(data)
       })
       .catch(err => console.error(err));
   }

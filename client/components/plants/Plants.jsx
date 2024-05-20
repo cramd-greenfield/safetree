@@ -29,7 +29,7 @@ const Plants = () => {
     <div>
       {/* {loadPlants()} */}
       <h1>Plants</h1>
-      <PlantSearch />
+      <PlantSearch updatePlantList={setPlantArr} />
       <PlantList plants={plantArr} />
     </div>
   );

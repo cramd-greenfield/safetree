@@ -12,7 +12,8 @@ safeTree.all('/hikes', hikes);
 safeTree.get('/observations', observations);
 safeTree.post('/observations', observations);
 
-safeTree.get('/plants', plants);
-safeTree.post('/plants', plants);
+safeTree.all('/plants', plants);
+safeTree.all('/plants/:id', plants);
+
 
 module.exports = safeTree;
