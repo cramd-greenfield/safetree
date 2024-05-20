@@ -52,6 +52,19 @@ const WildLife = () => {
     
   };
 
+  const deleteAnimal = (species) => {
+    axios
+      .delete(`/wildlife`, {species})
+      .then((response) => {
+        console.log("Animal deleted:", response.data);
+        //return the lost of every animal but the one deleted
+        updateList(list.filter((animal) => animal.species !== species));
+      })
+      .catch((error) => {
+        console.error("Error deleting animal:", error);
+      });
+  };
+
   return (
     <div>
       <div>
@@ -74,6 +87,7 @@ const WildLife = () => {
             <h3>{animal.species}</h3>
             <p>{animal.isPredator ? "Predator" : "Not a predator"}</p>
             <p>{animal.location}</p>
+            <button onClick={() => deleteAnimal(animal.species)}>Delete</button>
           </div>
         ))}
       </div>
