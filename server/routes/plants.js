@@ -1,21 +1,21 @@
 const { Router } = require('express');
 const { searchPlants, loadPlants, savePlants } = require('../helpers/plantHelpers.js');
 const { Plant } = require('../database/index.js');
+const { Op } = require("sequelize");
 
 const Plants = Router();
 
 // makes search to api
 Plants.get('/plants', (req, res) => {
-  // make req to api
-  // loadPlants()
-  //   .then(({ data }) => {
-  //     // console.log(data.data.length);
-  //     res.status(201).send(data.data);
-  //   })
-  //   .catch((err) => {
-  //     console.error('failed to load plants', err);
-  //     res.sendStatus(500);
-  //   });
+  Plant.findAll({ limit: 5 })
+    .then(data => {
+      // console.log(data);
+      res.status(200).send(data);
+    })
+    .catch(err => {
+      console.error(err);
+      res.sendStatus(500);
+    });
 });
 
 Plants.post('/plants', (req, res) => {
@@ -25,18 +25,84 @@ Plants.post('/plants', (req, res) => {
   // make req to api
   searchPlants(plantName)
     .then(({ data }) => {
-      // console.log(data);
-      data.data.map(plantObj => savePlants(plantObj));
-      res.status(201).send(data);
+      // console.log(data.data);
+      const dbQuery = data.data.map(plantObj => savePlants(plantObj));
+      // res.status(201).send(data);
+      
+      // // condense promises from queries
+      return Promise.all(dbQuery)
+      //   .then(data => console.log(data));
+      
     })
+    .then(() => {
+      Plant.findAll({
+        where: {
+          species: {
+            [Op.substring]: plantName,
+          }
+        }
+      })
+        .then(foundPlants => {
+          res.status(203).send(foundPlants)
+        })
+        .catch(err => console.log(err));
+    })
+    // .then(data => console.log(data))
     .catch((err) => {
       console.error(err);
       res.sendStatus(500);
     });
 });
 
-Plants.get('/plants', (req, res) => {});
+Plants.patch('/plants/:id', (req, res) => {
+  // access plant id via req.params
+  const { id } = req.params;
+  console.log(id);
 
-Plants.delete('/plants', (req, res) => {});
+  // access isUpdate status via req.body
+  const { isObserved } = req.body.plant;
+
+
+  Plant.update(
+    {
+      isObserved,
+    },
+    {
+      where: {
+        id,
+      }
+    },
+  )
+    .then(rowsChanged => { // rowsChanged is an array w a number i.e. [1] or [0]
+      if (rowsChanged[0]) {
+        // if rowsChanged is not falsy / NOT [0] -> send 200 status code
+        res.sendStatus(200);
+      } else { 
+        // if values being updated does not exist in db / [0] -> send 404 status code
+        res.sendStatus(404);
+      }
+    })
+    .catch(err => res.sendStatus(500));
+
+});
+
+Plants.delete('/plants/:id', (req, res) => {
+  const { id } = req.params;
+  // console.log(req.params);
+
+  Plant.destroy({
+    where: {
+      id,
+    }
+  })
+    .then(rowsDeleted => {
+      if (rowsDeleted) {
+        res.sendStatus(200);
+      } else {
+        res.sendStatus(404);
+      }
+    })
+    .catch(err => res.sendStatus(500));
+});
 
 module.exports = Plants;
