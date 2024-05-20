@@ -148,19 +148,19 @@ const fakeHikes = [
 const fakeObservations = [
   {
     message: 'A lot of rust. Would not recommend...',
-    isSafe: '🚫',
+    isSafe: false,
   },
   {
     message: 'A lot of great stuff to say about this place.',
-    isSafe: '🌳',
+    isSafe: true,
   },
   {
     message: 'Great day for a family adventure!',
-    isSafe: '🌳',
+    isSafe: true,
   },
   {
     message: "There a was an angry eagle that wouldn't let us pass...",
-    isSafe: '🚫',
+    isSafe: false,
   },
 ];
 
