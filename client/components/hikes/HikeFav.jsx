@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Button, ListItem, ListItemText, TextField } from '@mui/material';
 
 const HikeFav = ({ favHike, getFavHikes }) => {
 
@@ -49,13 +50,33 @@ const HikeFav = ({ favHike, getFavHikes }) => {
   return (
     <div>
       <ul>
-        <li>Name:  { favHike.description }</li>
-        <li>Location:  { favHike.location }</li>
-        <li>Rating:  { favHike.rating }</li>
+        <ListItem>
+          <ListItemText
+            primary={`Name:  ${favHike.description}`}
+          />
+        </ListItem>
+        <ListItem>
+          <ListItemText
+            primary={`Location:  ${favHike.location}`}
+          />
+        </ListItem>
+        <ListItem>
+          <ListItemText
+            primary={`Rating:  ${favHike.rating}`}
+          />
+        </ListItem>
       </ul>
-      <input value={ newRating } onChange={ handleNewRating } type="text" placeholder="up to 5" />
-      <button onClick={ rateFavHike } type="button">Rate</button>
-      <button onClick={ removeFavHike } type="button">Remove</button>
+      <TextField 
+        id="filled-basic"
+        label="Rate this hike"
+        variant="filled"
+        value={ newRating }
+        onChange={ handleNewRating }
+        type="text"
+        placeholder="up to 5"
+      />
+      <Button variant="outlined" onClick={ rateFavHike } type="button">Rate</Button>
+      <Button variant="outlined" onClick={ removeFavHike } type="button">Remove</Button>
     </div>
   )
 }
