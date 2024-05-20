@@ -1,12 +1,19 @@
 import React from "react";
 import Plant from "./Plant.jsx";
 
-const PlantList = () => {
+const PlantList = ({plants}) => {
+  // console.log('plant list props: ', plants);
+
   return (
     <div>
-      < Plant />
-      < Plant />
-      < Plant />
+      { plants.map((plantObj, index) => {
+        return ( 
+        <Plant 
+          plant={plantObj} 
+          key={index} 
+        />
+      );
+      })}
     </div>
   );
 };
