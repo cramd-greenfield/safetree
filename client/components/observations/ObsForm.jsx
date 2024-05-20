@@ -23,11 +23,12 @@ const safe = () => {
 };
 
 const ObsForm = ({ getObservations, handleClose }) => {
-  const [isSafe, setIsSafe] = useState(() => safe());
+  // const [isSafe, setIsSafe] = useState();
   const [message, setMessage] = useState('');
   const [selected, setSelected] = useState(false);
 
   const createObservation = () => {
+    const { message, isSafe } = observation;
     axios
       .post(`/observations`, { observation: { message, isSafe } })
       .then(() => {

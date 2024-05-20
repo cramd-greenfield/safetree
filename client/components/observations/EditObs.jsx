@@ -12,15 +12,12 @@ import {
   ToggleButton,
   Box,
   ToggleButtonGroup,
-  Checkbox,
 } from '@mui/material';
-import EditObs from './EditObs.jsx';
 
-const ObservationEntry = ({ observation, getObservations }) => {
-  const [isSafe, setIsSafe] = useState(0);
-  const [message, setMessage] = useState('');
-
+const EditObs = ({ observation, deleteObservation, getObservations }) => {
   const [open, setOpen] = useState(false);
+  const [isSafe, setIsSafe] = useState(false);
+  const [message, setMessage] = useState('');
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -33,7 +30,6 @@ const ObservationEntry = ({ observation, getObservations }) => {
   const handleIsSafe = (event, newIsSafe) => {
     setIsSafe(newIsSafe);
   };
-
   const updateReview = () => {
     axios
       .patch(`/observations/${observation.id}`, {
@@ -46,39 +42,46 @@ const ObservationEntry = ({ observation, getObservations }) => {
       .catch((err) => console.error('Failed to Patch safe:', err));
   };
 
-  const deleteObservation = () => {
-    const { message, isSafe } = observation;
-    axios
-      .delete(`/observations/${observation.id}`, {
-        observation: { message, isSafe },
-      })
-      .then(getObservations)
-      .catch((err) => {
-        console.error('Failed to DELETE observation:', err);
-      });
-  };
-
-  const checkSafe = observation.isSafe > 0 ? '🌳' : '🚫';
-
   return (
     <Box sx={{ width: '100%', maxWidth: 500, bgcolor: 'background.paper' }}>
       <Box sx={{ gap: 20, justifyContent: 'space-evenly' }}>
         <Typography align='left' variant='contained'>
-          {/* <Button size='small' variant='contained' onClick={deleteObservation}>
+          <Button size='small' variant='contained' onClick={deleteObservation}>
             🔥
-          </Button> */}
-          <Button type='submit' onClick={handleClickOpen}>
-            Edit
           </Button>
+
+          <ToggleButtonGroup
+            value={isSafe}
+            exclusive
+            onChange={handleIsSafe}
+            aria-label='safe-selection'
+            onSubmit={(e) => {
+              setIsSafe(e.target.value);
+            }}
+          >
+            <ToggleButton
+              value='safe'
+              onClick={updateReview}
+              aria-label='safe-tree'
+            >
+              🌳
+            </ToggleButton>
+            <ToggleButton
+              value='not-safe'
+              onClick={updateReview}
+              aria-label='do-not-sign'
+            >
+              🚫
+            </ToggleButton>
+          </ToggleButtonGroup>
         </Typography>
         <Typography align='right' variant='contained' gutterBottom>
-          Hike Review: {observation.message}
+          {observation.message}
         </Typography>
-        <Box>
-          <Typography value align='left' variant='contained' gutterBottom>
-            Recommend: {checkSafe}
-          </Typography>
-        </Box>
+
+        <Typography align='left' variant='contained' gutterBottom>
+          {/* {observation.isSafe} places a 1 or 0 for true or false */}
+        </Typography>
       </Box>
 
       <Dialog
@@ -95,12 +98,9 @@ const ObservationEntry = ({ observation, getObservations }) => {
         <DialogTitle>Reviews</DialogTitle>
         <DialogContent>
           <DialogContentText></DialogContentText>
-          {/* <Checkbox
-            checked={isSafe}
-            onChange={(e) => {
-              setIsSafe(e.target.checked);
-            }}
-          /> */}
+          {/* <Button variant='outlined' onClick={handleEdit}>
+            Edit
+          </Button> */}
           <Button size='small' variant='contained' onClick={deleteObservation}>
             🔥
           </Button>
@@ -113,10 +113,8 @@ const ObservationEntry = ({ observation, getObservations }) => {
             required
             value={message}
             margin='dense'
-            id='name'
             name='message'
             label={observation.message}
-            type='patch'
             fullWidth
             variant='standard'
             onChange={(e) => {
@@ -135,4 +133,4 @@ const ObservationEntry = ({ observation, getObservations }) => {
   );
 };
 
-export default ObservationEntry;
+export default EditObs;
