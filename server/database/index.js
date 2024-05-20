@@ -71,23 +71,60 @@ const Hike = sequelize.define('Hike', {
   rating: DataTypes.INTEGER,
 });
 
-const Observations = sequelize.define('Observations', {
+const Observations = sequelize.define('observation', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
-  message: DataTypes.STRING, // Should this be it's own model?
-  animalSpec: DataTypes.STRING,
-  plantSpec: DataTypes.STRING,
-  hikeLoc: DataTypes.STRING,
+  message: DataTypes.TEXT,
+  isSafe: DataTypes.BOOLEAN,
 });
-User.hasMany(Observations);
-Observations.hasMany(Animal);
-Observations.hasMany(Plant);
-Observations.hasMany(Hike);
+User.Observations = User.hasMany(Observations);
+Observations.User = Observations.belongsTo(User);
 
-Observations.belongsTo(User);
+// const Observations = sequelize.define('Observations', {
+//   id: {
+//     type: DataTypes.INTEGER,
+//     primaryKey: true,
+//     autoIncrement: true,
+//   },
+//   animalId: {
+//     type: DataTypes.INTEGER,
+//     primaryKey: false,
+//     references: {
+//       model: Animal,
+//       key: 'animalId',
+//     },
+//   },
+//   plantId: {
+//     type: DataTypes.INTEGER,
+//     primaryKey: false,
+//     references: {
+//       model: Plant,
+//       key: 'plantId',
+//     },
+//   },
+//   hikeId: {
+//     type: DataTypes.INTEGER,
+//     primaryKey: false,
+//     references: {
+//       model: Hike,
+//       key: 'hikeId',
+//     },
+//   },
+// });
+
+// Animal.belongsTo(Observations, {
+//   foreignKey: 'animalId',
+// });
+// Hike.belongsTo(Observations, {
+//   foreignKey: 'hikeId',
+// });
+// Plant.belongsTo(Observations, {
+//   foreignKey: 'plantId',
+// });
+// Observations.belongsTo(User);
 
 module.exports = {
   User,
