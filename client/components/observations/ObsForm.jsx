@@ -22,15 +22,14 @@ const safe = () => {
   }
 };
 
-const ObsForm = ({ getObservations, handleClose }) => {
+const ObsForm = ({ observation, getObservations, handleClose }) => {
   // const [isSafe, setIsSafe] = useState();
   const [message, setMessage] = useState('');
-  const [selected, setSelected] = useState(false);
 
   const createObservation = () => {
-    const { message, isSafe } = observation;
+    // const { message, isSafe } = observation;
     axios
-      .post(`/observations`, { observation: { message, isSafe } })
+      .post(`/observations`, { observation: { message, isSafe: true } })
       .then(() => {
         getObservations();
       })
@@ -41,9 +40,6 @@ const ObsForm = ({ getObservations, handleClose }) => {
         console.error('Failed to Create Observation:', err);
       });
   };
-  // const handleIsSafe = (event, newIsSafe) => {
-  //   setIsSafe(newIsSafe);
-  // };
 
   return (
     <>
@@ -51,22 +47,6 @@ const ObsForm = ({ getObservations, handleClose }) => {
       <DialogContent>
         <DialogContentText></DialogContentText>
         <Typography></Typography>
-        {/* <Box>
-          <ToggleButtonGroup
-            value={isSafe}
-            exclusive
-            onChange={handleIsSafe}
-            aria-label='safe-selection'
-            onSubmit={setIsSafe}
-          >
-            <ToggleButton value='safe' aria-label='safe-tree'>
-              🌳
-            </ToggleButton>
-            <ToggleButton value='not-safe' aria-label='do-not-sign'>
-              🚫
-            </ToggleButton>
-          </ToggleButtonGroup>
-        </Box> */}
         <Box height={100} width={400}>
           <TextField
             fullWidth

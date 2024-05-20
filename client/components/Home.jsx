@@ -19,8 +19,6 @@ const Home = () => {
     setOpen(true);
   };
 
-  const handleEdit = () => {};
-
   const handleClose = () => {
     setOpen(false);
   };
@@ -54,9 +52,9 @@ const Home = () => {
           <Box height={300} width={500} sx={reviewBox}>
             <Box sx={boxHeader}>
               <Typography align='right' variant='h8'>
-                Safe: / Unsafe:
+                {/* Safe: / Unsafe: */}
               </Typography>
-              <Typography align='left' variant='h8'>
+              <Typography align='center' variant='h8' gutterBottom>
                 Review
               </Typography>
             </Box>
@@ -87,9 +85,9 @@ const Home = () => {
           Add
         </Button>
         {/* <EditObs getObservations={getObservations} handleEdit={handleEdit}/> */}
-        {/* <Button variant='contained' type='submit' onClick={handleEdit}> */}
-        {/* Edit */}
-        {/* </Button> */}
+        {/* <Button variant='contained' type='submit' onClick={handleEdit}> 
+        Edit
+        </Button> */}
       </Box>
     </div>
   );

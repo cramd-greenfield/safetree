@@ -38,7 +38,6 @@ const ObservationEntry = ({ observation, getObservations }) => {
     axios
       .patch(`/observations/${observation.id}`, {
         observation: {
-          message: message,
           isSafe: !observation.isSafe,
         },
       })
@@ -64,15 +63,12 @@ const ObservationEntry = ({ observation, getObservations }) => {
     <Box sx={{ width: '100%', maxWidth: 500, bgcolor: 'background.paper' }}>
       <Box sx={{ gap: 20, justifyContent: 'space-evenly' }}>
         <Typography align='left' variant='contained'>
-          {/* <Button size='small' variant='contained' onClick={deleteObservation}>
-            🔥
-          </Button> */}
           <Button type='submit' onClick={handleClickOpen}>
             Edit
           </Button>
         </Typography>
         <Typography align='right' variant='contained' gutterBottom>
-          Hike Review: {observation.message}
+          {observation.message}
         </Typography>
         <Box>
           <Typography value align='left' variant='contained' gutterBottom>
@@ -95,12 +91,30 @@ const ObservationEntry = ({ observation, getObservations }) => {
         <DialogTitle>Reviews</DialogTitle>
         <DialogContent>
           <DialogContentText></DialogContentText>
-          {/* <Checkbox
-            checked={isSafe}
-            onChange={(e) => {
-              setIsSafe(e.target.checked);
+          <ToggleButtonGroup
+            value={isSafe}
+            exclusive
+            onChange={handleIsSafe}
+            aria-label='safe-selection'
+            onSubmit={() => {
+              setIsSafe(checkSafe);
             }}
-          /> */}
+          >
+            <ToggleButton
+              value='safe'
+              onClick={updateReview}
+              aria-label='safe-tree'
+            >
+              🌳
+            </ToggleButton>
+            <ToggleButton
+              value='not-safe'
+              onClick={updateReview}
+              aria-label='do-not-sign'
+            >
+              🚫
+            </ToggleButton>
+          </ToggleButtonGroup>
           <Button size='small' variant='contained' onClick={deleteObservation}>
             🔥
           </Button>
@@ -110,7 +124,6 @@ const ObservationEntry = ({ observation, getObservations }) => {
           {/* {observation.message} */}
           <TextField
             autoFocus
-            required
             value={message}
             margin='dense'
             id='name'
