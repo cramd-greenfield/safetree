@@ -12,9 +12,7 @@ import {
   ToggleButton,
   Box,
   ToggleButtonGroup,
-  Checkbox,
 } from '@mui/material';
-import EditObs from './EditObs.jsx';
 
 const ObservationEntry = ({ observation, getObservations }) => {
   const [isSafe, setIsSafe] = useState(0);

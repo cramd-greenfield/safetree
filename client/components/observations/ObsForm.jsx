@@ -22,7 +22,7 @@ const safe = () => {
   }
 };
 
-const ObsForm = ({ observation, getObservations, handleClose }) => {
+const ObsForm = ({ getObservations, handleClose }) => {
   // const [isSafe, setIsSafe] = useState();
   const [message, setMessage] = useState('');
 

@@ -8,7 +8,6 @@ import ObservationsList, {
 } from './observations/ObservationsList.jsx';
 import ObsForm from './observations/ObsForm.jsx';
 import { st, reviewBox, boxHeader } from './observations/styles.js';
-import EditObs from './observations/EditObs.jsx';
 
 const Home = () => {
   const [observations, setObservations] = useState([]);
