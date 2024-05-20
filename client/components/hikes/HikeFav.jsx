@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Button, ListItem, ListItemText, TextField } from '@mui/material';
+import { Button, List, ListItem, ListItemText, TextField } from '@mui/material';
 
 const HikeFav = ({ favHike, getFavHikes }) => {
 
@@ -49,7 +49,7 @@ const HikeFav = ({ favHike, getFavHikes }) => {
 
   return (
     <div>
-      <ul>
+      <List>
         <ListItem>
           <ListItemText
             primary={`Name:  ${favHike.description}`}
@@ -65,7 +65,7 @@ const HikeFav = ({ favHike, getFavHikes }) => {
             primary={`Rating:  ${favHike.rating}`}
           />
         </ListItem>
-      </ul>
+      </List>
       <TextField 
         id="filled-basic"
         label="Rate this hike"
