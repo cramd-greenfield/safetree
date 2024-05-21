@@ -35,7 +35,7 @@ const Plant = sequelize.define('Plant', {
   isEdible: DataTypes.BOOLEAN,
   isObserved: DataTypes.BOOLEAN,
   image: DataTypes.STRING,
-  scientificNAme: DataTypes.STRING,
+  scientificName: DataTypes.STRING,
 });
 
 const Animal = sequelize.define('Animal', {
@@ -71,23 +71,17 @@ const Hike = sequelize.define('Hike', {
   rating: DataTypes.INTEGER,
 });
 
-const Observations = sequelize.define('Observations', {
+const Observations = sequelize.define('observation', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
-  message: DataTypes.STRING, // Should this be it's own model?
-  animalSpec: DataTypes.STRING,
-  plantSpec: DataTypes.STRING,
-  hikeLoc: DataTypes.STRING,
+  message: DataTypes.TEXT,
+  isSafe: DataTypes.BOOLEAN,
 });
-User.hasMany(Observations);
-Observations.hasMany(Animal);
-Observations.hasMany(Plant);
-Observations.hasMany(Hike);
-
-Observations.belongsTo(User);
+User.Observations = User.hasMany(Observations);
+Observations.User = Observations.belongsTo(User);
 
 module.exports = {
   User,

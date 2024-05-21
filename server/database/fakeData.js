@@ -145,65 +145,22 @@ const fakeHikes = [
   },
 ];
 
-// const fakeObservations = [
-//   {
-//     id: 1,
-//     message: 'I loved this trail.',
-//     plantSpec: 1,
-//     animalSpec: 1,
-//     hikeLoc: 1,
-//   },
-//   {
-//     id: 2,
-//     message: 'This trail was boring.',
-//     plantSpec: 2,
-//     animalSpec: 2,
-//     hikeLoc: 2,
-//   },
-//   {
-//     id: 3,
-//     message: 'Parking lot was cool.',
-//     plantSpec: 3,
-//     animalSpec: 3,
-//     hikeLoc: 3,
-//   },
-//   {
-//     id: 4,
-//     message: 'Saw a ton of plants on this trail.',
-//     plantSpec: 4,
-//     animalSpec: 4,
-//     hikeLoc: 4,
-//   },
-// ];
-
 const fakeObservations = [
   {
-    UserId: fakeUsers[0].id,
-    message: 'I loved this trail.',
-    plantSpec: fakePlants[0].species,
-    animalSpec: fakeAnimals[0].species,
-    hikeLoc: fakeHikes[0].description,
+    message: 'A lot of rust. Would not recommend...',
+    isSafe: false,
   },
   {
-    UserId: fakeUsers[1].id,
-    message: 'This trail was boring.',
-    plantSpec: fakePlants[1].species,
-    animalSpec: fakeAnimals[1].species,
-    hikeLoc: fakeHikes[1].description,
+    message: 'A lot of great stuff to say about this place.',
+    isSafe: true,
   },
   {
-    UserId: fakeUsers[2].id,
-    message: 'Parking lot was cool.',
-    plantSpec: fakePlants[2].species,
-    animalSpec: fakeAnimals[2].species,
-    hikeLoc: fakeHikes[2].description,
+    message: 'Great day for a family adventure!',
+    isSafe: true,
   },
   {
-    UserId: fakeUsers[3].id,
-    message: 'Saw a ton of plants on this trail.',
-    plantSpec: fakePlants[3].species,
-    animalSpec: fakeAnimals[3].species,
-    hikeLoc: fakeHikes[3].description,
+    message: "There a was an angry eagle that wouldn't let us pass...",
+    isSafe: false,
   },
 ];
 

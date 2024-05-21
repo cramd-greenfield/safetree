@@ -1,8 +1,45 @@
 const express = require('express');
+const axios = require('axios');
 const hikes = express.Router();
 const { Hike } = require('../database');
+const { GOOGLE_MAPS_API_KEY } = process.env;
 
 // routes for hike related requests
+
+hikes.post('/hikeSearch', (req, res) => {
+
+  const { location } = req.body.search;
+
+  // fetch search results from google places api
+  axios({
+    method: 'post',
+    url: 'https://places.googleapis.com/v1/places:searchText',
+    params: {
+      key: GOOGLE_MAPS_API_KEY,
+      fields: 'places.id,places.displayName,places.location,places.primaryTypeDisplayName,places.rating,places.formattedAddress',
+      textQuery: `hikes near ${location}`,
+      maxResultCount: 5,
+      rankPreference: 'DISTANCE',
+    }
+  })
+    .then(({ data }) => {
+
+      // map data.places to custom object
+      let relevantHikeProps = data.places.map((result) => {
+        return {
+          description: result.displayName.text,
+          location: result.formattedAddress,
+          rating: result.rating,
+        }
+      })
+      res.status(201).send(relevantHikeProps);
+    })
+    .catch((err) => {
+      console.error('Failed to fetch results from Google Maps', err);
+      res.sendStatus(500);
+    })
+
+});
 
 hikes.post('/hikes', (req, res) => {
 
@@ -17,7 +54,6 @@ hikes.post('/hikes', (req, res) => {
       console.error('Failed to add favorite hike: ', err);
       res.sendStatus(500);
     });
-
 });
 
 hikes.get('/hikes', (req, res) => {
@@ -58,7 +94,7 @@ hikes.patch('/hikes', (req, res) => {
 
 hikes.delete('/hikes', (req, res) => {
 
-  const { description } = req.body.hike;
+  const { description } = req.body;
 
   // delete a hike from the database
   Hike.destroy({

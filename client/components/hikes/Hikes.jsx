@@ -1,16 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Typography } from '@mui/material';
 
 import HikeSearch from './HikeSearch.jsx';
-import HikeResults from './HikeResults.jsx';
-import HikeFavList from './HikeFavList.jsx';
 
 const Hikes = () => {
 
   return (
     <div className="hikes">
-      <HikeSearch />
-      <HikeResults />
-      <HikeFavList />
+      <Typography variant="h2" gutterBottom>
+        Hikes
+      </Typography>
+      <div className="hike-search">
+        <Typography variant="h5" gutterBottom>
+          Search for trails near you:
+        </Typography>
+        <HikeSearch />
+      </div>
     </div>
   )
 }
