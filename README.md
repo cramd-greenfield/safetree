@@ -34,19 +34,19 @@ _**Style:**_ </ins>-> Material UI
 <li> NPM
 <li> Node 20.12.2
 
-> The Database was built using MySql and the Sequelize ORM.
+> The Database build using MySql and the Sequelize ORM.
 
 <li> MySql
 <li> Sequelize
 
-> The Client side was created with React hooks
+> The Client side creation with React hooks
 
 <li> React
 <li> React-router
 <li> React-dom
 <li> React-router-dom
 
-> Axios was used to communicate with the Server from our Client side.
+> Axios to communicate with the Server from the Client side.
 
 <li> Axios
 
@@ -55,34 +55,34 @@ _**Style:**_ </ins>-> Material UI
 <li> Express
 <li> Express-session
 
-> For errors and specific syntax rules we utilized ESLint with Airbnb rules.
+> For errors and specific syntax rules / Airbnb rules.
 
 <li> ESLint (Airbnb Rules)
 
-> Transpiling was performed from Babel plugins to create compatible code for older browsers.
+> Transpiling with Babel plugins to create compatible code for older browsers.
 
 <li>@babel/core
 <li>@babel/preset-env
 <li>@babel/preset-react
 <li>babel-loader
 
-> Bundling for optimization performed by Webpack
+> Webpack bundling for optimization.
 
 <li> Webpack
 <li> Webpack-cli
 <li> Webpack-dev-server
 
-> The Prettier formatter to maintain clean code for all developers involved
+> The Prettier formatter maintains clean code for all developers involved
 
 <li> Prettier
 
-> Styling created using Material UI and emotion
+> Styling using Material UI and Emotion
 
 <li>@emotion/react
 <li>@emotion/styled
 <li>mui/material
 
-> Lastly for Authentication was performed with the use of Passport and the Google Strategy
+> Lastly for Authentication with Passport and the Google Strategy
 
 <li> Passport
 <li> Passport-google-oauth20
