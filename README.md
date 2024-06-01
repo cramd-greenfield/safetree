@@ -4,7 +4,7 @@
 
 ### SafeTree
 
-> SafeTree is a play on the word 'safety' for user's that enjoy the outdoors!
+Explore confidently with SafeTree! No matter where you are, have the ability to locate hiking trails, discover plants, acquire a knowledge of wildlife, and share the entire experience all at the tip of your fingers.
 
 ### Features
 
@@ -29,72 +29,72 @@ _**Style:**_ </ins>-> Material UI
 
 ### What software is required to run
 
-> NPM was used to installed the necessary dependencies for this project.
+- NPM was used to installed the necessary dependencies for this project.
 
-<li> NPM
-<li> Node 20.12.2
+> npm
+> node 20.12.2
 
-> The Database was built using MySql and the Sequelize ORM.
+- The Database was built using MySql and the Sequelize ORM.
 
-<li> MySql
-<li> Sequelize
+> MySql
+> Sequelize
 
-> The Client side was created with React hooks
+- The Client side was created with React hooks
 
-<li> React
-<li> React-router
-<li> React-dom
-<li> React-router-dom
+> React
+> React-router
+> React-dom
+> React-router-dom
 
-> Axios was used to communicate with the Server from our Client side.
+- Axios was used to communicate with the Server from our Client side.
 
-<li> Axios
+> Axios
 
-> Express on the Server side to handle all request handling
+- Express on the Server side to handle all request handling
 
-<li> Express
-<li> Express-session
+> Express
+> Express-session
 
-> For errors and specific syntax rules we utilized ESLint with Airbnb rules.
+- For linting we utilized ESLint with Airbnb rules.
 
-<li> ESLint (Airbnb Rules)
+> ESLint (Airbnb Rules)
 
-> Transpiling was performed from Babel plugins to create compatible code for older browsers.
+- Transpiling was performed from Babel plugins to create compatible code for older browsers.
 
-<li>@babel/core
-<li>@babel/preset-env
-<li>@babel/preset-react
-<li>babel-loader
+> @babel/core
+> @babel/preset-env
+> @babel/preset-react
+> babel-loader
 
-> Bundling for optimization performed by Webpack
+- Bundling for optimization performed by Webpack
 
-<li> Webpack
-<li> Webpack-cli
-<li> Webpack-dev-server
+> Webpack
+> Webpack-cli
+> Webpack-dev-server
 
-> The Prettier formatter to maintain clean code for all developers involved
+- The Prettier formatter to maintain clean code for all developers involved
 
-<li> Prettier
+> Prettier
 
-> Styling created using Material UI and emotion
+- Styling created using Material UI and emotion
 
-<li>@emotion/react
-<li>@emotion/styled
-<li>mui/material
+> @emotion/react
+> @emotion/styled
+> mui/material
 
-> Lastly for Authentication was performed with the use of Passport and the Google Strategy
+- Lastly for Authentication was performed with the use of Passport and the Google Strategy
 
-<li> Passport
-<li> Passport-google-oauth20
+> Passport
+> Passport-google-oauth20
 
 ### What commands to use to Start
 
 1: **Start MySql** server/service\
 <ins>MAC - Homebrew</ins>\
-mysql.server start
+> mysql.server start
 
 <ins>Windows/WSL</ins>\
-sudo service mysql start
+> sudo service mysql start
 
 2: **npm start**: Start the server utilizing _Nodemon_ (1 terminal sustained)
 
@@ -112,4 +112,8 @@ sudo service mysql start
 
 ### Authors & acknowledgements:
 
-`Operation Spark instructors` & `Cody D. Allyn M. Mike S. Darius C. Rodman L.`
+- [Cody Daigle](https://github.com/cody-daigle/)
+- [Allyn McKinney](https://github.com/allynmm)
+- [Mike Sammartino](https://github.com/mikesamm)
+- [Rodman Lavalais](https://github.com/cougarred1)
+- [Darius Cooper](https://github.com/dariusc16)
