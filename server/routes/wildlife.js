@@ -50,7 +50,7 @@ router.post('/wildLifeSearch', (req, res) => {
           location: animal.locations.join(", ")
         };
       });
-      
+      //CR
 
       //insert the animals objects into the Animals database
       Animal.bulkCreate(animals)
@@ -68,6 +68,20 @@ router.post('/wildLifeSearch', (req, res) => {
       res.sendStatus(500);
     });
 })
+
+router.delete('/wildlife', (req, res) => {
+  console.log('REQ BODY!!!', req.body);
+  const species = req.body.species;
+    Animal.destroy({ where: { species } })  
+    .then(() => {
+      console.log('Animal successfully deleted!');
+      res.status(200).send({ message: 'Animal successfully deleted!' });
+    })
+    .catch((error) => {
+      console.error('Error deleting animal:', error);
+      res.sendStatus(500);
+    });
+});
 
 module.exports = router;
 
